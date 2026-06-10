@@ -4,6 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Moby Dick: analisi allegorica e simbolica</title>
+    <meta name="description" content="Che cosa si nasconde dietro la balena bianca? Un viaggio interattivo tra le allegorie, i personaggi, gli eventi e i simboli di Moby Dick di Herman Melville.">
+    <meta name="theme-color" content="#1a365d">
+    <meta property="og:title" content="Moby Dick: oltre la superficie del mare">
+    <meta property="og:description" content="Un'esplorazione interattiva dell'allegoria e del simbolismo nel capolavoro di Herman Melville: la balena, i personaggi, gli eventi, gli oggetti che parlano.">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="it_IT">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%90%8B%3C/text%3E%3C/svg%3E">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -121,6 +128,18 @@
             100% { transform: translateX(-90px); }
         }
         .wave-drift { animation: wave-drift 9s linear infinite; }
+
+        /* Scroll reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+        .reveal.revealed { opacity: 1; transform: none; }
+        @media (prefers-reduced-motion: reduce) {
+            .reveal { opacity: 1; transform: none; transition: none; }
+            .whale-float, .wave-drift { animation: none; }
+        }
     </style>
 </head>
 <body class="antialiased selection:bg-ocean selection:text-white pb-20">
@@ -150,7 +169,22 @@
                     <a href="#oracolo" class="text-ink hover:text-ocean px-2 py-2 text-sm font-medium transition-colors font-bold">L'oracolo ✨</a>
                     <a href="#officina" class="text-ink hover:text-ocean px-2 py-2 text-sm font-medium transition-colors font-bold text-crimson">Officina ✨</a>
                 </div>
+                <button id="mobile-menu-btn" class="md:hidden p-2 text-ocean" aria-label="Apri il menu" aria-expanded="false" aria-controls="mobile-menu">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
+                </button>
             </div>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-parchment border-t border-bone px-4 pb-4">
+            <a href="#introduzione" class="block py-2 text-ink hover:text-ocean font-medium">Introduzione</a>
+            <a href="#labalena" class="block py-2 text-ink hover:text-ocean font-medium">La balena</a>
+            <a href="#ipersonaggi" class="block py-2 text-ink hover:text-ocean font-medium">Personaggi</a>
+            <a href="#eventi" class="block py-2 text-ink hover:text-ocean font-medium">Eventi</a>
+            <a href="#simboli" class="block py-2 text-ink hover:text-ocean font-medium">Simboli</a>
+            <a href="#tematiche" class="block py-2 text-ink hover:text-ocean font-medium">Tematiche</a>
+            <a href="#oracolo" class="block py-2 text-ink hover:text-ocean font-bold">L'oracolo ✨</a>
+            <a href="#officina" class="block py-2 text-crimson hover:text-ocean font-bold">Officina ✨</a>
         </div>
     </nav>
 
@@ -666,7 +700,38 @@
     <!-- JavaScript Logic -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            
+
+            // --- 0a. Mobile Menu ---
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenuBtn.addEventListener('click', () => {
+                const isOpen = !mobileMenu.classList.toggle('hidden');
+                mobileMenuBtn.setAttribute('aria-expanded', isOpen);
+            });
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                    mobileMenuBtn.setAttribute('aria-expanded', 'false');
+                });
+            });
+
+            // --- 0b. Scroll Reveal ---
+            if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                const revealTargets = document.querySelectorAll('main > section, .char-card, .symbol-card');
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('revealed');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.08 });
+                revealTargets.forEach(el => {
+                    el.classList.add('reveal');
+                    observer.observe(el);
+                });
+            }
+
             // --- 1. Interactive Tabs Logic (La Balena) ---
             const symbolData = {
                 natura: {
