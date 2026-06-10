@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="it" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moby Dick: analisi allegorica e simbolica</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lora:wght@400;500;600&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'parchment': '#f4f1ea',
+                        'ink': '#2c3e50',
+                        'ocean': '#1a365d',
+                        'crimson': '#8b0000',
+                        'bone': '#e3dac9'
+                    },
+                    fontFamily: {
+                        'serif': ['"Playfair Display"', 'serif'],
+                        'body': ['"Lora"', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Lora', serif; background-color: #f4f1ea; color: #2c3e50; }
+        h1, h2, h3, h4, .nav-logo { font-family: 'Playfair Display', serif; }
+        
+        /* Required Chart Container Styling */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 650px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
+        }
+        @media (min-width: 768px) {
+            .chart-container { height: 400px; }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f4f1ea; }
+        ::-webkit-scrollbar-thumb { background: #1a365d; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #2c3e50; }
+
+        .tab-btn.active {
+            background-color: #1a365d;
+            color: #f4f1ea;
+            border-color: #1a365d;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-ocean selection:text-white pb-20">
+
+    <!-- Chosen Palette: Warm Neutrals (Parchment, Bone) with Deep Ocean Blue and Crimson accents -->
+    <!-- Application Structure Plan: A single-page scrolling presentation. It uses a top sticky navigation for easy access. The structure moves from a general introduction to an interactive exploration of the main symbol (the Whale), then uses quantitative visualization (Radar Chart) to compare character archetypes, followed by a breakdown of thematic frequencies (Doughnut Chart). This flow is chosen to engage the user from high-level concepts down to specific analytical comparisons, keeping the dense literary subject matter digestible and visually stimulating. -->
+    <!-- Visualization & Content Choices: 
+         1. Interactive Tabs (The Whale): Goal is to show multiple interpretations of one symbol. Tabs allow users to switch context without cluttering the screen.
+         2. Radar Chart (Characters): Goal is to compare complex character archetypes across multiple psychological/thematic axes. Radar is perfect for multi-variable profiling.
+         3. Doughnut Chart (Themes): Goal is to show the relative dominance of key themes in the narrative structure. Doughnut provides a clear proportional view. 
+         Library: Chart.js for all charts. HTML/Tailwind/JS for tabs. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-parchment/90 backdrop-blur-sm border-b border-bone shadow-sm">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex-shrink-0 flex items-center">
+                    <a href="#" class="nav-logo text-2xl font-bold text-ocean">Moby Dick <span class="text-crimson text-xl">&#9875;</span></a>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#introduzione" class="text-ink hover:text-ocean px-3 py-2 text-sm font-medium transition-colors">Introduzione</a>
+                    <a href="#labalena" class="text-ink hover:text-ocean px-3 py-2 text-sm font-medium transition-colors">La balena</a>
+                    <a href="#ipersonaggi" class="text-ink hover:text-ocean px-3 py-2 text-sm font-medium transition-colors">I personaggi</a>
+                    <a href="#tematiche" class="text-ink hover:text-ocean px-3 py-2 text-sm font-medium transition-colors">Tematiche</a>
+                    <a href="#oracolo" class="text-ink hover:text-ocean px-3 py-2 text-sm font-medium transition-colors font-bold">L'oracolo ✨</a>
+                    <a href="#officina" class="text-ink hover:text-ocean px-3 py-2 text-sm font-medium transition-colors font-bold text-crimson">Officina ✨</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="pt-32 pb-20 px-4 text-center bg-gradient-to-b from-bone to-parchment border-b border-bone">
+        <div class="max-w-3xl mx-auto">
+            <h1 class="text-5xl md:text-6xl font-bold text-ocean mb-6 leading-tight">Oltre la superficie del mare</h1>
+            <p class="text-xl text-ink mb-8 italic">Un'esplorazione interattiva dell'allegoria e del simbolismo nel capolavoro di Herman Melville.</p>
+            <div class="text-6xl text-ocean opacity-50 mb-4">&#128011;</div>
+            <a href="#introduzione" class="inline-block border-2 border-ocean text-ocean hover:bg-ocean hover:text-white font-bold py-3 px-8 rounded transition-all duration-300">Inizia l'Esplorazione</a>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-24 py-16">
+
+        <!-- Introduzione -->
+        <section id="introduzione" class="scroll-mt-24">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-3xl font-bold text-ocean mb-4 border-b-2 border-crimson inline-block pb-2">Un oceano di significati</h2>
+                    <p class="mb-4 text-lg leading-relaxed">
+                        "Moby Dick" non è semplicemente la storia di una caccia alla balena. È un'epopea filosofica, un labirinto di metafore e un'indagine profonda sull'animo umano, su Dio e sulla natura dell'universo.
+                    </p>
+                    <p class="text-lg leading-relaxed">
+                        Melville utilizza il viaggio della baleniera <strong>Pequod</strong> come veicolo per esplorare la condizione umana. Ogni elemento – dalla nave stessa, ai membri dell'equipaggio, fino al colore della balena – è carico di molteplici strati di significato. Questa applicazione scompone queste allegorie per renderle navigabili.
+                    </p>
+                </div>
+                <div class="bg-bone p-8 rounded shadow-inner border border-stone-300 relative">
+                    <div class="absolute top-4 left-4 text-4xl text-ocean opacity-20">&#10077;</div>
+                    <p class="text-xl font-serif italic text-ink relative z-10 text-center mt-4">
+                        "Non c'è follia delle bestie della terra che non sia superata all'infinito dalla follia degli uomini."
+                    </p>
+                    <p class="text-right mt-4 font-bold text-ocean">- Herman Melville</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- La Balena (Interactive Explorer) -->
+        <section id="labalena" class="scroll-mt-24 bg-white p-8 rounded-xl shadow-sm border border-bone">
+            <div class="mb-8 text-center max-w-3xl mx-auto">
+                <h2 class="text-3xl font-bold text-ocean mb-4">L'enigma bianco: Moby Dick</h2>
+                <p class="text-lg">
+                    La balena bianca è il simbolo centrale e più sfuggente del romanzo. Non rappresenta una singola entità, ma funge da schermo vuoto su cui i personaggi (e i lettori) proiettano le proprie paure, credenze e ossessioni. <strong>Clicca sui concetti sottostanti per esplorare le diverse interpretazioni allegoriche.</strong>
+                </p>
+            </div>
+
+            <div class="flex flex-col md:flex-row gap-8">
+                <!-- Navigation Tabs -->
+                <div class="md:w-1/3 flex flex-col space-y-3" id="symbol-tabs">
+                    <button class="tab-btn active text-left px-6 py-4 rounded border border-ocean font-bold text-lg transition-all" data-target="natura">
+                        Forza della Natura &#127754;
+                    </button>
+                    <button class="tab-btn text-left px-6 py-4 rounded border border-ocean font-bold text-lg transition-all" data-target="dio">
+                        Divinità Incomprensibile &#9889;
+                    </button>
+                    <button class="tab-btn text-left px-6 py-4 rounded border border-ocean font-bold text-lg transition-all" data-target="vuoto">
+                        Il Vuoto e l'Ignoto &#9898;
+                    </button>
+                    <button class="tab-btn text-left px-6 py-4 rounded border border-ocean font-bold text-lg transition-all" data-target="male">
+                        Il Male Assoluto (Visione di Ahab) &#128293;
+                    </button>
+                </div>
+
+                <!-- Content Area -->
+                <div class="md:w-2/3 bg-parchment p-8 rounded border-l-4 border-crimson min-h-[300px] flex flex-col justify-center" id="symbol-content">
+                    <h3 class="text-2xl font-bold text-ocean mb-3" id="sym-title">La Forza Indifferente della Natura</h3>
+                    <p class="text-lg leading-relaxed" id="sym-text">
+                        Nella sua forma più basilare, Moby Dick rappresenta la forza bruta, implacabile e del tutto indifferente della natura. Non agisce per malizia, ma per istinto di sopravvivenza. Sfidare la balena significa sfidare l'ordine naturale stesso, un'impresa destinata al fallimento catastrofico di fronte a una potenza insormontabile.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- I Personaggi (Radar Chart) -->
+        <section id="ipersonaggi" class="scroll-mt-24">
+            <div class="text-center mb-12 max-w-3xl mx-auto">
+                <h2 class="text-3xl font-bold text-ocean mb-4">La micro-società del Pequod</h2>
+                <p class="text-lg">
+                    Il Pequod è una "nave-mondo", un microcosmo dell'umanità. I suoi occupanti rappresentano diverse filosofie, classi sociali e approcci alla vita. Il grafico sottostante confronta i tre archetipi principali attraverso assi psicologici e filosofici, evidenziando il contrasto tra l'ossessione distruttiva e la ragione.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <!-- Chart Container -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-bone w-full">
+                    <div class="chart-container">
+                        <canvas id="characterRadarChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Character Descriptions -->
+                <div class="space-y-6">
+                    <div class="border-l-4 border-crimson pl-4">
+                        <h3 class="text-xl font-bold text-crimson">Capitano Ahab</h3>
+                        <p class="text-sm md:text-base mt-2">La personificazione dell'<em>hybris</em> (tracotanza). Ahab rappresenta l'intelletto umano corrotto dalla monomania e dal desiderio di vendetta contro forze superiori. Egli eleva il suo trauma personale a una crociata cosmica, sfidando Dio e la Natura.</p>
+                    </div>
+                    <div class="border-l-4 border-ocean pl-4">
+                        <h3 class="text-xl font-bold text-ocean">Ismaele</h3>
+                        <p class="text-sm md:text-base mt-2">Il narratore, l'osservatore e il filosofo. Ismaele rappresenta l'umanità aperta, curiosa e tollerante. A differenza di Ahab, cerca di comprendere l'universo senza la presunzione di dominarlo. La sua fluidità mentale è ciò che, allegoricamente, gli permette di sopravvivere.</p>
+                    </div>
+                    <div class="border-l-4 border-stone-500 pl-4">
+                        <h3 class="text-xl font-bold text-stone-600">Starbuck</h3>
+                        <p class="text-sm md:text-base mt-2">Il primo ufficiale rappresenta la ragione pragmatica, la religione ortodossa e la moralità convenzionale. Tuttavia, la tragedia del romanzo risiede anche nel fallimento della "ragione normale" (Starbuck) di fronte al fascino carismatico del fanatismo estremo (Ahab).</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tematiche (Doughnut Chart) -->
+        <section id="tematiche" class="scroll-mt-24 mb-20 bg-ocean text-parchment p-8 md:p-12 rounded-xl">
+            <div class="text-center mb-12 max-w-3xl mx-auto">
+                <h2 class="text-3xl font-bold text-white mb-4 border-b-2 border-bone inline-block pb-2">Struttura tematica dell'opera</h2>
+                <p class="text-lg opacity-90">
+                    L'opera è un tessuto intricato di dicotomie. Questa visualizzazione concettuale rappresenta il "peso" narrativo e filosofico delle forze in contrasto all'interno del romanzo. Naviga sui segmenti del grafico per scoprire i dettagli di ogni tema.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <!-- Chart Container -->
+                <div class="chart-container bg-white/5 rounded-full p-4">
+                    <canvas id="themeDoughnutChart"></canvas>
+                </div>
+                
+                <div class="space-y-4" id="theme-description">
+                    <div class="bg-white/10 p-6 rounded backdrop-blur-sm border border-white/20">
+                        <h3 class="text-2xl font-bold mb-2 text-white">&#10024; Interagisci col Grafico</h3>
+                        <p class="opacity-90">Passa il cursore (o tocca) le sezioni del grafico a ciambella per esplorare le grandi dicotomie filosofiche che guidano la narrazione di Moby Dick.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- L'Oracolo del Pequod (Gemini API Integration) -->
+        <section id="oracolo" class="scroll-mt-24 mb-10">
+            <div class="bg-gradient-to-br from-parchment to-white p-8 md:p-12 rounded-xl shadow-lg border-2 border-ocean relative overflow-hidden">
+                <div class="absolute -right-10 -top-10 text-9xl opacity-5 text-ocean">&#9875;</div>
+                
+                <div class="max-w-3xl mx-auto relative z-10">
+                    <h2 class="text-3xl font-bold text-ocean mb-2">L'oracolo del Pequod ✨</h2>
+                    <p class="text-lg text-ink mb-6">
+                        Hai un dubbio su un capitolo oscuro? Vuoi analizzare una citazione specifica? Interroga il nostro esperto letterario virtuale basato sull'Intelligenza Artificiale.
+                    </p>
+
+                    <!-- Pre-set Questions -->
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        <span class="text-sm font-bold text-stone-500 uppercase mt-2 mr-2">Spunti:</span>
+                        <button class="preset-btn text-xs bg-bone hover:bg-ocean hover:text-white border border-stone-300 rounded-full px-3 py-1 transition-colors" data-prompt="Qual è il significato simbolico della gamba di balena di Ahab?">Gamba d'osso</button>
+                        <button class="preset-btn text-xs bg-bone hover:bg-ocean hover:text-white border border-stone-300 rounded-full px-3 py-1 transition-colors" data-prompt="Perché il romanzo inizia con la frase 'Chiamatemi Ismaele'?">Chiamatemi Ismaele</button>
+                        <button class="preset-btn text-xs bg-bone hover:bg-ocean hover:text-white border border-stone-300 rounded-full px-3 py-1 transition-colors" data-prompt="Analizza allegoricamente il personaggio di Pip, il mozzo.">Il mozzo Pip</button>
+                    </div>
+
+                    <!-- Input Area -->
+                    <div class="flex flex-col space-y-4">
+                        <textarea id="ai-input" rows="3" class="w-full p-4 rounded border border-stone-300 focus:ring-2 focus:ring-ocean focus:outline-none resize-none bg-white/80 backdrop-blur-sm shadow-inner" placeholder="Es: 'Cosa rappresenta il raggio di Sant'Elmo sugli alberi della nave?'"></textarea>
+                        
+                        <div class="flex justify-end">
+                            <button id="ai-submit" class="bg-ocean hover:bg-ink text-white font-bold py-3 px-6 rounded transition-colors shadow-md flex items-center">
+                                <span>Analizza con l'Intelligenza Artificiale ✨</span>
+                                <svg id="ai-loading" class="animate-spin -mr-1 ml-3 h-5 w-5 text-white hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Response Area -->
+                    <div id="ai-response-container" class="mt-8 hidden">
+                        <div class="border-t-2 border-bone pt-6">
+                            <h4 class="font-serif text-xl font-bold text-crimson mb-4 flex items-center">
+                                <span class="mr-2">&#9997;</span> L'analisi dello studioso:
+                            </h4>
+                            <div id="ai-response-content" class="text-lg leading-relaxed space-y-4 bg-white p-6 rounded border border-stone-200 shadow-sm">
+                                <!-- AI response will be injected here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Officina Creativa (More Gemini API Features) -->
+        <section id="officina" class="scroll-mt-24 mb-10">
+            <div class="text-center mb-12 max-w-3xl mx-auto">
+                <h2 class="text-3xl font-bold text-ocean mb-4 border-b-2 border-crimson inline-block pb-2">Officina letteraria ✨</h2>
+                <p class="text-lg">
+                    Sperimenta in prima persona lo stile narrativo di Melville. Lascia che l'Intelligenza Artificiale trasformi i tuoi pensieri quotidiani nel linguaggio epico dei protagonisti del Pequod.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                
+                <!-- Il Diario di Ismaele -->
+                <div class="bg-[#fdfbf7] p-8 rounded-xl shadow-md border-2 border-bone relative">
+                    <div class="absolute top-4 right-4 text-3xl opacity-20">&#128214;</div>
+                    <h3 class="text-2xl font-bold text-ocean mb-2 font-serif">Il diario di Ismaele ✨</h3>
+                    <p class="text-sm text-ink mb-4 h-16">Scrivi un evento banale della tua giornata. L'IA nei panni di Ismaele lo trasformerà in una lunga e complessa divagazione filosofica marinaresca.</p>
+                    
+                    <input type="text" id="ishmael-input" class="w-full p-3 mb-4 rounded border border-stone-300 focus:ring-2 focus:ring-ocean focus:outline-none bg-white" placeholder="Es: 'Oggi ho perso le chiavi di casa.'">
+                    
+                    <button id="ishmael-submit" class="w-full bg-stone-700 hover:bg-ink text-white font-bold py-2 px-4 rounded transition-colors shadow flex items-center justify-center mb-6">
+                        <span>Scrivi sul Diario di Bordo</span>
+                        <svg id="ishmael-loading" class="animate-spin -mr-1 ml-3 h-5 w-5 text-white hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+                    </button>
+
+                    <div id="ishmael-output" class="hidden">
+                        <div class="border-t border-stone-300 pt-4 font-serif italic text-ink leading-relaxed" id="ishmael-response-text"></div>
+                    </div>
+                </div>
+
+                <!-- Il Monologo di Ahab -->
+                <div class="bg-gradient-to-b from-stone-900 to-ink p-8 rounded-xl shadow-md border-2 border-crimson relative text-parchment">
+                    <div class="absolute top-4 right-4 text-3xl opacity-20">&#9876;</div>
+                    <h3 class="text-2xl font-bold text-crimson mb-2 font-serif">Parla come Ahab ✨</h3>
+                    <p class="text-sm text-bone mb-4 opacity-80 h-16">Inserisci una piccola frustrazione quotidiana. L'IA la trasformerà in un furioso monologo vendicativo e teatrale del Capitano Ahab.</p>
+                    
+                    <input type="text" id="ahab-input" class="w-full p-3 mb-4 rounded border border-stone-600 focus:ring-2 focus:ring-crimson focus:outline-none bg-stone-800 text-white placeholder-stone-400" placeholder="Es: 'Il wifi ha smesso di funzionare.'">
+                    
+                    <button id="ahab-submit" class="w-full bg-crimson hover:bg-red-800 text-white font-bold py-2 px-4 rounded transition-colors shadow flex items-center justify-center mb-6 border border-red-900">
+                        <span>Lancia la Fiocina</span>
+                        <svg id="ahab-loading" class="animate-spin -mr-1 ml-3 h-5 w-5 text-white hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+                    </button>
+
+                    <div id="ahab-output" class="hidden">
+                        <div class="border-t border-stone-700 pt-4 font-serif text-white leading-relaxed text-lg" id="ahab-response-text"></div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-ink text-bone py-8 text-center">
+        <div class="max-w-6xl mx-auto px-4">
+            <p class="mb-2 font-serif text-xl">"Chiamatemi Ismaele."</p>
+            <p class="text-sm opacity-70">Analisi Allegorica Interattiva - Progettata per l'esplorazione letteraria.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript Logic -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            
+            // --- 1. Interactive Tabs Logic (La Balena) ---
+            const symbolData = {
+                natura: {
+                    title: "La Forza Indifferente della Natura \uD83C\uDF0A",
+                    text: "Nella sua forma più basilare, Moby Dick rappresenta la forza bruta, implacabile e del tutto indifferente della natura. Non agisce per malizia, ma per istinto di sopravvivenza. Sfidare la balena significa sfidare l'ordine naturale stesso, un'impresa destinata al fallimento catastrofico di fronte a una potenza insormontabile."
+                },
+                dio: {
+                    title: "La Divinità Incomprensibile \u26A1",
+                    text: "Calvino e la predestinazione permeano il romanzo. Moby Dick può essere vista come l'incarnazione di un Dio onnipotente e imperscrutabile. Ahab, simile a Prometeo, cerca di punire questo Dio per le sofferenze inflitte all'umanità, rifiutando la sottomissione al fato divino."
+                },
+                vuoto: {
+                    title: "La 'Bianchezza' e il Vuoto \u26AA",
+                    text: "Nel celebre capitolo 'La Bianchezza della Balena', Ismaele riflette sul colore bianco non come simbolo di purezza, ma come un vuoto terrificante. Il bianco è l'assenza di colore e, simultaneamente, la somma di tutti i colori. Rappresenta il terrore dell'assenza di significato nell'universo, un abisso ateo che l'uomo cerca disperatamente di riempire di senso."
+                },
+                male: {
+                    title: "Il Male Assoluto (La Visione di Ahab) \uD83D\uDD25",
+                    text: "Per Ahab, la balena non è un animale, ma la maschera tangibile di un demone cosmico. Egli proietta su Moby Dick tutto il dolore, l'ingiustizia e il male del mondo. La sua tragedia è credere che distruggendo la creatura fisica, possa distruggere il principio metafisico del male."
+                }
+            };
+
+            const tabBtns = document.querySelectorAll('.tab-btn');
+            const symTitle = document.getElementById('sym-title');
+            const symText = document.getElementById('sym-text');
+
+            tabBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // Remove active class from all
+                    tabBtns.forEach(b => {
+                        b.classList.remove('active', 'bg-ocean', 'text-white');
+                        b.classList.add('text-ink');
+                    });
+                    
+                    // Add active class to clicked
+                    this.classList.add('active');
+                    this.classList.remove('text-ink');
+                    
+                    // Update content
+                    const target = this.getAttribute('data-target');
+                    
+                    // Add simple fade animation
+                    symTitle.style.opacity = 0;
+                    symText.style.opacity = 0;
+                    
+                    setTimeout(() => {
+                        symTitle.textContent = symbolData[target].title;
+                        symText.textContent = symbolData[target].text;
+                        symTitle.style.opacity = 1;
+                        symText.style.opacity = 1;
+                    }, 200);
+                });
+            });
+
+            // Smooth transition setup for text
+            symTitle.style.transition = 'opacity 0.2s ease';
+            symText.style.transition = 'opacity 0.2s ease';
+
+
+            // --- 2. Character Radar Chart ---
+            const ctxRadar = document.getElementById('characterRadarChart').getContext('2d');
+            
+            // Shared Chart.js options for responsiveness
+            const commonOptions = {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: { font: { family: "'Lora', serif", size: 14 } }
+                    }
+                }
+            };
+
+            new Chart(ctxRadar, {
+                type: 'radar',
+                data: {
+                    labels: ['Ossessione/Follia', 'Ragione/Pragmatismo', 'Spiritualità/Tolleranza', 'Dominio sulla Natura', 'Adattabilità'],
+                    datasets: [
+                        {
+                            label: 'Capitano Ahab',
+                            data: [10, 2, 1, 9, 1],
+                            backgroundColor: 'rgba(139, 0, 0, 0.2)', // Crimson
+                            borderColor: 'rgba(139, 0, 0, 1)',
+                            pointBackgroundColor: 'rgba(139, 0, 0, 1)',
+                            borderWidth: 2
+                        },
+                        {
+                            label: 'Ismaele',
+                            data: [3, 7, 9, 2, 10],
+                            backgroundColor: 'rgba(26, 54, 93, 0.2)', // Ocean
+                            borderColor: 'rgba(26, 54, 93, 1)',
+                            pointBackgroundColor: 'rgba(26, 54, 93, 1)',
+                            borderWidth: 2
+                        },
+                        {
+                            label: 'Starbuck',
+                            data: [1, 9, 6, 5, 4],
+                            backgroundColor: 'rgba(120, 113, 108, 0.2)', // Stone
+                            borderColor: 'rgba(120, 113, 108, 1)',
+                            pointBackgroundColor: 'rgba(120, 113, 108, 1)',
+                            borderWidth: 2
+                        }
+                    ]
+                },
+                options: {
+                    ...commonOptions,
+                    scales: {
+                        r: {
+                            angleLines: { color: 'rgba(0, 0, 0, 0.1)' },
+                            grid: { color: 'rgba(0, 0, 0, 0.1)' },
+                            pointLabels: {
+                                font: { family: "'Lora', serif", size: 12 },
+                                color: '#2c3e50'
+                            },
+                            ticks: { display: false, min: 0, max: 10 }
+                        }
+                    }
+                }
+            });
+
+            // --- 3. Thematic Doughnut Chart ---
+            const ctxDoughnut = document.getElementById('themeDoughnutChart').getContext('2d');
+            
+            const themeDetails = {
+                0: { title: "Destino vs Libero Arbitrio", text: "Fino a che punto l'uomo controlla la propria vita? Ahab crede di agire liberamente, ma Ismaele suggerisce che l'intera umanità è intrappolata in un 'telaio del fato', intrecciando caso, necessità e libero arbitrio." },
+                1: { title: "L'Isolamento e l'Alienazione", text: "La caccia isola il Pequod dalla civiltà. L'oceano vasto e solitario riflette l'isolamento esistenziale dell'individuo. Ahab sceglie l'isolamento assoluto, recidendo ogni legame umano." },
+                2: { title: "I Limiti della Conoscenza Umana", text: "Il romanzo è pieno di tentativi falliti di classificare e comprendere la balena (scienza, arte, mito). La lezione finale è che ci sono verità insondabili e misteri che l'intelletto umano non può penetrare." },
+                3: { title: "Sfruttamento Industriale vs Natura", text: "Il Pequod è una fabbrica galleggiante. Il libro documenta l'alba dello sfruttamento spietato della natura da parte dell'industria capitalistica, prefigurando la crisi ecologica moderna." }
+            };
+
+            const themeChart = new Chart(ctxDoughnut, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Destino / Libero Arbitrio', 'Isolamento', 'Limiti della Conoscenza', 'Sfruttamento / Industria'],
+                    datasets: [{
+                        data: [35, 25, 25, 15],
+                        backgroundColor: [
+                            '#e3dac9', // Bone
+                            '#8b0000', // Crimson
+                            '#2c3e50', // Ink
+                            '#475569'  // Slate
+                        ],
+                        borderColor: '#1a365d',
+                        borderWidth: 2,
+                        hoverOffset: 10
+                    }]
+                },
+                options: {
+                    ...commonOptions,
+                    cutout: '60%',
+                    plugins: {
+                        legend: {
+                            position: 'right',
+                            labels: { color: '#f4f1ea', font: { family: "'Lora', serif" } }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) { return ' ' + context.label; }
+                            }
+                        }
+                    },
+                    onHover: (event, chartElement) => {
+                        const descriptionBox = document.getElementById('theme-description');
+                        if (chartElement.length > 0) {
+                            const index = chartElement[0].index;
+                            descriptionBox.innerHTML = `
+                                <div class="bg-white/10 p-6 rounded backdrop-blur-sm border border-white/20 transition-all duration-300">
+                                    <h3 class="text-2xl font-bold mb-3 text-[#e3dac9]">${themeDetails[index].title}</h3>
+                                    <p class="text-lg leading-relaxed">${themeDetails[index].text}</p>
+                                </div>
+                            `;
+                        }
+                    }
+                }
+            });
+
+            // --- 4. Gemini API Integration (L'Oracolo del Pequod) ---
+            const apiKey = "sk-e68246bf4bba4222a84655b676a8abd3"; // API Key is injected by the environment
+            const aiInput = document.getElementById('ai-input');
+            const aiSubmitBtn = document.getElementById('ai-submit');
+            const aiLoadingIcon = document.getElementById('ai-loading');
+            const aiResponseContainer = document.getElementById('ai-response-container');
+            const aiResponseContent = document.getElementById('ai-response-content');
+            const presetBtns = document.querySelectorAll('.preset-btn');
+
+            // Handle Preset Buttons
+            presetBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    aiInput.value = btn.getAttribute('data-prompt');
+                    aiInput.focus();
+                });
+            });
+
+            // Format simple markdown (bold and line breaks)
+            const formatMarkdown = (text) => {
+                let formatted = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>'); // Bold
+                formatted = formatted.replace(/\*(.*?)\*/g, '<em>$1</em>'); // Italic
+                formatted = formatted.split('\n').filter(p => p.trim() !== '').map(p => `<p>${p}</p>`).join(''); // Paragraphs
+                return formatted;
+            };
+
+            // Call DeepSeek API with Exponential Backoff and dynamic system prompts
+            async function generateContent(prompt, systemInstructionText) {
+                const endpoint = `https://api.deepseek.com/chat/completions`;
+                
+                const payload = {
+                    model: "deepseek-v4-flash",
+                    messages: [
+                        { role: "system", content: systemInstructionText },
+                        { role: "user", content: prompt }
+                    ]
+                };
+
+                const maxRetries = 5;
+                let baseDelay = 1000; // 1s, 2s, 4s, 8s, 16s
+
+                for (let attempt = 0; attempt < maxRetries; attempt++) {
+                    try {
+                        const response = await fetch(endpoint, {
+                            method: 'POST',
+                            headers: { 
+                                'Content-Type': 'application/json',
+                                'Authorization': `Bearer ${apiKey}`
+                            },
+                            body: JSON.stringify(payload)
+                        });
+
+                        if (!response.ok) {
+                            throw new Error(`HTTP Error: ${response.status}`);
+                        }
+
+                        const data = await response.json();
+                        return data.choices?.[0]?.message?.content || "Nessuna risposta generata.";
+                    } catch (error) {
+                        if (attempt === maxRetries - 1) {
+                            console.error("DeepSeek API failed after all retries:", error);
+                            return "Mi dispiace, la nebbia è troppo fitta per vedere chiaramente in questo momento. Il nostro oracolo è temporaneamente irraggiungibile. Riprova più tardi.";
+                        }
+                        await new Promise(resolve => setTimeout(resolve, baseDelay));
+                        baseDelay *= 2; // Exponential backoff
+                    }
+                }
+            }
+
+            // Handle Submit Action for L'Oracolo
+            aiSubmitBtn.addEventListener('click', async () => {
+                const prompt = aiInput.value.trim();
+                if (!prompt) return;
+
+                // UI Loading State
+                aiInput.disabled = true;
+                aiSubmitBtn.disabled = true;
+                aiSubmitBtn.classList.add('opacity-75', 'cursor-not-allowed');
+                aiLoadingIcon.classList.remove('hidden');
+                aiResponseContainer.classList.add('hidden');
+                
+                // Set preset response area to show thinking
+                aiResponseContainer.classList.remove('hidden');
+                aiResponseContent.innerHTML = '<p class="animate-pulse text-stone-500 italic">Consultando gli antichi registri del Pequod...</p>';
+
+                // Fetch AI response
+                const sysPromptOracolo = "Sei un esperto accademico e critico letterario specializzato in 'Moby Dick' di Herman Melville. Rispondi in italiano. Fornisci un'analisi profonda, allegorica e simbolica alla richiesta dell'utente. Sii chiaro, incisivo e limitati a un massimo di tre o quattro paragrafi ben strutturati.";
+                const responseText = await generateContent(prompt, sysPromptOracolo);
+
+                // UI Complete State
+                aiInput.disabled = false;
+                aiSubmitBtn.disabled = false;
+                aiSubmitBtn.classList.remove('opacity-75', 'cursor-not-allowed');
+                aiLoadingIcon.classList.add('hidden');
+                
+                // Render Response
+                aiResponseContent.innerHTML = formatMarkdown(responseText);
+            });
+
+            // --- 5. Nuove Feature AI (Officina Creativa) ---
+
+            // Diario di Ismaele
+            const ishmaelInput = document.getElementById('ishmael-input');
+            const ishmaelSubmit = document.getElementById('ishmael-submit');
+            const ishmaelLoading = document.getElementById('ishmael-loading');
+            const ishmaelOutput = document.getElementById('ishmael-output');
+            const ishmaelResponseText = document.getElementById('ishmael-response-text');
+
+            ishmaelSubmit.addEventListener('click', async () => {
+                const prompt = ishmaelInput.value.trim();
+                if (!prompt) return;
+
+                ishmaelInput.disabled = true;
+                ishmaelSubmit.disabled = true;
+                ishmaelLoading.classList.remove('hidden');
+                ishmaelOutput.classList.remove('hidden');
+                ishmaelResponseText.innerHTML = '<span class="animate-pulse">Intingendo la penna nel calamaio...</span>';
+
+                const sysPromptIshmael = "Sei Ismaele, il narratore di Moby Dick. L'utente ti fornirà un evento banale della sua giornata. Scrivi una voce di diario di bordo (max 150 parole). Inizia descrivendo l'evento oggettivamente, ma poi perditi immediatamente in una profonda, complessa e quasi assurda riflessione filosofica/metafisica sulla condizione umana, il cosmo o il destino, usando il tuo classico stile divagante e ricche metafore legate all'oceano, alle navi o alla baleneria.";
+                const responseText = await generateContent(`Evento banale: "${prompt}"`, sysPromptIshmael);
+
+                ishmaelInput.disabled = false;
+                ishmaelSubmit.disabled = false;
+                ishmaelLoading.classList.add('hidden');
+                ishmaelResponseText.innerHTML = formatMarkdown(responseText);
+            });
+
+            // Monologo di Ahab
+            const ahabInput = document.getElementById('ahab-input');
+            const ahabSubmit = document.getElementById('ahab-submit');
+            const ahabLoading = document.getElementById('ahab-loading');
+            const ahabOutput = document.getElementById('ahab-output');
+            const ahabResponseText = document.getElementById('ahab-response-text');
+
+            ahabSubmit.addEventListener('click', async () => {
+                const prompt = ahabInput.value.trim();
+                if (!prompt) return;
+
+                ahabInput.disabled = true;
+                ahabSubmit.disabled = true;
+                ahabLoading.classList.remove('hidden');
+                ahabOutput.classList.remove('hidden');
+                ahabResponseText.innerHTML = '<span class="animate-pulse">Fissando l\'orizzonte con odio...</span>';
+
+                const sysPromptAhab = "Sei il Capitano Ahab di Moby Dick. L'utente ti fornirà una piccola e insignificante frustrazione quotidiana. Riscrivila trasformandola in un monologo oscuro, teatrale, folle, ossessivo e vendicativo. Usa il tuo tipico linguaggio marinaresco ottocentesco, esclamazioni drammatiche (es: 'Per il cuore di tenebra!'), e riferimenti a forze oscure, al fato inesorabile o alla dannazione. Sii breve ma incredibilmente intenso (max 100 parole).";
+                const responseText = await generateContent(`Frustrazione quotidiana: "${prompt}"`, sysPromptAhab);
+
+                ahabInput.disabled = false;
+                ahabSubmit.disabled = false;
+                ahabLoading.classList.add('hidden');
+                ahabResponseText.innerHTML = formatMarkdown(responseText);
+            });
+
+        });
+    </script>
+</body>
+</html>
