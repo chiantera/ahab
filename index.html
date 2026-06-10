@@ -132,7 +132,6 @@
          2. Radar Chart (Characters): Goal is to compare complex character archetypes across multiple psychological/thematic axes. Radar is perfect for multi-variable profiling.
          3. Doughnut Chart (Themes): Goal is to show the relative dominance of key themes in the narrative structure. Doughnut provides a clear proportional view. 
          Library: Chart.js for all charts. HTML/Tailwind/JS for tabs. -->
-    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
 
     <!-- Navigation -->
     <nav class="fixed w-full z-50 bg-parchment/90 backdrop-blur-sm border-b border-bone shadow-sm">
@@ -643,10 +642,24 @@
 
     </main>
 
-    <footer class="bg-ink text-bone py-8 text-center">
-        <div class="max-w-6xl mx-auto px-4">
-            <p class="mb-2 font-serif text-xl">"Chiamatemi Ismaele."</p>
-            <p class="text-sm opacity-70">Analisi Allegorica Interattiva - Progettata per l'esplorazione letteraria.</p>
+    <footer class="bg-ink text-bone pt-0 pb-10 text-center relative">
+        <div class="h-12 overflow-hidden bg-parchment" aria-hidden="true">
+            <svg class="w-full h-full text-ink" viewBox="0 0 360 30" preserveAspectRatio="none" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 18 C 30 30, 60 6, 90 18 C 120 30, 150 6, 180 18 C 210 30, 240 6, 270 18 C 300 30, 330 6, 360 18 L 360 30 L 0 30 Z"/>
+            </svg>
+        </div>
+        <div class="max-w-6xl mx-auto px-4 pt-10">
+            <div class="w-20 mx-auto mb-6 text-bone opacity-60" aria-hidden="true">
+                <svg viewBox="0 0 240 120" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M30 30 C 16 32, 8 44, 8 58 C 8 72, 16 82, 34 86 C 70 93, 120 92, 162 74 C 170 70, 182 66, 192 64 C 198 70, 208 80, 222 86 C 216 76, 213 68, 214 60 C 220 54, 228 44, 232 32 C 220 40, 208 46, 198 48 C 192 42, 184 40, 176 44 C 160 32, 130 24, 96 24 C 70 24, 46 27, 30 30 Z"/>
+                </svg>
+            </div>
+            <p class="mb-2 quote-antique text-2xl italic">«Chiamatemi Ismaele.»</p>
+            <p class="text-sm opacity-70 mb-6">L'incipit più famoso della letteratura americana: non un nome, ma una scelta. Ismaele, il figlio ripudiato di Abramo, l'esule volontario.</p>
+            <div class="flex items-center justify-center gap-4 text-xs uppercase tracking-widest opacity-60">
+                <span>Herman Melville &middot; Moby Dick, or The Whale &middot; 1851</span>
+            </div>
+            <p class="text-xs opacity-50 mt-4">Analisi allegorica interattiva &mdash; progettata per l'esplorazione letteraria. Nessun capodoglio è stato ferito nella realizzazione di questo sito.</p>
         </div>
     </footer>
 
@@ -662,7 +675,7 @@
                 },
                 dio: {
                     title: "La Divinità Incomprensibile \u26A1",
-                    text: "Calvino e la predestinazione permeano il romanzo. Moby Dick può essere vista come l'incarnazione di un Dio onnipotente e imperscrutabile. Ahab, simile a Prometeo, cerca di punire questo Dio per le sofferenze inflitte all'umanità, rifiutando la sottomissione al fato divino."
+                    text: "Il calvinismo e l'idea di predestinazione permeano il romanzo. Moby Dick può essere vista come l'incarnazione di un Dio onnipotente e imperscrutabile. Ahab, simile a Prometeo, cerca di punire questo Dio per le sofferenze inflitte all'umanità, rifiutando la sottomissione al fato divino."
                 },
                 vuoto: {
                     title: "La 'Bianchezza' e il Vuoto \u26AA",
