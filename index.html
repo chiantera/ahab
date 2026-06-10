@@ -3,44 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Moby Dick: analisi allegorica e simbolica</title>
-    <meta name="description" content="Che cosa si nasconde dietro la balena bianca? Un viaggio interattivo tra le allegorie, i personaggi, gli eventi e i simboli di Moby Dick di Herman Melville.">
-    <meta name="theme-color" content="#1a365d">
-    <meta property="og:title" content="Moby Dick: oltre la superficie del mare">
-    <meta property="og:description" content="Un'esplorazione interattiva dell'allegoria e del simbolismo nel capolavoro di Herman Melville: la balena, i personaggi, gli eventi, gli oggetti che parlano.">
+    <title>La versione di Elena — L'Odissea raccontata dalle donne</title>
+    <meta name="description" content="Per quasi tremila anni l'Odissea l'hanno raccontata gli uomini. Qui parlano Elena di Troia e Penelope: un'esplorazione interattiva, in italiano, dell'epica omerica dal punto di vista delle donne.">
+    <meta name="theme-color" content="#1d3557">
+    <meta property="og:title" content="La versione di Elena">
+    <meta property="og:description" content="L'Odissea capovolta: la storia raccontata da Elena di Troia e Penelope.">
     <meta property="og:type" content="website">
     <meta property="og:locale" content="it_IT">
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%90%8B%3C/text%3E%3C/svg%3E">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8F%BA%3C/text%3E%3C/svg%3E">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        'parchment': '#f4f1ea',
-                        'ink': '#2c3e50',
-                        'ocean': '#1a365d',
-                        'crimson': '#8b0000',
-                        'bone': '#e3dac9'
+                        'marmo': '#f7f4ee',
+                        'egeo': '#1d3557',
+                        'terracotta': '#b4532a',
+                        'oliva': '#606c38',
+                        'oro': '#c9a227',
+                        'notte': '#22223b',
+                        'sabbia': '#e9e2d0'
                     },
                     fontFamily: {
-                        'serif': ['"Playfair Display"', 'serif'],
-                        'body': ['"Lora"', 'serif'],
-                        'antique': ['"IM Fell English"', 'serif'],
+                        'display': ['"Marcellus"', 'serif'],
+                        'body': ['"Cormorant Garamond"', 'serif'],
                     }
                 }
             }
         }
     </script>
     <style>
-        body { font-family: 'Lora', serif; background-color: #f4f1ea; color: #2c3e50; }
-        h1, h2, h3, h4, .nav-logo { font-family: 'Playfair Display', serif; }
-        
-        /* Required Chart Container Styling */
+        body { font-family: 'Cormorant Garamond', serif; background-color: #f7f4ee; color: #22223b; font-size: 1.05rem; }
+        h1, h2, h3, h4, .display { font-family: 'Marcellus', serif; }
+
         .chart-container {
             position: relative;
             width: 100%;
@@ -54,31 +54,50 @@
             .chart-container { height: 400px; }
         }
 
-        /* Custom Scrollbar */
         ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #f4f1ea; }
-        ::-webkit-scrollbar-thumb { background: #1a365d; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #2c3e50; }
+        ::-webkit-scrollbar-track { background: #f7f4ee; }
+        ::-webkit-scrollbar-thumb { background: #1d3557; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #22223b; }
 
-        .tab-btn.active {
-            background-color: #1a365d;
-            color: #f4f1ea;
-            border-color: #1a365d;
+        /* Greek meander (greca) pattern via repeating gradient borders */
+        .meander {
+            height: 14px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 14' fill='none' stroke='%231d3557' stroke-width='2'%3E%3Cpath d='M0 12 L0 2 L36 2 M8 12 L8 6 L32 6 M16 12 L16 10 L28 10 M40 12 L40 2'/%3E%3C/svg%3E");
+            background-size: 40px 14px;
+            background-repeat: repeat-x;
         }
 
-        /* Antique quote typography */
-        .quote-antique { font-family: 'IM Fell English', serif; }
-
-        /* Drop cap for opening paragraphs */
+        /* Drop cap */
         .drop-cap::first-letter {
-            font-family: 'Playfair Display', serif;
-            font-weight: 900;
+            font-family: 'Marcellus', serif;
             font-size: 3.4em;
             float: left;
             line-height: 0.85;
             padding-right: 0.12em;
-            color: #8b0000;
+            color: #b4532a;
         }
+
+        /* Voice switch */
+        .voice-btn.active { background-color: #1d3557; color: #f7f4ee; border-color: #1d3557; }
+        .chapter-btn.active { background-color: #b4532a; color: #f7f4ee; border-color: #b4532a; }
+
+        /* Animated loom threads */
+        @keyframes weave {
+            0% { stroke-dashoffset: 220; }
+            55%, 70% { stroke-dashoffset: 0; }
+            100% { stroke-dashoffset: -220; }
+        }
+        .thread { stroke-dasharray: 220; animation: weave 8s ease-in-out infinite; }
+        .thread:nth-child(2) { animation-delay: 0.6s; }
+        .thread:nth-child(3) { animation-delay: 1.2s; }
+        .thread:nth-child(4) { animation-delay: 1.8s; }
+        .thread:nth-child(5) { animation-delay: 2.4s; }
+
+        /* Cards */
+        .donna-card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .donna-card:hover { transform: translateY(-6px); box-shadow: 0 12px 24px -8px rgba(29, 53, 87, 0.25); }
+        .symbol-card { transition: transform 0.3s ease, border-color 0.3s ease; }
+        .symbol-card:hover { transform: scale(1.02); border-color: #b4532a; }
 
         /* Timeline */
         .timeline-line {
@@ -87,7 +106,7 @@
             top: 0;
             bottom: 0;
             width: 2px;
-            background: linear-gradient(to bottom, #e3dac9, #1a365d 15%, #1a365d 85%, #8b0000);
+            background: linear-gradient(to bottom, #e9e2d0, #1d3557 15%, #1d3557 85%, #b4532a);
         }
         @media (min-width: 768px) {
             .timeline-line { left: 50%; transform: translateX(-1px); }
@@ -99,35 +118,14 @@
             width: 1.1rem;
             height: 1.1rem;
             border-radius: 9999px;
-            background-color: #f4f1ea;
-            border: 3px solid #1a365d;
+            background-color: #f7f4ee;
+            border: 3px solid #1d3557;
             z-index: 10;
             top: 1.75rem;
         }
         @media (min-width: 768px) {
             .timeline-dot { left: 50%; }
         }
-
-        /* Character card hover lift */
-        .char-card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
-        .char-card:hover { transform: translateY(-6px); box-shadow: 0 12px 24px -8px rgba(26, 54, 93, 0.25); }
-
-        /* Symbol card */
-        .symbol-card { transition: transform 0.3s ease, border-color 0.3s ease; }
-        .symbol-card:hover { transform: scale(1.02); border-color: #8b0000; }
-
-        /* Gentle floating animation for the hero whale */
-        @keyframes float-whale {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-12px) rotate(-1.5deg); }
-        }
-        .whale-float { animation: float-whale 7s ease-in-out infinite; }
-
-        @keyframes wave-drift {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-90px); }
-        }
-        .wave-drift { animation: wave-drift 9s linear infinite; }
 
         /* Scroll reveal */
         .reveal {
@@ -138,101 +136,82 @@
         .reveal.revealed { opacity: 1; transform: none; }
         @media (prefers-reduced-motion: reduce) {
             .reveal { opacity: 1; transform: none; transition: none; }
-            .whale-float, .wave-drift { animation: none; }
+            .thread { animation: none; stroke-dasharray: none; }
         }
     </style>
 </head>
-<body class="antialiased selection:bg-ocean selection:text-white pb-20">
-
-    <!-- Chosen Palette: Warm Neutrals (Parchment, Bone) with Deep Ocean Blue and Crimson accents -->
-    <!-- Application Structure Plan: A single-page scrolling presentation. It uses a top sticky navigation for easy access. The structure moves from a general introduction to an interactive exploration of the main symbol (the Whale), then uses quantitative visualization (Radar Chart) to compare character archetypes, followed by a breakdown of thematic frequencies (Doughnut Chart). This flow is chosen to engage the user from high-level concepts down to specific analytical comparisons, keeping the dense literary subject matter digestible and visually stimulating. -->
-    <!-- Visualization & Content Choices: 
-         1. Interactive Tabs (The Whale): Goal is to show multiple interpretations of one symbol. Tabs allow users to switch context without cluttering the screen.
-         2. Radar Chart (Characters): Goal is to compare complex character archetypes across multiple psychological/thematic axes. Radar is perfect for multi-variable profiling.
-         3. Doughnut Chart (Themes): Goal is to show the relative dominance of key themes in the narrative structure. Doughnut provides a clear proportional view. 
-         Library: Chart.js for all charts. HTML/Tailwind/JS for tabs. -->
+<body class="antialiased selection:bg-egeo selection:text-white">
 
     <!-- Navigation -->
-    <nav class="fixed w-full z-50 bg-parchment/90 backdrop-blur-sm border-b border-bone shadow-sm">
+    <nav class="fixed w-full z-50 bg-marmo/90 backdrop-blur-sm border-b border-sabbia shadow-sm">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16 items-center">
-                <div class="flex-shrink-0 flex items-center">
-                    <a href="#" class="nav-logo text-2xl font-bold text-ocean">Moby Dick <span class="text-crimson text-xl">&#9875;</span></a>
-                </div>
+                <a href="#" class="display text-xl md:text-2xl text-egeo">La versione di Elena <span class="text-terracotta">&#127994;</span></a>
                 <div class="hidden md:flex space-x-2 lg:space-x-4">
-                    <a href="#introduzione" class="text-ink hover:text-ocean px-2 py-2 text-sm font-medium transition-colors">Introduzione</a>
-                    <a href="#labalena" class="text-ink hover:text-ocean px-2 py-2 text-sm font-medium transition-colors">La balena</a>
-                    <a href="#ipersonaggi" class="text-ink hover:text-ocean px-2 py-2 text-sm font-medium transition-colors">Personaggi</a>
-                    <a href="#eventi" class="text-ink hover:text-ocean px-2 py-2 text-sm font-medium transition-colors">Eventi</a>
-                    <a href="#simboli" class="text-ink hover:text-ocean px-2 py-2 text-sm font-medium transition-colors">Simboli</a>
-                    <a href="#tematiche" class="text-ink hover:text-ocean px-2 py-2 text-sm font-medium transition-colors">Tematiche</a>
-                    <a href="#oracolo" class="text-ink hover:text-ocean px-2 py-2 text-sm font-medium transition-colors font-bold">L'oracolo ✨</a>
-                    <a href="#officina" class="text-ink hover:text-ocean px-2 py-2 text-sm font-medium transition-colors font-bold text-crimson">Officina ✨</a>
+                    <a href="#introduzione" class="text-notte hover:text-egeo px-2 py-2 text-sm font-semibold transition-colors">Introduzione</a>
+                    <a href="#voci" class="text-notte hover:text-egeo px-2 py-2 text-sm font-semibold transition-colors">Le due voci</a>
+                    <a href="#donne" class="text-notte hover:text-egeo px-2 py-2 text-sm font-semibold transition-colors">Le donne</a>
+                    <a href="#eventi" class="text-notte hover:text-egeo px-2 py-2 text-sm font-semibold transition-colors">Eventi</a>
+                    <a href="#simboli" class="text-notte hover:text-egeo px-2 py-2 text-sm font-semibold transition-colors">Simboli</a>
+                    <a href="#tematiche" class="text-notte hover:text-egeo px-2 py-2 text-sm font-semibold transition-colors">Tematiche</a>
                 </div>
-                <button id="mobile-menu-btn" class="md:hidden p-2 text-ocean" aria-label="Apri il menu" aria-expanded="false" aria-controls="mobile-menu">
+                <button id="mobile-menu-btn" class="md:hidden p-2 text-egeo" aria-label="Apri il menu" aria-expanded="false" aria-controls="mobile-menu">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
                     </svg>
                 </button>
             </div>
         </div>
-        <div id="mobile-menu" class="hidden md:hidden bg-parchment border-t border-bone px-4 pb-4">
-            <a href="#introduzione" class="block py-2 text-ink hover:text-ocean font-medium">Introduzione</a>
-            <a href="#labalena" class="block py-2 text-ink hover:text-ocean font-medium">La balena</a>
-            <a href="#ipersonaggi" class="block py-2 text-ink hover:text-ocean font-medium">Personaggi</a>
-            <a href="#eventi" class="block py-2 text-ink hover:text-ocean font-medium">Eventi</a>
-            <a href="#simboli" class="block py-2 text-ink hover:text-ocean font-medium">Simboli</a>
-            <a href="#tematiche" class="block py-2 text-ink hover:text-ocean font-medium">Tematiche</a>
-            <a href="#oracolo" class="block py-2 text-ink hover:text-ocean font-bold">L'oracolo ✨</a>
-            <a href="#officina" class="block py-2 text-crimson hover:text-ocean font-bold">Officina ✨</a>
+        <div id="mobile-menu" class="hidden md:hidden bg-marmo border-t border-sabbia px-4 pb-4">
+            <a href="#introduzione" class="block py-2 text-notte hover:text-egeo font-semibold">Introduzione</a>
+            <a href="#voci" class="block py-2 text-notte hover:text-egeo font-semibold">Le due voci</a>
+            <a href="#donne" class="block py-2 text-notte hover:text-egeo font-semibold">Le donne</a>
+            <a href="#eventi" class="block py-2 text-notte hover:text-egeo font-semibold">Eventi</a>
+            <a href="#simboli" class="block py-2 text-notte hover:text-egeo font-semibold">Simboli</a>
+            <a href="#tematiche" class="block py-2 text-notte hover:text-egeo font-semibold">Tematiche</a>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <header class="pt-32 pb-0 px-0 text-center bg-gradient-to-b from-bone to-parchment relative overflow-hidden">
+    <!-- Hero -->
+    <header class="pt-32 pb-0 text-center bg-gradient-to-b from-sabbia to-marmo relative overflow-hidden">
         <div class="max-w-3xl mx-auto px-4 relative z-10">
-            <p class="quote-antique text-crimson text-lg tracking-widest uppercase mb-3">Herman Melville &middot; 1851</p>
-            <h1 class="text-5xl md:text-7xl font-black text-ocean mb-6 leading-tight">Oltre la superficie<br>del mare</h1>
-            <p class="text-xl text-ink mb-10 italic max-w-2xl mx-auto">Che cosa si nasconde dietro la balena bianca? Un viaggio interattivo tra le allegorie, i personaggi e i simboli di <em>Moby Dick</em>.</p>
+            <p class="display text-terracotta text-lg tracking-[0.3em] uppercase mb-4">L'Odissea capovolta</p>
+            <h1 class="text-5xl md:text-7xl text-egeo mb-6 leading-tight">La versione<br>di Elena</h1>
+            <p class="text-2xl text-notte mb-10 italic max-w-2xl mx-auto leading-snug">Per quasi tremila anni questa storia l'hanno raccontata gli uomini. Oggi versiamo il vino, sediamo accanto al fuoco — e la parola passa a Elena di Troia e a Penelope.</p>
 
-            <!-- Whale SVG illustration -->
-            <div class="whale-float mx-auto mb-8 w-64 md:w-80 text-ocean opacity-80" aria-hidden="true">
-                <svg viewBox="0 0 240 120" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                    <!-- spout -->
-                    <path d="M30 22 C 28 14, 32 8, 38 6 C 34 12, 35 16, 36 20 Z" opacity="0.45"/>
-                    <path d="M40 20 C 41 12, 47 8, 53 9 C 47 13, 45 17, 44 22 Z" opacity="0.45"/>
-                    <!-- body -->
-                    <path d="M30 30
-                             C 16 32, 8 44, 8 58
-                             C 8 72, 16 82, 34 86
-                             C 70 93, 120 92, 162 74
-                             C 170 70, 182 66, 192 64
-                             C 198 70, 208 80, 222 86
-                             C 216 76, 213 68, 214 60
-                             C 220 54, 228 44, 232 32
-                             C 220 40, 208 46, 198 48
-                             C 192 42, 184 40, 176 44
-                             C 160 32, 130 24, 96 24
-                             C 70 24, 46 27, 30 30 Z"/>
-                    <!-- fin -->
-                    <path d="M92 88 C 96 98, 92 108, 82 112 C 86 104, 86 96, 84 90 Z"/>
-                    <!-- eye (parchment colored) -->
-                    <circle cx="42" cy="60" r="3.5" fill="#f4f1ea"/>
+            <!-- Loom SVG: warp threads being woven -->
+            <div class="mx-auto mb-10 w-64 md:w-80 text-egeo" aria-hidden="true">
+                <svg viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <!-- loom frame -->
+                    <rect x="20" y="10" width="160" height="8" rx="2" fill="currentColor"/>
+                    <rect x="20" y="102" width="160" height="8" rx="2" fill="currentColor"/>
+                    <rect x="14" y="6" width="8" height="108" rx="2" fill="currentColor"/>
+                    <rect x="178" y="6" width="8" height="108" rx="2" fill="currentColor"/>
+                    <!-- warp threads -->
+                    <g stroke="currentColor" stroke-width="1" opacity="0.35">
+                        <line x1="40" y1="18" x2="40" y2="102"/>
+                        <line x1="60" y1="18" x2="60" y2="102"/>
+                        <line x1="80" y1="18" x2="80" y2="102"/>
+                        <line x1="100" y1="18" x2="100" y2="102"/>
+                        <line x1="120" y1="18" x2="120" y2="102"/>
+                        <line x1="140" y1="18" x2="140" y2="102"/>
+                        <line x1="160" y1="18" x2="160" y2="102"/>
+                    </g>
+                    <!-- weft threads woven and unwoven -->
+                    <g stroke-width="2.5" fill="none" stroke-linecap="round">
+                        <path class="thread" stroke="#b4532a" d="M30 36 C 60 30, 80 42, 100 36 C 120 30, 150 42, 170 36"/>
+                        <path class="thread" stroke="#c9a227" d="M30 50 C 60 44, 80 56, 100 50 C 120 44, 150 56, 170 50"/>
+                        <path class="thread" stroke="#1d3557" d="M30 64 C 60 58, 80 70, 100 64 C 120 58, 150 70, 170 64"/>
+                        <path class="thread" stroke="#b4532a" d="M30 78 C 60 72, 80 84, 100 78 C 120 72, 150 84, 170 78"/>
+                        <path class="thread" stroke="#606c38" d="M30 92 C 60 86, 80 98, 100 92 C 120 86, 150 98, 170 92"/>
+                    </g>
                 </svg>
+                <p class="text-xs uppercase tracking-widest text-egeo/60 mt-2">La tela si fa e si disfa, come il racconto</p>
             </div>
 
-            <a href="#introduzione" class="inline-block border-2 border-ocean text-ocean hover:bg-ocean hover:text-white font-bold py-3 px-8 rounded transition-all duration-300 mb-16">Inizia l'esplorazione</a>
+            <a href="#introduzione" class="inline-block border-2 border-egeo text-egeo hover:bg-egeo hover:text-white display py-3 px-8 rounded transition-all duration-300 mb-16 tracking-wider">Ascolta la loro versione</a>
         </div>
-
-        <!-- Animated waves -->
-        <div class="relative h-16 overflow-hidden" aria-hidden="true">
-            <svg class="wave-drift absolute bottom-0 left-0 h-full text-ocean opacity-20" style="width: 200%;" viewBox="0 0 360 40" preserveAspectRatio="none" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                <path d="M0 20 C 22.5 35, 45 5, 67.5 20 C 90 35, 112.5 5, 135 20 C 157.5 35, 180 5, 202.5 20 C 225 35, 247.5 5, 270 20 C 292.5 35, 315 5, 337.5 20 L 360 20 L 360 40 L 0 40 Z"/>
-            </svg>
-            <svg class="absolute bottom-0 left-0 w-full h-2/3 text-ocean opacity-30" viewBox="0 0 360 30" preserveAspectRatio="none" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                <path d="M0 15 C 30 28, 60 4, 90 15 C 120 26, 150 4, 180 15 C 210 26, 240 4, 270 15 C 300 26, 330 4, 360 15 L 360 30 L 0 30 Z"/>
-            </svg>
-        </div>
+        <div class="meander opacity-60" aria-hidden="true"></div>
     </header>
 
     <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-24 py-16">
@@ -241,165 +220,121 @@
         <section id="introduzione" class="scroll-mt-24">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
                 <div>
-                    <h2 class="text-3xl font-bold text-ocean mb-4 border-b-2 border-crimson inline-block pb-2">Un oceano di significati</h2>
-                    <p class="mb-4 text-lg leading-relaxed drop-cap">
-                        Moby Dick non è semplicemente la storia di una caccia alla balena. È un'epopea filosofica, un labirinto di metafore, un'indagine vertiginosa sull'animo umano, su Dio e sul silenzio dell'universo. Quando uscì nel 1851 fu un fiasco commerciale: il mondo impiegò settant'anni ad accorgersi di avere tra le mani uno dei più grandi romanzi mai scritti.
+                    <h2 class="text-3xl text-egeo mb-4 border-b-2 border-terracotta inline-block pb-2">Il racconto è affare degli uomini?</h2>
+                    <p class="mb-4 text-xl leading-relaxed drop-cap">
+                        Nel primo libro dell'Odissea, Penelope scende tra i proci e chiede all'aedo di cambiare canzone: quella sulla guerra di Troia le strazia il cuore. Suo figlio Telemaco la zittisce e la rimanda al telaio. È una delle prime scene della letteratura occidentale — e già una donna viene esclusa dal racconto della propria vita.
                     </p>
-                    <p class="text-lg leading-relaxed">
-                        Melville usa il viaggio della baleniera <strong>Pequod</strong> come veicolo per esplorare la condizione umana. Ogni elemento — la nave, l'equipaggio, gli oggetti di bordo, perfino il colore della balena — porta con sé più strati di significato. Questo sito li scompone uno a uno, per renderli navigabili.
+                    <p class="text-xl leading-relaxed">
+                        Eppure l'Odissea è piena di donne che reggono la trama: la sposa che tesse e disfa il tempo, le dee che trattengono e lasciano andare, la nutrice che riconosce e tace. E su tutte Elena, la donna più raccontata — e meno ascoltata — dell'antichità. Questo sito rilegge l'epica <strong>dalla loro parte del telaio</strong>.
                     </p>
                 </div>
-                <div class="bg-bone p-8 rounded shadow-inner border border-stone-300 relative">
-                    <div class="absolute top-4 left-4 text-4xl text-ocean opacity-20">&#10077;</div>
-                    <p class="quote-antique text-2xl italic text-ink relative z-10 text-center mt-4">
-                        «Non c'è follia delle bestie della terra che non sia superata all'infinito dalla follia degli uomini.»
+                <div class="bg-sabbia p-8 rounded shadow-inner border border-stone-300 relative">
+                    <div class="absolute top-4 left-4 text-4xl text-egeo opacity-20">&#10077;</div>
+                    <p class="text-2xl italic text-notte relative z-10 text-center mt-4 leading-snug">
+                        «Torna alle tue stanze e pensa alle opere tue, al telaio e al fuso… La parola spetta agli uomini, e a me più di tutti.»
                     </p>
-                    <p class="text-right mt-4 font-bold text-ocean">— Herman Melville, <em>Moby Dick</em></p>
+                    <p class="text-right mt-4 display text-egeo">— Telemaco a Penelope, <em>Odissea</em>, libro I</p>
                 </div>
             </div>
         </section>
 
-        <!-- La Balena (Interactive Explorer) -->
-        <section id="labalena" class="scroll-mt-24 bg-white p-8 rounded-xl shadow-sm border border-bone">
+        <!-- Le due voci -->
+        <section id="voci" class="scroll-mt-24 bg-white p-8 rounded-xl shadow-sm border border-sabbia">
             <div class="mb-8 text-center max-w-3xl mx-auto">
-                <h2 class="text-3xl font-bold text-ocean mb-4">L'enigma bianco: Moby Dick</h2>
-                <p class="text-lg">
-                    La balena bianca è il simbolo centrale e più sfuggente del romanzo. Non rappresenta una singola entità, ma funge da schermo vuoto su cui i personaggi (e i lettori) proiettano le proprie paure, credenze e ossessioni. <strong>Clicca sui concetti sottostanti per esplorare le diverse interpretazioni allegoriche.</strong>
+                <h2 class="text-3xl text-egeo mb-4">Le due voci</h2>
+                <p class="text-xl">
+                    Due donne, due attese, due modi di sopravvivere a una storia scritta da altri. <strong>Scegli una voce, poi un momento della sua vita</strong>: ogni monologo riannoda i fili che l'epica ha lasciato cadere.
                 </p>
+            </div>
+
+            <!-- Voice switch -->
+            <div class="flex justify-center gap-4 mb-8" id="voice-switch">
+                <button class="voice-btn active display text-lg px-8 py-3 rounded border-2 border-egeo transition-all" data-voice="elena">Elena di Troia</button>
+                <button class="voice-btn display text-lg px-8 py-3 rounded border-2 border-egeo transition-all" data-voice="penelope">Penelope</button>
             </div>
 
             <div class="flex flex-col md:flex-row gap-8">
-                <!-- Navigation Tabs -->
-                <div class="md:w-1/3 flex flex-col space-y-3" id="symbol-tabs">
-                    <button class="tab-btn active text-left px-6 py-4 rounded border border-ocean font-bold text-lg transition-all" data-target="natura">
-                        Forza della Natura &#127754;
-                    </button>
-                    <button class="tab-btn text-left px-6 py-4 rounded border border-ocean font-bold text-lg transition-all" data-target="dio">
-                        Divinità Incomprensibile &#9889;
-                    </button>
-                    <button class="tab-btn text-left px-6 py-4 rounded border border-ocean font-bold text-lg transition-all" data-target="vuoto">
-                        Il Vuoto e l'Ignoto &#9898;
-                    </button>
-                    <button class="tab-btn text-left px-6 py-4 rounded border border-ocean font-bold text-lg transition-all" data-target="male">
-                        Il Male Assoluto (Visione di Ahab) &#128293;
-                    </button>
-                </div>
-
-                <!-- Content Area -->
-                <div class="md:w-2/3 bg-parchment p-8 rounded border-l-4 border-crimson min-h-[300px] flex flex-col justify-center" id="symbol-content">
-                    <h3 class="text-2xl font-bold text-ocean mb-3" id="sym-title">La Forza Indifferente della Natura</h3>
-                    <p class="text-lg leading-relaxed" id="sym-text">
-                        Nella sua forma più basilare, Moby Dick rappresenta la forza bruta, implacabile e del tutto indifferente della natura. Non agisce per malizia, ma per istinto di sopravvivenza. Sfidare la balena significa sfidare l'ordine naturale stesso, un'impresa destinata al fallimento catastrofico di fronte a una potenza insormontabile.
-                    </p>
+                <div class="md:w-1/3 flex flex-col space-y-3" id="chapter-tabs"></div>
+                <div class="md:w-2/3 bg-marmo p-8 rounded border-l-4 border-terracotta min-h-[320px]">
+                    <p class="text-xs uppercase tracking-widest text-terracotta font-bold mb-2" id="voice-context"></p>
+                    <h3 class="text-2xl text-egeo mb-4" id="voice-title"></h3>
+                    <p class="text-xl leading-relaxed italic" id="voice-text"></p>
                 </div>
             </div>
         </section>
 
-        <!-- I Personaggi (Radar Chart) -->
-        <section id="ipersonaggi" class="scroll-mt-24">
+        <!-- Le donne dell'Odissea -->
+        <section id="donne" class="scroll-mt-24">
             <div class="text-center mb-12 max-w-3xl mx-auto">
-                <h2 class="text-3xl font-bold text-ocean mb-4">La micro-società del Pequod</h2>
-                <p class="text-lg">
-                    Il Pequod è una "nave-mondo", un microcosmo dell'umanità. I suoi occupanti rappresentano diverse filosofie, classi sociali e approcci alla vita. Il grafico sottostante confronta i tre archetipi principali attraverso assi psicologici e filosofici, evidenziando il contrasto tra l'ossessione distruttiva e la ragione.
+                <h2 class="text-3xl text-egeo mb-4 border-b-2 border-terracotta inline-block pb-2">Le donne che reggono la trama</h2>
+                <p class="text-xl">
+                    Tolte le donne, dell'Odissea resta poco: una zattera e del vento. Sono loro a trattenere, salvare, riconoscere, ingannare e tessere. Eccole — non come funzioni del viaggio di un uomo, ma come persone.
                 </p>
             </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                <!-- Chart Container -->
-                <div class="bg-white p-6 rounded-xl shadow-sm border border-bone w-full">
-                    <div class="chart-container">
-                        <canvas id="characterRadarChart"></canvas>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="donna-card bg-white p-6 rounded-xl border border-sabbia shadow-sm">
+                    <div class="flex items-center justify-between mb-3">
+                        <h3 class="text-xl text-egeo">Circe</h3>
+                        <span class="text-2xl" aria-hidden="true">&#129497;&#8205;&#9792;&#65039;</span>
                     </div>
+                    <p class="text-xs uppercase tracking-widest text-terracotta font-bold mb-3">La sovrana che non chiede permesso</p>
+                    <p class="text-base leading-relaxed">Vive sola, su un'isola sua, con un potere suo. Trasforma gli uomini in porci — o forse, semplicemente, li rivela. La tradizione l'ha chiamata strega perché non sapeva come chiamare una donna autonoma. Quando Odisseo parte, è lei a dargli le istruzioni per attraversare l'Ade: nel poema, il sapere più profondo ha quasi sempre voce femminile.</p>
                 </div>
 
-                <!-- Character Descriptions -->
-                <div class="space-y-6">
-                    <div class="border-l-4 border-crimson pl-4">
-                        <h3 class="text-xl font-bold text-crimson">Capitano Ahab</h3>
-                        <p class="text-sm md:text-base mt-2">La personificazione dell'<em>hybris</em> (tracotanza). Ahab rappresenta l'intelletto umano corrotto dalla monomania e dal desiderio di vendetta contro forze superiori. Egli eleva il suo trauma personale a una crociata cosmica, sfidando Dio e la Natura.</p>
+                <div class="donna-card bg-white p-6 rounded-xl border border-sabbia shadow-sm">
+                    <div class="flex items-center justify-between mb-3">
+                        <h3 class="text-xl text-egeo">Calipso</h3>
+                        <span class="text-2xl" aria-hidden="true">&#127965;&#65039;</span>
                     </div>
-                    <div class="border-l-4 border-ocean pl-4">
-                        <h3 class="text-xl font-bold text-ocean">Ismaele</h3>
-                        <p class="text-sm md:text-base mt-2">Il narratore, l'osservatore e il filosofo. Ismaele rappresenta l'umanità aperta, curiosa e tollerante. A differenza di Ahab, cerca di comprendere l'universo senza la presunzione di dominarlo. La sua fluidità mentale è ciò che, allegoricamente, gli permette di sopravvivere.</p>
-                    </div>
-                    <div class="border-l-4 border-stone-500 pl-4">
-                        <h3 class="text-xl font-bold text-stone-600">Starbuck</h3>
-                        <p class="text-sm md:text-base mt-2">Il primo ufficiale rappresenta la ragione pragmatica, la religione ortodossa e la moralità convenzionale. Tuttavia, la tragedia del romanzo risiede anche nel fallimento della "ragione normale" (Starbuck) di fronte al fascino carismatico del fanatismo estremo (Ahab).</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Equipaggio: personaggi secondari -->
-            <div class="mt-20">
-                <div class="text-center mb-10 max-w-3xl mx-auto">
-                    <h3 class="text-2xl md:text-3xl font-bold text-ocean mb-3">Le altre anime a bordo</h3>
-                    <p class="text-lg">Attorno ai tre protagonisti, Melville dispone una galleria di figure che sono altrettante chiavi di lettura. Nessuno, sul Pequod, è soltanto un marinaio.</p>
+                    <p class="text-xs uppercase tracking-widest text-terracotta font-bold mb-3">Il doppio standard divino</p>
+                    <p class="text-base leading-relaxed">Quando gli dèi le ordinano di liberare Odisseo, Calipso pronuncia una delle proteste più moderne del poema: voi dèi maschi amate le mortali che volete, ma quando una dea ama un uomo diventa uno scandalo. Offre l'immortalità e viene rifiutata; il poema la dimentica su un'isola che è insieme paradiso e cella.</p>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <div class="char-card bg-white p-6 rounded-xl border border-bone shadow-sm">
-                        <div class="flex items-center justify-between mb-3">
-                            <h4 class="text-xl font-bold text-ocean">Queequeg</h4>
-                            <span class="text-2xl" aria-hidden="true">&#128481;</span>
-                        </div>
-                        <p class="text-xs uppercase tracking-widest text-crimson font-bold mb-3">La fratellanza universale</p>
-                        <p class="text-sm md:text-base leading-relaxed">Ramponiere "cannibale" dell'isola di Kokovoko, coperto di tatuaggi e devoto al suo idolo Yojo. Il "selvaggio" si rivela l'uomo più nobile del romanzo: Melville rovescia la dicotomia tra civiltà e barbarie. La sua bara, trasformata in salvagente, è la metafora più potente del libro: la morte accettata con serenità diventa, letteralmente, ciò che tiene a galla la vita.</p>
+                <div class="donna-card bg-white p-6 rounded-xl border border-sabbia shadow-sm">
+                    <div class="flex items-center justify-between mb-3">
+                        <h3 class="text-xl text-egeo">Nausicaa</h3>
+                        <span class="text-2xl" aria-hidden="true">&#127754;</span>
                     </div>
+                    <p class="text-xs uppercase tracking-widest text-terracotta font-bold mb-3">La libertà di un mattino</p>
+                    <p class="text-base leading-relaxed">La principessa dei Feaci trova sulla spiaggia un naufrago nudo e non scappa: lo soccorre, lo istruisce, gli apre la strada verso la reggia. È l'unica donna del poema colta in un momento di pura libertà — un mattino al fiume, prima che il matrimonio la archivi. Omero la congeda con un addio sospeso che i lettori rimpiangono da secoli.</p>
+                </div>
 
-                    <div class="char-card bg-white p-6 rounded-xl border border-bone shadow-sm">
-                        <div class="flex items-center justify-between mb-3">
-                            <h4 class="text-xl font-bold text-ocean">Pip</h4>
-                            <span class="text-2xl" aria-hidden="true">&#129687;</span>
-                        </div>
-                        <p class="text-xs uppercase tracking-widest text-crimson font-bold mb-3">La verità che acceca</p>
-                        <p class="text-sm md:text-base leading-relaxed">Il piccolo mozzo afroamericano, abbandonato per ore in mare aperto, vede «il piede di Dio sul pedale del telaio» e ne esce folle. La sua è la follia di chi ha guardato l'abisso senza filtri: una saggezza insostenibile che il mondo chiama pazzia. Ahab, che nell'abisso si specchia ogni giorno, è l'unico a riconoscerlo come un proprio simile.</p>
+                <div class="donna-card bg-white p-6 rounded-xl border border-sabbia shadow-sm">
+                    <div class="flex items-center justify-between mb-3">
+                        <h3 class="text-xl text-egeo">Euriclea</h3>
+                        <span class="text-2xl" aria-hidden="true">&#129716;</span>
                     </div>
+                    <p class="text-xs uppercase tracking-widest text-terracotta font-bold mb-3">La memoria della casa</p>
+                    <p class="text-base leading-relaxed">La vecchia nutrice riconosce Odisseo dalla cicatrice mentre gli lava i piedi — e lui le stringe la gola perché taccia. Comprata da Laerte «al prezzo di venti buoi», ha cresciuto due generazioni di padroni. È la memoria della casa: sa tutto, può dire nulla. Sarà lei a indicare quali ancelle sono «colpevoli», pagando la sopravvivenza con la complicità.</p>
+                </div>
 
-                    <div class="char-card bg-white p-6 rounded-xl border border-bone shadow-sm">
-                        <div class="flex items-center justify-between mb-3">
-                            <h4 class="text-xl font-bold text-ocean">Fedallah</h4>
-                            <span class="text-2xl" aria-hidden="true">&#128293;</span>
-                        </div>
-                        <p class="text-xs uppercase tracking-widest text-crimson font-bold mb-3">L'ombra demoniaca</p>
-                        <p class="text-sm md:text-base leading-relaxed">Il misterioso parsi adoratore del fuoco, imbarcato di nascosto da Ahab. È la sua ombra in senso quasi junghiano: il lato fatale e luciferino del capitano. Come le streghe del <em>Macbeth</em>, pronuncia profezie ambigue che si avverano alla lettera, e muore legato alla balena — anticipando di un giorno il destino del suo padrone.</p>
+                <div class="donna-card bg-white p-6 rounded-xl border border-sabbia shadow-sm">
+                    <div class="flex items-center justify-between mb-3">
+                        <h3 class="text-xl text-egeo">Le dodici ancelle</h3>
+                        <span class="text-2xl" aria-hidden="true">&#128147;</span>
                     </div>
+                    <p class="text-xs uppercase tracking-widest text-terracotta font-bold mb-3">Il prezzo del lieto fine</p>
+                    <p class="text-base leading-relaxed">Schiave della casa, costrette o sedotte dai proci, vengono impiccate da Telemaco dopo la strage: «come tordi» — dieci versi, nessun processo. Sono la pagina che la lettura eroica preferisce saltare, e il punto da cui parte ogni riscrittura moderna del poema, dal <em>Canto di Penelope</em> di Margaret Atwood in poi: il lieto fine di qualcuno è costato la vita a qualcuna.</p>
+                </div>
 
-                    <div class="char-card bg-white p-6 rounded-xl border border-bone shadow-sm">
-                        <div class="flex items-center justify-between mb-3">
-                            <h4 class="text-xl font-bold text-ocean">Padre Mapple</h4>
-                            <span class="text-2xl" aria-hidden="true">&#9962;</span>
-                        </div>
-                        <p class="text-xs uppercase tracking-widest text-crimson font-bold mb-3">Il monito inascoltato</p>
-                        <p class="text-sm md:text-base leading-relaxed">L'ex baleniere diventato predicatore, che a New Bedford sale su un pulpito a forma di prua con una scala di corda. Il suo sermone su Giona — l'uomo che fugge da Dio e viene inghiottito da una balena — è il prologo teologico dell'intero romanzo: obbedire a Dio significa disobbedire a se stessi. Ahab farà l'esatto contrario.</p>
+                <div class="donna-card bg-white p-6 rounded-xl border border-sabbia shadow-sm">
+                    <div class="flex items-center justify-between mb-3">
+                        <h3 class="text-xl text-egeo">Anticlea</h3>
+                        <span class="text-2xl" aria-hidden="true">&#128330;</span>
                     </div>
-
-                    <div class="char-card bg-white p-6 rounded-xl border border-bone shadow-sm">
-                        <div class="flex items-center justify-between mb-3">
-                            <h4 class="text-xl font-bold text-ocean">Stubb e Flask</h4>
-                            <span class="text-2xl" aria-hidden="true">&#128684;</span>
-                        </div>
-                        <p class="text-xs uppercase tracking-widest text-crimson font-bold mb-3">L'indifferenza e la mediocrità</p>
-                        <p class="text-sm md:text-base leading-relaxed">Il secondo e il terzo ufficiale completano lo spettro delle risposte umane all'assurdo. Stubb ride di tutto, fuma la pipa e affronta la morte come una barzelletta: è il fatalismo cinico che si salva dall'angoscia rinunciando a pensare. Flask, ottuso e aggressivo, caccia le balene senza chiedersi mai nulla: la violenza ridotta a mestiere.</p>
-                    </div>
-
-                    <div class="char-card bg-white p-6 rounded-xl border border-bone shadow-sm">
-                        <div class="flex items-center justify-between mb-3">
-                            <h4 class="text-xl font-bold text-ocean">Tashtego, Daggoo ed Elia</h4>
-                            <span class="text-2xl" aria-hidden="true">&#127757;</span>
-                        </div>
-                        <p class="text-xs uppercase tracking-widest text-crimson font-bold mb-3">Il mondo intero a bordo</p>
-                        <p class="text-sm md:text-base leading-relaxed">Con il nativo americano Tashtego e il gigantesco africano Daggoo, i tre ramponieri pagani fanno del Pequod un'arca dell'umanità intera, guidata però da un solo folle. A terra resta Elia, lo straccione-profeta del molo che mormora oscuri avvertimenti sui destini della nave: come il suo omonimo biblico con il re Achab, parla — e nessuno lo ascolta.</p>
-                    </div>
+                    <p class="text-xs uppercase tracking-widest text-terracotta font-bold mb-3">Morta d'attesa</p>
+                    <p class="text-base leading-relaxed">La madre di Odisseo compare nell'Ade, tra le ombre. Non è morta di malattia, gli dice, ma di nostalgia: «il desiderio di te mi ha tolto la vita». Tre volte il figlio prova ad abbracciarla, tre volte stringe il vuoto. L'attesa, che per Penelope è strategia, per Anticlea è stata una condanna a morte — l'altro modo in cui finiscono le donne che aspettano.</p>
                 </div>
             </div>
         </section>
 
-        <!-- Gli Eventi (Timeline) -->
+        <!-- Eventi -->
         <section id="eventi" class="scroll-mt-24">
             <div class="text-center mb-14 max-w-3xl mx-auto">
-                <h2 class="text-3xl font-bold text-ocean mb-4 border-b-2 border-crimson inline-block pb-2">La rotta verso l'abisso</h2>
-                <p class="text-lg">
-                    La trama di <em>Moby Dick</em> è scandita da una serie di momenti che sono insieme eventi narrativi e soglie simboliche. Ogni tappa del viaggio avvicina il Pequod al vortice finale — e ogni avvertimento viene puntualmente ignorato.
+                <h2 class="text-3xl text-egeo mb-4 border-b-2 border-terracotta inline-block pb-2">La stessa storia, dall'altra riva</h2>
+                <p class="text-xl">
+                    Gli stessi eventi che l'epica racconta come imprese, visti da chi li ha subiti, attesi o orditi. La cronologia va dalla mela d'oro alla corda tesa nel cortile di Itaca.
                 </p>
             </div>
 
@@ -410,10 +345,10 @@
                     <div class="relative md:grid md:grid-cols-2 md:gap-12">
                         <div class="timeline-dot"></div>
                         <div class="pl-12 md:pl-0 md:pr-12 md:text-right">
-                            <div class="bg-white p-6 rounded-xl border border-bone shadow-sm">
-                                <p class="text-xs uppercase tracking-widest text-crimson font-bold mb-1">Capitolo 9 &middot; New Bedford</p>
-                                <h3 class="text-xl font-bold text-ocean mb-2">Il sermone di Padre Mapple</h3>
-                                <p class="text-sm md:text-base leading-relaxed">Prima ancora di salpare, il romanzo offre la sua chiave teologica: la storia di Giona, l'uomo che fuggì da Dio e fu inghiottito da una balena. Il viaggio comincia con un monito che nessuno, a bordo, vorrà ricordare.</p>
+                            <div class="bg-white p-6 rounded-xl border border-sabbia shadow-sm">
+                                <p class="text-xs uppercase tracking-widest text-terracotta font-bold mb-1">L'antefatto &middot; Il monte Ida</p>
+                                <h3 class="text-xl text-egeo mb-2">Il giudizio di Paride</h3>
+                                <p class="text-base leading-relaxed">Tre dee, una mela, un pastore chiamato a decidere chi è «la più bella». Afrodite vince promettendo a Paride la donna più bella del mondo — che non viene interpellata. La guerra di Troia comincia così: con una donna offerta come premio in una gara fra altri. Elena entra nella storia da oggetto, non da soggetto.</p>
                             </div>
                         </div>
                         <div></div>
@@ -422,10 +357,10 @@
                     <div class="relative md:grid md:grid-cols-2 md:gap-12">
                         <div class="timeline-dot"></div>
                         <div class="md:col-start-2 pl-12 md:pl-12">
-                            <div class="bg-white p-6 rounded-xl border border-bone shadow-sm">
-                                <p class="text-xs uppercase tracking-widest text-crimson font-bold mb-1">Capitolo 36 &middot; Il cassero</p>
-                                <h3 class="text-xl font-bold text-ocean mb-2">Il doblone inchiodato all'albero</h3>
-                                <p class="text-sm md:text-base leading-relaxed">Ahab raduna l'equipaggio, inchioda una moneta d'oro all'albero maestro e la promette a chi avvisterà la balena bianca. Con un rito quasi blasfemo — il grog bevuto negli incavi dei ramponi — la caccia commerciale si trasforma in crociata metafisica: «Morte a Moby Dick!». È il patto faustiano del romanzo.</p>
+                            <div class="bg-white p-6 rounded-xl border border-sabbia shadow-sm">
+                                <p class="text-xs uppercase tracking-widest text-terracotta font-bold mb-1">Sparta &rarr; Troia</p>
+                                <h3 class="text-xl text-egeo mb-2">Rapita o fuggita? Le versioni in guerra</h3>
+                                <p class="text-base leading-relaxed">Su come Elena arrivò a Troia, l'antichità non si è mai messa d'accordo: rapita con la forza, sedotta, partita per amore — o, nella versione più vertiginosa, mai partita affatto. Il poeta Stesicoro scrisse una palinodia: a Troia andò solo un <em>eidolon</em>, un fantasma di Elena, mentre lei aspettava in Egitto. Diecimila morti per un'immagine. Nessun personaggio antico ha avuto tante «versioni» — tutte scritte da uomini.</p>
                             </div>
                         </div>
                     </div>
@@ -433,22 +368,22 @@
                     <div class="relative md:grid md:grid-cols-2 md:gap-12">
                         <div class="timeline-dot"></div>
                         <div class="pl-12 md:pl-0 md:pr-12 md:text-right">
-                            <div class="bg-white p-6 rounded-xl border border-bone shadow-sm">
-                                <p class="text-xs uppercase tracking-widest text-crimson font-bold mb-1">Capitolo 42 &middot; Il saggio nel romanzo</p>
-                                <h3 class="text-xl font-bold text-ocean mb-2">La bianchezza della balena</h3>
-                                <p class="text-sm md:text-base leading-relaxed">Ismaele sospende la narrazione per chiedersi perché, di tutto, lo atterrisca proprio il <em>bianco</em>. Colore della purezza ma anche del nulla, somma di tutti i colori e loro assenza: la pagina più vertiginosa del libro, dove il terrore non ha più zanne né artigli, ma la forma di un universo senza significato.</p>
+                            <div class="bg-white p-6 rounded-xl border border-sabbia shadow-sm">
+                                <p class="text-xs uppercase tracking-widest text-terracotta font-bold mb-1">La notte di Troia</p>
+                                <h3 class="text-xl text-egeo mb-2">La città cade: il bottino è umano</h3>
+                                <p class="text-base leading-relaxed">Quando il cavallo si apre e Troia brucia, per gli uomini la guerra finisce. Per le donne comincia la seconda: Andromaca, Ecuba e Cassandra vengono spartite come parte del bottino, insieme ai tripodi e al bronzo. L'epica lo registra senza fermarsi; saranno i tragici, secoli dopo, a dare voce a quella notte — con <em>Le Troiane</em> di Euripide.</p>
                             </div>
                         </div>
                         <div></div>
                     </div>
 
                     <div class="relative md:grid md:grid-cols-2 md:gap-12">
-                        <div class="timeline-dot"></div>
+                        <div class="timeline-dot" style="border-color: #c9a227;"></div>
                         <div class="md:col-start-2 pl-12 md:pl-12">
-                            <div class="bg-white p-6 rounded-xl border border-bone shadow-sm">
-                                <p class="text-xs uppercase tracking-widest text-crimson font-bold mb-1">Capitolo 93 &middot; Oceano Pacifico</p>
-                                <h3 class="text-xl font-bold text-ocean mb-2">Pip abbandonato in mare</h3>
-                                <p class="text-sm md:text-base leading-relaxed">Saltato dalla lancia per paura, il mozzo viene lasciato solo per ore nell'immensità dell'oceano. Quando lo recuperano, la sua ragione è rimasta laggiù: Pip ha visto il fondo delle cose, «il piede di Dio sul pedale del telaio». La conoscenza assoluta, suggerisce Melville, non è compatibile con la vita.</p>
+                            <div class="bg-gradient-to-b from-egeo to-notte text-marmo p-6 rounded-xl border-2 border-oro shadow-md">
+                                <p class="text-xs uppercase tracking-widest text-oro font-bold mb-1">Odissea, libro IV &middot; Sparta, vent'anni dopo</p>
+                                <h3 class="text-xl text-white mb-2">Elena versa il nepente — e racconta</h3>
+                                <p class="text-base leading-relaxed opacity-90">È la scena che dà il titolo a questo sito. Telemaco arriva a Sparta e trova Elena tornata regina accanto a Menelao. Lei versa nel vino il nepente, la droga che scioglie il dolore, e racconta la <em>sua</em> versione della guerra. Subito dopo Menelao ne racconta un'altra, che la smentisce. Omero le mette accanto le due versioni e non sceglie: per un istante, l'unica volta in tutta l'epica, la parola di una donna vale quanto quella di un re.</p>
                             </div>
                         </div>
                     </div>
@@ -456,10 +391,10 @@
                     <div class="relative md:grid md:grid-cols-2 md:gap-12">
                         <div class="timeline-dot"></div>
                         <div class="pl-12 md:pl-0 md:pr-12 md:text-right">
-                            <div class="bg-white p-6 rounded-xl border border-bone shadow-sm">
-                                <p class="text-xs uppercase tracking-widest text-crimson font-bold mb-1">Capitolo 119 &middot; Il tifone</p>
-                                <h3 class="text-xl font-bold text-ocean mb-2">I fuochi di Sant'Elmo</h3>
-                                <p class="text-sm md:text-base leading-relaxed">Durante la tempesta, fiamme bianche si accendono in cima agli alberi del Pequod. L'equipaggio vi legge un segno divino e vorrebbe tornare indietro; Ahab afferra i parafulmini e sfida il fuoco: «Ti adoro come un figlio adora il padre che lo brucia». L'uomo prometeico al suo apice — e al suo punto di non ritorno.</p>
+                            <div class="bg-white p-6 rounded-xl border border-sabbia shadow-sm">
+                                <p class="text-xs uppercase tracking-widest text-terracotta font-bold mb-1">Itaca &middot; Tre anni</p>
+                                <h3 class="text-xl text-egeo mb-2">La tela fatta e disfatta</h3>
+                                <p class="text-base leading-relaxed">Assediata da centootto pretendenti, Penelope promette: sceglierò quando avrò finito il sudario per Laerte. Di giorno tesse, di notte disfa. Per tre anni ferma il tempo con le mani — finché un'ancella la tradisce. È l'astuzia più celebrata del poema dopo il cavallo di Troia: ma quella di Odisseo distrugge una città, la sua non versa una goccia di sangue.</p>
                             </div>
                         </div>
                         <div></div>
@@ -468,33 +403,33 @@
                     <div class="relative md:grid md:grid-cols-2 md:gap-12">
                         <div class="timeline-dot"></div>
                         <div class="md:col-start-2 pl-12 md:pl-12">
-                            <div class="bg-white p-6 rounded-xl border border-bone shadow-sm">
-                                <p class="text-xs uppercase tracking-widest text-crimson font-bold mb-1">Capitolo 128 &middot; L'ultima occasione</p>
-                                <h3 class="text-xl font-bold text-ocean mb-2">L'incontro con la Rachele</h3>
-                                <p class="text-sm md:text-base leading-relaxed">Il capitano Gardiner implora Ahab di aiutarlo a cercare la lancia dispersa su cui c'è suo figlio. Ahab rifiuta: la vendetta non concede deviazioni. È l'ultimo bivio morale del romanzo, la porta della redenzione chiusa con le proprie mani. Sarà proprio la Rachele, alla fine, a raccogliere l'unico superstite.</p>
+                            <div class="bg-white p-6 rounded-xl border border-sabbia shadow-sm">
+                                <p class="text-xs uppercase tracking-widest text-terracotta font-bold mb-1">Odissea, libro XXI &middot; La svolta</p>
+                                <h3 class="text-xl text-egeo mb-2">La gara dell'arco la indice lei</h3>
+                                <p class="text-base leading-relaxed">Si dimentica spesso che il finale dell'Odissea lo apparecchia Penelope: è lei a prendere l'arco dal ripostiglio, lei a proporre la gara che mette l'arma in mano al mendicante. Lo sapesse o lo intuisse — il poema lascia l'ambiguità aperta — la trappola in cui muoiono i proci è ordita nella stanza della regina, non sulla zattera dell'eroe.</p>
                             </div>
                         </div>
                     </div>
 
                     <div class="relative md:grid md:grid-cols-2 md:gap-12">
-                        <div class="timeline-dot" style="border-color: #8b0000;"></div>
+                        <div class="timeline-dot"></div>
                         <div class="pl-12 md:pl-0 md:pr-12 md:text-right">
-                            <div class="bg-gradient-to-b from-stone-900 to-ink text-parchment p-6 rounded-xl border-2 border-crimson shadow-md">
-                                <p class="text-xs uppercase tracking-widest text-bone font-bold mb-1 opacity-80">Capitoli 133–135 &middot; La fine</p>
-                                <h3 class="text-xl font-bold text-white mb-2">La caccia di tre giorni</h3>
-                                <p class="text-sm md:text-base leading-relaxed opacity-90">Tre giorni di caccia come una liturgia rovesciata: al terzo giorno non c'è resurrezione, ma il vortice. Moby Dick sfonda il Pequod, e Ahab — strangolato dalla sua stessa sagola, avvinto per sempre alla balena — scompare negli abissi insieme all'intero equipaggio. «E il grande sudario del mare tornò a stendersi placido come cinquemila anni fa.»</p>
+                            <div class="bg-white p-6 rounded-xl border border-sabbia shadow-sm">
+                                <p class="text-xs uppercase tracking-widest text-terracotta font-bold mb-1">Odissea, libro XXIII &middot; Il riconoscimento</p>
+                                <h3 class="text-xl text-egeo mb-2">La prova del letto: lei esamina lui</h3>
+                                <p class="text-base leading-relaxed">Davanti al marito tornato dopo vent'anni, Penelope non si getta tra le sue braccia: ordina di spostare il letto nuziale. È una trappola — quel letto è scolpito in un ulivo vivo, radicato nella terra, e non può muoversi. Odisseo esplode d'indignazione e così si rivela. Nella scena più famosa del ritorno, l'ingannatore per eccellenza viene ingannato: l'ultima prova del poema la somministra una donna.</p>
                             </div>
                         </div>
                         <div></div>
                     </div>
 
                     <div class="relative md:grid md:grid-cols-2 md:gap-12">
-                        <div class="timeline-dot"></div>
+                        <div class="timeline-dot" style="border-color: #b4532a;"></div>
                         <div class="md:col-start-2 pl-12 md:pl-12">
-                            <div class="bg-white p-6 rounded-xl border border-bone shadow-sm">
-                                <p class="text-xs uppercase tracking-widest text-crimson font-bold mb-1">Epilogo</p>
-                                <h3 class="text-xl font-bold text-ocean mb-2">La bara che salva</h3>
-                                <p class="text-sm md:text-base leading-relaxed">Solo Ismaele sopravvive, aggrappato alla bara-salvagente di Queequeg, finché la Rachele, «che incrociando ancora in cerca dei suoi figli dispersi, trovò soltanto un altro orfano», lo trae in salvo. Il cerchio simbolico si chiude: la morte accolta con serenità diventa zattera, e chi non ha voluto dominare l'oceano è l'unico che l'oceano restituisce.</p>
+                            <div class="bg-gradient-to-b from-notte to-stone-900 text-marmo p-6 rounded-xl border-2 border-terracotta shadow-md">
+                                <p class="text-xs uppercase tracking-widest text-terracotta font-bold mb-1">Odissea, libro XXII &middot; L'epilogo rimosso</p>
+                                <h3 class="text-xl text-white mb-2">Le dodici ancelle impiccate</h3>
+                                <p class="text-base leading-relaxed opacity-90">Dopo la strage dei proci, Telemaco impicca le dodici ancelle «colpevoli» a una corda tesa nel cortile: «come tordi dalle ali distese». Dieci versi, e il poema passa oltre, verso il ricongiungimento degli sposi. È la macchia che nessuna lettura eroica riesce a pulire — e il punto esatto in cui la versione delle donne smette di coincidere con il lieto fine degli uomini.</p>
                             </div>
                         </div>
                     </div>
@@ -503,205 +438,117 @@
             </div>
         </section>
 
-        <!-- Simboli e Oggetti -->
-        <section id="simboli" class="scroll-mt-24 bg-white p-8 md:p-12 rounded-xl shadow-sm border border-bone">
+        <!-- Simboli -->
+        <section id="simboli" class="scroll-mt-24 bg-white p-8 md:p-12 rounded-xl shadow-sm border border-sabbia">
             <div class="text-center mb-12 max-w-3xl mx-auto">
-                <h2 class="text-3xl font-bold text-ocean mb-4">Il bagaglio del Pequod: oggetti che parlano</h2>
-                <p class="text-lg">
-                    In <em>Moby Dick</em> nessun oggetto è soltanto un oggetto. Melville carica gli strumenti quotidiani della baleneria di un peso metafisico: ecco i sei più eloquenti.
+                <h2 class="text-3xl text-egeo mb-4">Gli oggetti delle donne</h2>
+                <p class="text-xl">
+                    L'epica maschile ha la spada, lo scettro e la nave. Le donne dell'Odissea maneggiano oggetti più silenziosi — e nessuno è innocente.
                 </p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div class="symbol-card bg-parchment p-6 rounded-xl border-2 border-bone">
-                    <div class="text-3xl mb-3" aria-hidden="true">&#9973;</div>
-                    <h3 class="text-xl font-bold text-ocean mb-2">Il Pequod</h3>
-                    <p class="text-sm md:text-base leading-relaxed">La nave porta il nome di una tribù del Connecticut sterminata dai coloni: il destino di annientamento è iscritto nel suo nome fin dalla prima pagina. Decorata con denti e ossa di capodoglio, è una nave-mondo e insieme una fabbrica galleggiante — l'umanità intera imbarcata nel progetto di sfruttare la natura, senza accorgersi di esserne già il trofeo.</p>
+                <div class="symbol-card bg-marmo p-6 rounded-xl border-2 border-sabbia">
+                    <div class="text-3xl mb-3" aria-hidden="true">&#129525;</div>
+                    <h3 class="text-xl text-egeo mb-2">La tela</h3>
+                    <p class="text-base leading-relaxed">Il tempo dell'eroe è una linea: partenza, prove, ritorno. Il tempo di Penelope è un cerchio: fare, disfare, rifare. La tela è l'unica arma concessa a chi non può imbracciare l'arco — e funziona: ferma centootto uomini per tre anni. Tessere e raccontare, in greco come in italiano, condividono le stesse metafore: la trama, il filo, l'ordito.</p>
                 </div>
 
-                <div class="symbol-card bg-parchment p-6 rounded-xl border-2 border-bone">
-                    <div class="text-3xl mb-3" aria-hidden="true">&#129689;</div>
-                    <h3 class="text-xl font-bold text-ocean mb-2">Il doblone d'oro</h3>
-                    <p class="text-sm md:text-base leading-relaxed">La moneta equadoriana inchiodata all'albero maestro è lo specchio del romanzo: nel capitolo 99, ogni personaggio la osserva e vi legge qualcosa di diverso — Ahab vi vede se stesso, Starbuck la Trinità, Stubb uno zodiaco da ridere, Flask solo il prezzo di novecentosessanta sigari. Come la balena, il doblone non significa: riflette chi lo guarda.</p>
+                <div class="symbol-card bg-marmo p-6 rounded-xl border-2 border-sabbia">
+                    <div class="text-3xl mb-3" aria-hidden="true">&#127794;</div>
+                    <h3 class="text-xl text-egeo mb-2">Il letto d'ulivo</h3>
+                    <p class="text-base leading-relaxed">Odisseo costruì la camera nuziale attorno a un ulivo vivo e ne fece una colonna del letto: un segreto che conoscono solo in due. È il simbolo del matrimonio come sapere condiviso — qualcosa di radicato, che non si può spostare né simulare. Penelope lo usa come password: chi non conosce il segreto del letto non è suo marito.</p>
                 </div>
 
-                <div class="symbol-card bg-parchment p-6 rounded-xl border-2 border-bone">
-                    <div class="text-3xl mb-3" aria-hidden="true">&#129460;</div>
-                    <h3 class="text-xl font-bold text-ocean mb-2">La gamba d'avorio</h3>
-                    <p class="text-sm md:text-base leading-relaxed">Ahab cammina su una protesi ricavata dalla mascella di un capodoglio: porta letteralmente addosso un pezzo del suo nemico. Il trauma si è fatto corpo, e il corpo si è fatto ossessione. A ogni passo sul ponte, il tonfo dell'avorio ricorda all'equipaggio — e a lui stesso — che metà di Ahab appartiene già alla balena.</p>
+                <div class="symbol-card bg-marmo p-6 rounded-xl border-2 border-sabbia">
+                    <div class="text-3xl mb-3" aria-hidden="true">&#127863;</div>
+                    <h3 class="text-xl text-egeo mb-2">Il nepente</h3>
+                    <p class="text-base leading-relaxed">La droga che Elena versa nel vino a Sparta «scioglie il dolore e l'ira e fa dimenticare ogni male»: solo così gli uomini riescono ad ascoltare storie di Troia senza piangere. È un'immagine spietata di come funziona l'epica stessa — la guerra si può raccontare solo anestetizzati. Elena, che la guerra l'ha incarnata, è l'unica a possedere il farmaco.</p>
                 </div>
 
-                <div class="symbol-card bg-parchment p-6 rounded-xl border-2 border-bone">
-                    <div class="text-3xl mb-3" aria-hidden="true">&#9904;</div>
-                    <h3 class="text-xl font-bold text-ocean mb-2">La bara di Queequeg</h3>
-                    <p class="text-sm md:text-base leading-relaxed">Sentendosi morire, Queequeg si fa costruire una bara e vi incide i tatuaggi del proprio corpo — poi guarisce, e la bara viene calafatata come salvagente di bordo. È l'oggetto più dialettico del libro: la morte preparata con serenità che si rovescia in strumento di salvezza. Su quel legno, alla fine, galleggia l'unico superstite.</p>
+                <div class="symbol-card bg-marmo p-6 rounded-xl border-2 border-sabbia">
+                    <div class="text-3xl mb-3" aria-hidden="true">&#127993;</div>
+                    <h3 class="text-xl text-egeo mb-2">L'arco</h3>
+                    <p class="text-base leading-relaxed">L'arco di Odisseo dorme in un ripostiglio per vent'anni: è Penelope a tirarlo fuori, piangendo sulle sue curve, ed è lei a stabilire la gara che lo rimette in mano al legittimo proprietario. L'arma più maschile del poema passa per le mani della regina: il potere, a Itaca, viene consegnato — non conquistato.</p>
                 </div>
 
-                <div class="symbol-card bg-parchment p-6 rounded-xl border-2 border-bone">
-                    <div class="text-3xl mb-3" aria-hidden="true">&#129526;</div>
-                    <h3 class="text-xl font-bold text-ocean mb-2">La sagola del rampone</h3>
-                    <p class="text-sm md:text-base leading-relaxed">Nel capitolo 60 Ismaele descrive la fune che, durante la caccia, corre avvolta attorno a ogni uomo della lancia: «tutti gli uomini vivono avvolti nelle sagole. Tutti sono nati col capestro al collo». Il filo che lega il cacciatore alla preda è il filo del destino — e sarà proprio la sua sagola, alla fine, a trascinare Ahab negli abissi.</p>
+                <div class="symbol-card bg-marmo p-6 rounded-xl border-2 border-sabbia">
+                    <div class="text-3xl mb-3" aria-hidden="true">&#129463;</div>
+                    <h3 class="text-xl text-egeo mb-2">Il velo</h3>
+                    <p class="text-base leading-relaxed">Ogni volta che Penelope scende tra i proci si copre il volto con un velo lucente e si ferma sulla soglia, tra due ancelle. Il velo è il confine che attraversa: presente ma schermata, visibile ma illeggibile. Anche la ninfa Ino salva Odisseo dal naufragio gettandogli il proprio velo: nel poema, il tessuto delle donne letteralmente tiene a galla gli uomini.</p>
                 </div>
 
-                <div class="symbol-card bg-parchment p-6 rounded-xl border-2 border-bone">
-                    <div class="text-3xl mb-3" aria-hidden="true">&#129697;</div>
-                    <h3 class="text-xl font-bold text-ocean mb-2">Il telaio del fato</h3>
-                    <p class="text-sm md:text-base leading-relaxed">Intrecciando una stuoia con Queequeg, Ismaele vede nel telaio il modello dell'esistenza: l'ordito fisso è la necessità, la sua mano che passa la navetta è il libero arbitrio, e la spada di Queequeg che batte i fili, ora forte ora piano, è il caso. Le tre forze tessono insieme — e nessuna, da sola, decide il disegno.</p>
+                <div class="symbol-card bg-marmo p-6 rounded-xl border-2 border-sabbia">
+                    <div class="text-3xl mb-3" aria-hidden="true">&#128123;</div>
+                    <h3 class="text-xl text-egeo mb-2">L'eidolon di Elena</h3>
+                    <p class="text-base leading-relaxed">Nella palinodia di Stesicoro, a Troia non andò Elena ma il suo fantasma, l'<em>eidolon</em>. È la metafora definitiva del suo destino letterario: per tremila anni si è combattuto, scritto e moralizzato attorno a un'immagine di Elena, mentre Elena — la sua voce, la sua versione — restava altrove, in attesa che qualcuno la interrogasse.</p>
                 </div>
             </div>
         </section>
 
-        <!-- Tematiche (Doughnut Chart) -->
-        <section id="tematiche" class="scroll-mt-24 mb-20 bg-ocean text-parchment p-8 md:p-12 rounded-xl">
+        <!-- Tematiche -->
+        <section id="tematiche" class="scroll-mt-24 bg-egeo text-marmo p-8 md:p-12 rounded-xl">
             <div class="text-center mb-12 max-w-3xl mx-auto">
-                <h2 class="text-3xl font-bold text-white mb-4 border-b-2 border-bone inline-block pb-2">Struttura tematica dell'opera</h2>
-                <p class="text-lg opacity-90">
-                    L'opera è un tessuto intricato di dicotomie. Questa visualizzazione concettuale rappresenta il "peso" narrativo e filosofico delle forze in contrasto all'interno del romanzo. Naviga sui segmenti del grafico per scoprire i dettagli di ogni tema.
+                <h2 class="text-3xl text-white mb-4 border-b-2 border-oro inline-block pb-2">Tre donne a confronto</h2>
+                <p class="text-xl opacity-90">
+                    Elena, Penelope e Circe incarnano tre strategie diverse di esistenza dentro un mondo di uomini. Il grafico le confronta su cinque assi; passa il cursore sulle aree per leggere i valori.
                 </p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-                <!-- Chart Container -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="bg-white/5 p-6 rounded-xl border border-white/20 w-full">
+                    <div class="chart-container">
+                        <canvas id="donneRadarChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="space-y-6">
+                    <div class="border-l-4 border-oro pl-4">
+                        <h3 class="text-xl text-oro">Elena — la parola</h3>
+                        <p class="text-base mt-2 opacity-90">Non ha mai controllato il proprio destino, ma controlla il racconto: a Sparta è lei a narrare, lei a dosare il nepente. Il suo potere è tutto nella voce — ed è per questo che la tradizione ha lavorato tanto per toglierle credibilità.</p>
+                    </div>
+                    <div class="border-l-4 border-terracotta pl-4">
+                        <h3 class="text-xl" style="color:#e0876a;">Penelope — il tempo</h3>
+                        <p class="text-base mt-2 opacity-90">Chiusa in una casa invasa, trasforma l'attesa da condizione subita in strategia attiva: la tela, la gara dell'arco, la prova del letto. Non può muoversi nello spazio come Odisseo, così manovra il tempo.</p>
+                    </div>
+                    <div class="border-l-4 border-oliva pl-4">
+                        <h3 class="text-xl" style="color:#a3b18a;">Circe — l'autonomia</h3>
+                        <p class="text-base mt-2 opacity-90">L'unica che non aspetta nessuno. Ha un'isola, un'arte, una soglia che gli uomini varcano a loro rischio. Paga l'indipendenza con l'etichetta di strega: il nome che ogni epoca dà alle donne che non hanno bisogno di essere salvate.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center mt-16">
                 <div class="chart-container bg-white/5 rounded-full p-4">
-                    <canvas id="themeDoughnutChart"></canvas>
+                    <canvas id="potereDoughnutChart"></canvas>
                 </div>
-                
-                <div class="space-y-4" id="theme-description">
+                <div class="space-y-4" id="potere-description">
                     <div class="bg-white/10 p-6 rounded backdrop-blur-sm border border-white/20">
-                        <h3 class="text-2xl font-bold mb-2 text-white">&#10024; Interagisci col Grafico</h3>
-                        <p class="opacity-90">Passa il cursore (o tocca) le sezioni del grafico a ciambella per esplorare le grandi dicotomie filosofiche che guidano la narrazione di Moby Dick.</p>
+                        <h3 class="text-2xl mb-2 text-white">Le forme del potere femminile</h3>
+                        <p class="opacity-90 text-lg">Escluse dalla forza e dal comando, le donne dell'Odissea esercitano il potere per altre vie. Passa il cursore (o tocca) le sezioni del grafico per esplorarle.</p>
                     </div>
                 </div>
-            </div>
-        </section>
-
-        <!-- L'Oracolo del Pequod (Gemini API Integration) -->
-        <section id="oracolo" class="scroll-mt-24 mb-10">
-            <div class="bg-gradient-to-br from-parchment to-white p-8 md:p-12 rounded-xl shadow-lg border-2 border-ocean relative overflow-hidden">
-                <div class="absolute -right-10 -top-10 text-9xl opacity-5 text-ocean">&#9875;</div>
-                
-                <div class="max-w-3xl mx-auto relative z-10">
-                    <h2 class="text-3xl font-bold text-ocean mb-2">L'oracolo del Pequod ✨</h2>
-                    <p class="text-lg text-ink mb-6">
-                        Hai un dubbio su un capitolo oscuro? Vuoi analizzare una citazione specifica? Interroga il nostro esperto letterario virtuale basato sull'Intelligenza Artificiale.
-                    </p>
-
-                    <!-- Pre-set Questions -->
-                    <div class="flex flex-wrap gap-2 mb-6">
-                        <span class="text-sm font-bold text-stone-500 uppercase mt-2 mr-2">Spunti:</span>
-                        <button class="preset-btn text-xs bg-bone hover:bg-ocean hover:text-white border border-stone-300 rounded-full px-3 py-1 transition-colors" data-prompt="Qual è il significato simbolico della gamba di balena di Ahab?">Gamba d'osso</button>
-                        <button class="preset-btn text-xs bg-bone hover:bg-ocean hover:text-white border border-stone-300 rounded-full px-3 py-1 transition-colors" data-prompt="Perché il romanzo inizia con la frase 'Chiamatemi Ismaele'?">Chiamatemi Ismaele</button>
-                        <button class="preset-btn text-xs bg-bone hover:bg-ocean hover:text-white border border-stone-300 rounded-full px-3 py-1 transition-colors" data-prompt="Analizza allegoricamente il personaggio di Pip, il mozzo.">Il mozzo Pip</button>
-                    </div>
-
-                    <!-- Input Area -->
-                    <div class="flex flex-col space-y-4">
-                        <textarea id="ai-input" rows="3" class="w-full p-4 rounded border border-stone-300 focus:ring-2 focus:ring-ocean focus:outline-none resize-none bg-white/80 backdrop-blur-sm shadow-inner" placeholder="Es: 'Cosa rappresenta il raggio di Sant'Elmo sugli alberi della nave?'"></textarea>
-                        
-                        <div class="flex justify-end">
-                            <button id="ai-submit" class="bg-ocean hover:bg-ink text-white font-bold py-3 px-6 rounded transition-colors shadow-md flex items-center">
-                                <span>Analizza con l'Intelligenza Artificiale ✨</span>
-                                <svg id="ai-loading" class="animate-spin -mr-1 ml-3 h-5 w-5 text-white hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
-
-                    <!-- Response Area -->
-                    <div id="ai-response-container" class="mt-8 hidden">
-                        <div class="border-t-2 border-bone pt-6">
-                            <h4 class="font-serif text-xl font-bold text-crimson mb-4 flex items-center">
-                                <span class="mr-2">&#9997;</span> L'analisi dello studioso:
-                            </h4>
-                            <div id="ai-response-content" class="text-lg leading-relaxed space-y-4 bg-white p-6 rounded border border-stone-200 shadow-sm">
-                                <!-- AI response will be injected here -->
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Officina Creativa (More Gemini API Features) -->
-        <section id="officina" class="scroll-mt-24 mb-10">
-            <div class="text-center mb-12 max-w-3xl mx-auto">
-                <h2 class="text-3xl font-bold text-ocean mb-4 border-b-2 border-crimson inline-block pb-2">Officina letteraria ✨</h2>
-                <p class="text-lg">
-                    Sperimenta in prima persona lo stile narrativo di Melville. Lascia che l'Intelligenza Artificiale trasformi i tuoi pensieri quotidiani nel linguaggio epico dei protagonisti del Pequod.
-                </p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                
-                <!-- Il Diario di Ismaele -->
-                <div class="bg-[#fdfbf7] p-8 rounded-xl shadow-md border-2 border-bone relative">
-                    <div class="absolute top-4 right-4 text-3xl opacity-20">&#128214;</div>
-                    <h3 class="text-2xl font-bold text-ocean mb-2 font-serif">Il diario di Ismaele ✨</h3>
-                    <p class="text-sm text-ink mb-4 h-16">Scrivi un evento banale della tua giornata. L'IA nei panni di Ismaele lo trasformerà in una lunga e complessa divagazione filosofica marinaresca.</p>
-                    
-                    <input type="text" id="ishmael-input" class="w-full p-3 mb-4 rounded border border-stone-300 focus:ring-2 focus:ring-ocean focus:outline-none bg-white" placeholder="Es: 'Oggi ho perso le chiavi di casa.'">
-                    
-                    <button id="ishmael-submit" class="w-full bg-stone-700 hover:bg-ink text-white font-bold py-2 px-4 rounded transition-colors shadow flex items-center justify-center mb-6">
-                        <span>Scrivi sul Diario di Bordo</span>
-                        <svg id="ishmael-loading" class="animate-spin -mr-1 ml-3 h-5 w-5 text-white hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
-                    </button>
-
-                    <div id="ishmael-output" class="hidden">
-                        <div class="border-t border-stone-300 pt-4 font-serif italic text-ink leading-relaxed" id="ishmael-response-text"></div>
-                    </div>
-                </div>
-
-                <!-- Il Monologo di Ahab -->
-                <div class="bg-gradient-to-b from-stone-900 to-ink p-8 rounded-xl shadow-md border-2 border-crimson relative text-parchment">
-                    <div class="absolute top-4 right-4 text-3xl opacity-20">&#9876;</div>
-                    <h3 class="text-2xl font-bold text-crimson mb-2 font-serif">Parla come Ahab ✨</h3>
-                    <p class="text-sm text-bone mb-4 opacity-80 h-16">Inserisci una piccola frustrazione quotidiana. L'IA la trasformerà in un furioso monologo vendicativo e teatrale del Capitano Ahab.</p>
-                    
-                    <input type="text" id="ahab-input" class="w-full p-3 mb-4 rounded border border-stone-600 focus:ring-2 focus:ring-crimson focus:outline-none bg-stone-800 text-white placeholder-stone-400" placeholder="Es: 'Il wifi ha smesso di funzionare.'">
-                    
-                    <button id="ahab-submit" class="w-full bg-crimson hover:bg-red-800 text-white font-bold py-2 px-4 rounded transition-colors shadow flex items-center justify-center mb-6 border border-red-900">
-                        <span>Lancia la Fiocina</span>
-                        <svg id="ahab-loading" class="animate-spin -mr-1 ml-3 h-5 w-5 text-white hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
-                    </button>
-
-                    <div id="ahab-output" class="hidden">
-                        <div class="border-t border-stone-700 pt-4 font-serif text-white leading-relaxed text-lg" id="ahab-response-text"></div>
-                    </div>
-                </div>
-
             </div>
         </section>
 
     </main>
 
-    <footer class="bg-ink text-bone pt-0 pb-10 text-center relative">
-        <div class="h-12 overflow-hidden bg-parchment" aria-hidden="true">
-            <svg class="w-full h-full text-ink" viewBox="0 0 360 30" preserveAspectRatio="none" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                <path d="M0 18 C 30 30, 60 6, 90 18 C 120 30, 150 6, 180 18 C 210 30, 240 6, 270 18 C 300 30, 330 6, 360 18 L 360 30 L 0 30 Z"/>
-            </svg>
-        </div>
+    <footer class="bg-notte text-sabbia pt-0 pb-10 text-center relative">
+        <div class="meander opacity-40" aria-hidden="true" style="filter: invert(1);"></div>
         <div class="max-w-6xl mx-auto px-4 pt-10">
-            <div class="w-20 mx-auto mb-6 text-bone opacity-60" aria-hidden="true">
-                <svg viewBox="0 0 240 120" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M30 30 C 16 32, 8 44, 8 58 C 8 72, 16 82, 34 86 C 70 93, 120 92, 162 74 C 170 70, 182 66, 192 64 C 198 70, 208 80, 222 86 C 216 76, 213 68, 214 60 C 220 54, 228 44, 232 32 C 220 40, 208 46, 198 48 C 192 42, 184 40, 176 44 C 160 32, 130 24, 96 24 C 70 24, 46 27, 30 30 Z"/>
-                </svg>
-            </div>
-            <p class="mb-2 quote-antique text-2xl italic">«Chiamatemi Ismaele.»</p>
-            <p class="text-sm opacity-70 mb-6">L'incipit più famoso della letteratura americana: non un nome, ma una scelta. Ismaele, il figlio ripudiato di Abramo, l'esule volontario.</p>
+            <p class="mb-3 text-2xl italic">«Cantami, o Musa, l'uomo dal multiforme ingegno…»</p>
+            <p class="text-lg opacity-80 mb-6 max-w-2xl mx-auto">Così comincia la versione che conosciamo. Ma se la Musa, dopo quasi tremila anni, avesse voglia di cantare qualcun'altra?</p>
             <div class="flex items-center justify-center gap-4 text-xs uppercase tracking-widest opacity-60">
-                <span>Herman Melville &middot; Moby Dick, or The Whale &middot; 1851</span>
+                <span>Omero &middot; Odissea &middot; VIII secolo a.C. circa — riletta dall'altra parte del telaio</span>
             </div>
-            <p class="text-xs opacity-50 mt-4">Analisi allegorica interattiva &mdash; progettata per l'esplorazione letteraria. Nessun capodoglio è stato ferito nella realizzazione di questo sito.</p>
+            <p class="text-xs opacity-50 mt-4">La versione di Elena — un esperimento di lettura. Le interpretazioni qui proposte attingono alla critica moderna, da Margaret Atwood a Emily Wilson e Madeline Miller.</p>
         </div>
     </footer>
 
-    <!-- JavaScript Logic -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
 
-            // --- 0a. Mobile Menu ---
+            // --- Mobile menu ---
             const mobileMenuBtn = document.getElementById('mobile-menu-btn');
             const mobileMenu = document.getElementById('mobile-menu');
             mobileMenuBtn.addEventListener('click', () => {
@@ -715,9 +562,9 @@
                 });
             });
 
-            // --- 0b. Scroll Reveal ---
+            // --- Scroll reveal ---
             if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-                const revealTargets = document.querySelectorAll('main > section, .char-card, .symbol-card');
+                const revealTargets = document.querySelectorAll('main > section, .donna-card, .symbol-card');
                 const observer = new IntersectionObserver((entries) => {
                     entries.forEach(entry => {
                         if (entry.isIntersecting) {
@@ -732,105 +579,138 @@
                 });
             }
 
-            // --- 1. Interactive Tabs Logic (La Balena) ---
-            const symbolData = {
-                natura: {
-                    title: "La Forza Indifferente della Natura \uD83C\uDF0A",
-                    text: "Nella sua forma più basilare, Moby Dick rappresenta la forza bruta, implacabile e del tutto indifferente della natura. Non agisce per malizia, ma per istinto di sopravvivenza. Sfidare la balena significa sfidare l'ordine naturale stesso, un'impresa destinata al fallimento catastrofico di fronte a una potenza insormontabile."
+            // --- Le due voci: monologhi in prima persona ---
+            const voci = {
+                elena: {
+                    nome: 'Elena di Troia',
+                    capitoli: [
+                        {
+                            label: 'Il premio',
+                            contesto: 'Sparta, prima della guerra',
+                            titolo: 'Fui promessa prima di essere chiesta',
+                            testo: 'Dicono che tutto cominciò con una mela d’oro e tre dee vanitose. Vi dico io come cominciò: tre potenti fecero una gara e misero in palio una cosa che non era loro. Quella cosa ero io. Nessuno, sul monte Ida, chiese a Elena. Quando sentirete dire che il mio volto fece salpare mille navi, ricordate che un volto non firma trattati, non arruola eserciti, non dichiara guerre: quelle servono mani di re. Le mille navi le fecero salpare loro — a me lasciarono la colpa, che pesa meno di una nave ma dura molto di più.'
+                        },
+                        {
+                            label: 'Le mura',
+                            contesto: 'Troia, durante i dieci anni di assedio',
+                            titolo: 'La donna più odiata della città',
+                            testo: 'Dieci anni sulle mura a guardare uomini che morivano con il mio nome in bocca, come una maledizione. Le troiane mi giravano il viso; gli achei, laggiù, mi chiamavano cagna. Io stessa, in certe notti, usavo per me parole peggiori — le ho dette anch’io, sapete, e Omero le ha trascritte volentieri. Solo il vecchio Priamo mi sedeva accanto e diceva: tu non hai colpa, la colpa è degli dèi. Era l’unico. Ho passato dieci anni a tessere su una tela rossa le battaglie che si combattevano per me: anche noi, come i poeti, possiamo solo raccontare la guerra. A noi però non è concesso vincerla.'
+                        },
+                        {
+                            label: 'Il nepente',
+                            contesto: 'Sparta, vent’anni dopo (Odissea, libro IV)',
+                            titolo: 'Ora il vino lo verso io',
+                            testo: 'Il figlio di Odisseo è venuto a cercare notizie del padre, e alla mia tavola si piangeva. Allora ho versato nel vino il farmaco che porto dall’Egitto, quello che scioglie il dolore, e quando le lacrime si sono fermate ho raccontato io. La mia versione. Menelao subito dopo ne ha raccontata un’altra, dove io ero ancora la traditrice. Nessuno a tavola ha chiesto quale fosse vera: hanno bevuto, e dormito bene. È questo che ho imparato in vent’anni: alle donne non viene chiesta la verità, viene chiesto il conforto. Ma chi tiene la brocca decide quando si smette di piangere — e chi parla per primo.'
+                        }
+                    ]
                 },
-                dio: {
-                    title: "La Divinità Incomprensibile \u26A1",
-                    text: "Il calvinismo e l'idea di predestinazione permeano il romanzo. Moby Dick può essere vista come l'incarnazione di un Dio onnipotente e imperscrutabile. Ahab, simile a Prometeo, cerca di punire questo Dio per le sofferenze inflitte all'umanità, rifiutando la sottomissione al fato divino."
-                },
-                vuoto: {
-                    title: "La 'Bianchezza' e il Vuoto \u26AA",
-                    text: "Nel celebre capitolo 'La Bianchezza della Balena', Ismaele riflette sul colore bianco non come simbolo di purezza, ma come un vuoto terrificante. Il bianco è l'assenza di colore e, simultaneamente, la somma di tutti i colori. Rappresenta il terrore dell'assenza di significato nell'universo, un abisso ateo che l'uomo cerca disperatamente di riempire di senso."
-                },
-                male: {
-                    title: "Il Male Assoluto (La Visione di Ahab) \uD83D\uDD25",
-                    text: "Per Ahab, la balena non è un animale, ma la maschera tangibile di un demone cosmico. Egli proietta su Moby Dick tutto il dolore, l'ingiustizia e il male del mondo. La sua tragedia è credere che distruggendo la creatura fisica, possa distruggere il principio metafisico del male."
+                penelope: {
+                    nome: 'Penelope',
+                    capitoli: [
+                        {
+                            label: 'La tela',
+                            contesto: 'Itaca, durante l’assedio dei proci',
+                            titolo: 'Il tempo è l’unica arma che mi hanno lasciato',
+                            testo: 'Centootto uomini mangiano alla mia tavola e si dicono miei pretendenti, come se io fossi già vedova, come se fossi già loro. Non posso cacciarli: non ho esercito, ho un figlio ragazzino e un telaio. Così ho promesso: sceglierò quando avrò finito il sudario per il vecchio Laerte. Di giorno tesso davanti a tutti, di notte disfo al lume di una lampada. Chiamatela astuzia, se volete: io la chiamo sopravvivenza. Mio marito ha ingannato Troia con un cavallo di legno e lo chiamano geniale. Io ho ingannato cento uomini con la lana, per tre anni, senza spargere sangue — e per secoli mi avete chiamata soltanto paziente.'
+                        },
+                        {
+                            label: 'L’arco',
+                            contesto: 'Itaca, libro XXI',
+                            titolo: 'Il finale l’ho apparecchiato io',
+                            testo: 'C’è un mendicante nella mia sala, e parla di Odisseo come chi l’ha visto da vicino. Non so — non ancora — chi sia. So che è il momento. Sono salita nel ripostiglio, ho preso l’arco che dorme lì da vent’anni e ho pianto sulle sue curve; poi sono scesa e ho detto: chi lo tenderà e passerà la freccia per dodici scuri, mi avrà. Sapevo che nessuno di loro poteva tenderlo. Quando i poeti racconteranno la strage dei proci, diranno che fu l’ora di Odisseo. Sia. Ma l’arma in mano gliel’ha messa la regina: il finale, in questa casa, si è deciso nelle mie stanze.'
+                        },
+                        {
+                            label: 'Il letto',
+                            contesto: 'Itaca, libro XXIII',
+                            titolo: 'Ho messo alla prova l’ingannatore',
+                            testo: 'Dicono tutti: è lui, è tornato, corri ad abbracciarlo. Vent’anni di attesa mi hanno insegnato una cosa sola: la prudenza. Gli dèi sanno travestirsi, gli uomini mentono, e io non sono sopravvissuta a cento ingannatori per cadere all’ultimo. Così ho ordinato all’ancella, ad alta voce: spostagli il letto fuori dalla camera. Lui è esploso — chi ha tagliato il mio letto? — perché quel letto è scolpito in un ulivo vivo, radicato nella terra, e lo sappiamo solo noi due. Allora ho ceduto, allora ho pianto. Odisseo ha ingannato il mondo intero, ma all’ultima porta di casa sua c’era una prova: l’aveva preparata sua moglie.'
+                        }
+                    ]
                 }
             };
 
-            const tabBtns = document.querySelectorAll('.tab-btn');
-            const symTitle = document.getElementById('sym-title');
-            const symText = document.getElementById('sym-text');
+            const voiceBtns = document.querySelectorAll('.voice-btn');
+            const chapterTabs = document.getElementById('chapter-tabs');
+            const voiceContext = document.getElementById('voice-context');
+            const voiceTitle = document.getElementById('voice-title');
+            const voiceText = document.getElementById('voice-text');
+            let currentVoice = 'elena';
 
-            tabBtns.forEach(btn => {
-                btn.addEventListener('click', function() {
-                    // Remove active class from all
-                    tabBtns.forEach(b => {
-                        b.classList.remove('active', 'bg-ocean', 'text-white');
-                        b.classList.add('text-ink');
-                    });
-                    
-                    // Add active class to clicked
-                    this.classList.add('active');
-                    this.classList.remove('text-ink');
-                    
-                    // Update content
-                    const target = this.getAttribute('data-target');
-                    
-                    // Add simple fade animation
-                    symTitle.style.opacity = 0;
-                    symText.style.opacity = 0;
-                    
-                    setTimeout(() => {
-                        symTitle.textContent = symbolData[target].title;
-                        symText.textContent = symbolData[target].text;
-                        symTitle.style.opacity = 1;
-                        symText.style.opacity = 1;
-                    }, 200);
+            function renderChapter(voice, index) {
+                const cap = voci[voice].capitoli[index];
+                voiceContext.style.opacity = 0;
+                voiceTitle.style.opacity = 0;
+                voiceText.style.opacity = 0;
+                setTimeout(() => {
+                    voiceContext.textContent = voci[voice].nome + ' · ' + cap.contesto;
+                    voiceTitle.textContent = cap.titolo;
+                    voiceText.textContent = cap.testo;
+                    voiceContext.style.opacity = 1;
+                    voiceTitle.style.opacity = 1;
+                    voiceText.style.opacity = 1;
+                }, 180);
+                chapterTabs.querySelectorAll('.chapter-btn').forEach((b, i) => {
+                    b.classList.toggle('active', i === index);
                 });
-            });
+            }
 
-            // Smooth transition setup for text
-            symTitle.style.transition = 'opacity 0.2s ease';
-            symText.style.transition = 'opacity 0.2s ease';
+            function renderVoice(voice) {
+                currentVoice = voice;
+                voiceBtns.forEach(b => b.classList.toggle('active', b.dataset.voice === voice));
+                chapterTabs.innerHTML = '';
+                voci[voice].capitoli.forEach((cap, i) => {
+                    const btn = document.createElement('button');
+                    btn.className = 'chapter-btn text-left px-6 py-4 rounded border border-terracotta display text-lg transition-all';
+                    btn.textContent = cap.label;
+                    btn.addEventListener('click', () => renderChapter(voice, i));
+                    chapterTabs.appendChild(btn);
+                });
+                renderChapter(voice, 0);
+            }
 
+            [voiceContext, voiceTitle, voiceText].forEach(el => el.style.transition = 'opacity 0.2s ease');
+            voiceBtns.forEach(btn => btn.addEventListener('click', () => renderVoice(btn.dataset.voice)));
+            renderVoice('elena');
 
-            // --- 2. Character Radar Chart ---
-            const ctxRadar = document.getElementById('characterRadarChart').getContext('2d');
-            
-            // Shared Chart.js options for responsiveness
+            // --- Radar: tre donne a confronto ---
             const commonOptions = {
                 responsive: true,
                 maintainAspectRatio: false,
                 plugins: {
                     legend: {
                         position: 'bottom',
-                        labels: { font: { family: "'Lora', serif", size: 14 } }
+                        labels: { font: { family: "'Cormorant Garamond', serif", size: 15 }, color: '#f7f4ee' }
                     }
                 }
             };
 
-            new Chart(ctxRadar, {
+            new Chart(document.getElementById('donneRadarChart').getContext('2d'), {
                 type: 'radar',
                 data: {
-                    labels: ['Ossessione/Follia', 'Ragione/Pragmatismo', 'Spiritualità/Tolleranza', 'Dominio sulla Natura', 'Adattabilità'],
+                    labels: ['Astuzia', 'Libertà d’azione', 'Potere sul racconto', 'Attesa imposta', 'Giudizio della tradizione'],
                     datasets: [
                         {
-                            label: 'Capitano Ahab',
-                            data: [10, 2, 1, 9, 1],
-                            backgroundColor: 'rgba(139, 0, 0, 0.2)', // Crimson
-                            borderColor: 'rgba(139, 0, 0, 1)',
-                            pointBackgroundColor: 'rgba(139, 0, 0, 1)',
+                            label: 'Elena',
+                            data: [7, 4, 9, 6, 2],
+                            backgroundColor: 'rgba(201, 162, 39, 0.25)',
+                            borderColor: 'rgba(201, 162, 39, 1)',
+                            pointBackgroundColor: 'rgba(201, 162, 39, 1)',
                             borderWidth: 2
                         },
                         {
-                            label: 'Ismaele',
-                            data: [3, 7, 9, 2, 10],
-                            backgroundColor: 'rgba(26, 54, 93, 0.2)', // Ocean
-                            borderColor: 'rgba(26, 54, 93, 1)',
-                            pointBackgroundColor: 'rgba(26, 54, 93, 1)',
+                            label: 'Penelope',
+                            data: [10, 3, 5, 10, 9],
+                            backgroundColor: 'rgba(180, 83, 42, 0.25)',
+                            borderColor: 'rgba(224, 135, 106, 1)',
+                            pointBackgroundColor: 'rgba(224, 135, 106, 1)',
                             borderWidth: 2
                         },
                         {
-                            label: 'Starbuck',
-                            data: [1, 9, 6, 5, 4],
-                            backgroundColor: 'rgba(120, 113, 108, 0.2)', // Stone
-                            borderColor: 'rgba(120, 113, 108, 1)',
-                            pointBackgroundColor: 'rgba(120, 113, 108, 1)',
+                            label: 'Circe',
+                            data: [8, 10, 6, 1, 3],
+                            backgroundColor: 'rgba(96, 108, 56, 0.3)',
+                            borderColor: 'rgba(163, 177, 138, 1)',
+                            pointBackgroundColor: 'rgba(163, 177, 138, 1)',
                             borderWidth: 2
                         }
                     ]
@@ -839,11 +719,11 @@
                     ...commonOptions,
                     scales: {
                         r: {
-                            angleLines: { color: 'rgba(0, 0, 0, 0.1)' },
-                            grid: { color: 'rgba(0, 0, 0, 0.1)' },
+                            angleLines: { color: 'rgba(247, 244, 238, 0.15)' },
+                            grid: { color: 'rgba(247, 244, 238, 0.15)' },
                             pointLabels: {
-                                font: { family: "'Lora', serif", size: 12 },
-                                color: '#2c3e50'
+                                font: { family: "'Cormorant Garamond', serif", size: 13 },
+                                color: '#f7f4ee'
                             },
                             ticks: { display: false, min: 0, max: 10 }
                         }
@@ -851,29 +731,23 @@
                 }
             });
 
-            // --- 3. Thematic Doughnut Chart ---
-            const ctxDoughnut = document.getElementById('themeDoughnutChart').getContext('2d');
-            
-            const themeDetails = {
-                0: { title: "Destino vs Libero Arbitrio", text: "Fino a che punto l'uomo controlla la propria vita? Ahab crede di agire liberamente, ma Ismaele suggerisce che l'intera umanità è intrappolata in un 'telaio del fato', intrecciando caso, necessità e libero arbitrio." },
-                1: { title: "L'Isolamento e l'Alienazione", text: "La caccia isola il Pequod dalla civiltà. L'oceano vasto e solitario riflette l'isolamento esistenziale dell'individuo. Ahab sceglie l'isolamento assoluto, recidendo ogni legame umano." },
-                2: { title: "I Limiti della Conoscenza Umana", text: "Il romanzo è pieno di tentativi falliti di classificare e comprendere la balena (scienza, arte, mito). La lezione finale è che ci sono verità insondabili e misteri che l'intelletto umano non può penetrare." },
-                3: { title: "Sfruttamento Industriale vs Natura", text: "Il Pequod è una fabbrica galleggiante. Il libro documenta l'alba dello sfruttamento spietato della natura da parte dell'industria capitalistica, prefigurando la crisi ecologica moderna." }
+            // --- Doughnut: le forme del potere femminile ---
+            const potereDetails = {
+                0: { title: 'La tessitura', text: 'La tela di Penelope, la tela rossa di Elena a Troia, i telai di Circe e Calipso che cantano nelle loro isole: tessere è il gesto femminile per eccellenza — e la grande metafora del narrare. Chi tesse, trama.' },
+                1: { title: 'La parola', text: 'Elena che racconta a Sparta, le Sirene che promettono di sapere «tutto ciò che accade sulla terra»: nel poema la voce femminile è così potente che gli uomini devono legarsi all’albero o drogarsi per resisterle.' },
+                2: { title: 'La magia', text: 'Circe trasforma, Calipso nasconde, Ino salva con un velo incantato. La «magia» è spesso il nome che l’epica dà alle competenze femminili che non sa spiegare: farmacologia, astuzia, conoscenza.' },
+                3: { title: 'L’attesa strategica', text: 'Non l’attesa passiva delle statue, ma quella attiva di Penelope: guadagnare tempo, rinviare, logorare. Vent’anni di resistenza domestica che valgono il decennio di guerra di qualunque eroe.' },
+                4: { title: 'Il silenzio', text: 'Euriclea che tace il segreto della cicatrice, Penelope che non rivela ciò che forse ha intuito sul mendicante. Nel poema chi tace sa — e il silenzio delle donne è quasi sempre una scelta tattica, non un’assenza.' }
             };
 
-            const themeChart = new Chart(ctxDoughnut, {
+            new Chart(document.getElementById('potereDoughnutChart').getContext('2d'), {
                 type: 'doughnut',
                 data: {
-                    labels: ['Destino / Libero Arbitrio', 'Isolamento', 'Limiti della Conoscenza', 'Sfruttamento / Industria'],
+                    labels: ['Tessitura', 'Parola', 'Magia', 'Attesa strategica', 'Silenzio'],
                     datasets: [{
-                        data: [35, 25, 25, 15],
-                        backgroundColor: [
-                            '#e3dac9', // Bone
-                            '#8b0000', // Crimson
-                            '#2c3e50', // Ink
-                            '#475569'  // Slate
-                        ],
-                        borderColor: '#1a365d',
+                        data: [30, 25, 20, 15, 10],
+                        backgroundColor: ['#b4532a', '#c9a227', '#606c38', '#e9e2d0', '#8d99ae'],
+                        borderColor: '#1d3557',
                         borderWidth: 2,
                         hoverOffset: 10
                     }]
@@ -884,7 +758,7 @@
                     plugins: {
                         legend: {
                             position: 'right',
-                            labels: { color: '#f4f1ea', font: { family: "'Lora', serif" } }
+                            labels: { color: '#f7f4ee', font: { family: "'Cormorant Garamond', serif", size: 14 } }
                         },
                         tooltip: {
                             callbacks: {
@@ -893,170 +767,18 @@
                         }
                     },
                     onHover: (event, chartElement) => {
-                        const descriptionBox = document.getElementById('theme-description');
+                        const box = document.getElementById('potere-description');
                         if (chartElement.length > 0) {
                             const index = chartElement[0].index;
-                            descriptionBox.innerHTML = `
+                            box.innerHTML = `
                                 <div class="bg-white/10 p-6 rounded backdrop-blur-sm border border-white/20 transition-all duration-300">
-                                    <h3 class="text-2xl font-bold mb-3 text-[#e3dac9]">${themeDetails[index].title}</h3>
-                                    <p class="text-lg leading-relaxed">${themeDetails[index].text}</p>
+                                    <h3 class="text-2xl mb-3" style="color:#e9e2d0;">${potereDetails[index].title}</h3>
+                                    <p class="text-lg leading-relaxed">${potereDetails[index].text}</p>
                                 </div>
                             `;
                         }
                     }
                 }
-            });
-
-            // --- 4. Gemini API Integration (L'Oracolo del Pequod) ---
-            const apiKey = "sk-e68246bf4bba4222a84655b676a8abd3"; // API Key is injected by the environment
-            const aiInput = document.getElementById('ai-input');
-            const aiSubmitBtn = document.getElementById('ai-submit');
-            const aiLoadingIcon = document.getElementById('ai-loading');
-            const aiResponseContainer = document.getElementById('ai-response-container');
-            const aiResponseContent = document.getElementById('ai-response-content');
-            const presetBtns = document.querySelectorAll('.preset-btn');
-
-            // Handle Preset Buttons
-            presetBtns.forEach(btn => {
-                btn.addEventListener('click', () => {
-                    aiInput.value = btn.getAttribute('data-prompt');
-                    aiInput.focus();
-                });
-            });
-
-            // Format simple markdown (bold and line breaks)
-            const formatMarkdown = (text) => {
-                let formatted = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>'); // Bold
-                formatted = formatted.replace(/\*(.*?)\*/g, '<em>$1</em>'); // Italic
-                formatted = formatted.split('\n').filter(p => p.trim() !== '').map(p => `<p>${p}</p>`).join(''); // Paragraphs
-                return formatted;
-            };
-
-            // Call DeepSeek API with Exponential Backoff and dynamic system prompts
-            async function generateContent(prompt, systemInstructionText) {
-                const endpoint = `https://api.deepseek.com/chat/completions`;
-                
-                const payload = {
-                    model: "deepseek-v4-flash",
-                    messages: [
-                        { role: "system", content: systemInstructionText },
-                        { role: "user", content: prompt }
-                    ]
-                };
-
-                const maxRetries = 5;
-                let baseDelay = 1000; // 1s, 2s, 4s, 8s, 16s
-
-                for (let attempt = 0; attempt < maxRetries; attempt++) {
-                    try {
-                        const response = await fetch(endpoint, {
-                            method: 'POST',
-                            headers: { 
-                                'Content-Type': 'application/json',
-                                'Authorization': `Bearer ${apiKey}`
-                            },
-                            body: JSON.stringify(payload)
-                        });
-
-                        if (!response.ok) {
-                            throw new Error(`HTTP Error: ${response.status}`);
-                        }
-
-                        const data = await response.json();
-                        return data.choices?.[0]?.message?.content || "Nessuna risposta generata.";
-                    } catch (error) {
-                        if (attempt === maxRetries - 1) {
-                            console.error("DeepSeek API failed after all retries:", error);
-                            return "Mi dispiace, la nebbia è troppo fitta per vedere chiaramente in questo momento. Il nostro oracolo è temporaneamente irraggiungibile. Riprova più tardi.";
-                        }
-                        await new Promise(resolve => setTimeout(resolve, baseDelay));
-                        baseDelay *= 2; // Exponential backoff
-                    }
-                }
-            }
-
-            // Handle Submit Action for L'Oracolo
-            aiSubmitBtn.addEventListener('click', async () => {
-                const prompt = aiInput.value.trim();
-                if (!prompt) return;
-
-                // UI Loading State
-                aiInput.disabled = true;
-                aiSubmitBtn.disabled = true;
-                aiSubmitBtn.classList.add('opacity-75', 'cursor-not-allowed');
-                aiLoadingIcon.classList.remove('hidden');
-                aiResponseContainer.classList.add('hidden');
-                
-                // Set preset response area to show thinking
-                aiResponseContainer.classList.remove('hidden');
-                aiResponseContent.innerHTML = '<p class="animate-pulse text-stone-500 italic">Consultando gli antichi registri del Pequod...</p>';
-
-                // Fetch AI response
-                const sysPromptOracolo = "Sei un esperto accademico e critico letterario specializzato in 'Moby Dick' di Herman Melville. Rispondi in italiano. Fornisci un'analisi profonda, allegorica e simbolica alla richiesta dell'utente. Sii chiaro, incisivo e limitati a un massimo di tre o quattro paragrafi ben strutturati.";
-                const responseText = await generateContent(prompt, sysPromptOracolo);
-
-                // UI Complete State
-                aiInput.disabled = false;
-                aiSubmitBtn.disabled = false;
-                aiSubmitBtn.classList.remove('opacity-75', 'cursor-not-allowed');
-                aiLoadingIcon.classList.add('hidden');
-                
-                // Render Response
-                aiResponseContent.innerHTML = formatMarkdown(responseText);
-            });
-
-            // --- 5. Nuove Feature AI (Officina Creativa) ---
-
-            // Diario di Ismaele
-            const ishmaelInput = document.getElementById('ishmael-input');
-            const ishmaelSubmit = document.getElementById('ishmael-submit');
-            const ishmaelLoading = document.getElementById('ishmael-loading');
-            const ishmaelOutput = document.getElementById('ishmael-output');
-            const ishmaelResponseText = document.getElementById('ishmael-response-text');
-
-            ishmaelSubmit.addEventListener('click', async () => {
-                const prompt = ishmaelInput.value.trim();
-                if (!prompt) return;
-
-                ishmaelInput.disabled = true;
-                ishmaelSubmit.disabled = true;
-                ishmaelLoading.classList.remove('hidden');
-                ishmaelOutput.classList.remove('hidden');
-                ishmaelResponseText.innerHTML = '<span class="animate-pulse">Intingendo la penna nel calamaio...</span>';
-
-                const sysPromptIshmael = "Sei Ismaele, il narratore di Moby Dick. L'utente ti fornirà un evento banale della sua giornata. Scrivi una voce di diario di bordo (max 150 parole). Inizia descrivendo l'evento oggettivamente, ma poi perditi immediatamente in una profonda, complessa e quasi assurda riflessione filosofica/metafisica sulla condizione umana, il cosmo o il destino, usando il tuo classico stile divagante e ricche metafore legate all'oceano, alle navi o alla baleneria.";
-                const responseText = await generateContent(`Evento banale: "${prompt}"`, sysPromptIshmael);
-
-                ishmaelInput.disabled = false;
-                ishmaelSubmit.disabled = false;
-                ishmaelLoading.classList.add('hidden');
-                ishmaelResponseText.innerHTML = formatMarkdown(responseText);
-            });
-
-            // Monologo di Ahab
-            const ahabInput = document.getElementById('ahab-input');
-            const ahabSubmit = document.getElementById('ahab-submit');
-            const ahabLoading = document.getElementById('ahab-loading');
-            const ahabOutput = document.getElementById('ahab-output');
-            const ahabResponseText = document.getElementById('ahab-response-text');
-
-            ahabSubmit.addEventListener('click', async () => {
-                const prompt = ahabInput.value.trim();
-                if (!prompt) return;
-
-                ahabInput.disabled = true;
-                ahabSubmit.disabled = true;
-                ahabLoading.classList.remove('hidden');
-                ahabOutput.classList.remove('hidden');
-                ahabResponseText.innerHTML = '<span class="animate-pulse">Fissando l\'orizzonte con odio...</span>';
-
-                const sysPromptAhab = "Sei il Capitano Ahab di Moby Dick. L'utente ti fornirà una piccola e insignificante frustrazione quotidiana. Riscrivila trasformandola in un monologo oscuro, teatrale, folle, ossessivo e vendicativo. Usa il tuo tipico linguaggio marinaresco ottocentesco, esclamazioni drammatiche (es: 'Per il cuore di tenebra!'), e riferimenti a forze oscure, al fato inesorabile o alla dannazione. Sii breve ma incredibilmente intenso (max 100 parole).";
-                const responseText = await generateContent(`Frustrazione quotidiana: "${prompt}"`, sysPromptAhab);
-
-                ahabInput.disabled = false;
-                ahabSubmit.disabled = false;
-                ahabLoading.classList.add('hidden');
-                ahabResponseText.innerHTML = formatMarkdown(responseText);
             });
 
         });
