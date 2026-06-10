@@ -8,7 +8,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lora:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
             theme: {
@@ -23,6 +23,7 @@
                     fontFamily: {
                         'serif': ['"Playfair Display"', 'serif'],
                         'body': ['"Lora"', 'serif'],
+                        'antique': ['"IM Fell English"', 'serif'],
                     }
                 }
             }
@@ -57,6 +58,69 @@
             color: #f4f1ea;
             border-color: #1a365d;
         }
+
+        /* Antique quote typography */
+        .quote-antique { font-family: 'IM Fell English', serif; }
+
+        /* Drop cap for opening paragraphs */
+        .drop-cap::first-letter {
+            font-family: 'Playfair Display', serif;
+            font-weight: 900;
+            font-size: 3.4em;
+            float: left;
+            line-height: 0.85;
+            padding-right: 0.12em;
+            color: #8b0000;
+        }
+
+        /* Timeline */
+        .timeline-line {
+            position: absolute;
+            left: 1.25rem;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, #e3dac9, #1a365d 15%, #1a365d 85%, #8b0000);
+        }
+        @media (min-width: 768px) {
+            .timeline-line { left: 50%; transform: translateX(-1px); }
+        }
+        .timeline-dot {
+            position: absolute;
+            left: 1.25rem;
+            transform: translateX(-50%);
+            width: 1.1rem;
+            height: 1.1rem;
+            border-radius: 9999px;
+            background-color: #f4f1ea;
+            border: 3px solid #1a365d;
+            z-index: 10;
+            top: 1.75rem;
+        }
+        @media (min-width: 768px) {
+            .timeline-dot { left: 50%; }
+        }
+
+        /* Character card hover lift */
+        .char-card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .char-card:hover { transform: translateY(-6px); box-shadow: 0 12px 24px -8px rgba(26, 54, 93, 0.25); }
+
+        /* Symbol card */
+        .symbol-card { transition: transform 0.3s ease, border-color 0.3s ease; }
+        .symbol-card:hover { transform: scale(1.02); border-color: #8b0000; }
+
+        /* Gentle floating animation for the hero whale */
+        @keyframes float-whale {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-12px) rotate(-1.5deg); }
+        }
+        .whale-float { animation: float-whale 7s ease-in-out infinite; }
+
+        @keyframes wave-drift {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-90px); }
+        }
+        .wave-drift { animation: wave-drift 9s linear infinite; }
     </style>
 </head>
 <body class="antialiased selection:bg-ocean selection:text-white pb-20">
@@ -77,25 +141,64 @@
                 <div class="flex-shrink-0 flex items-center">
                     <a href="#" class="nav-logo text-2xl font-bold text-ocean">Moby Dick <span class="text-crimson text-xl">&#9875;</span></a>
                 </div>
-                <div class="hidden md:flex space-x-8">
-                    <a href="#introduzione" class="text-ink hover:text-ocean px-3 py-2 text-sm font-medium transition-colors">Introduzione</a>
-                    <a href="#labalena" class="text-ink hover:text-ocean px-3 py-2 text-sm font-medium transition-colors">La balena</a>
-                    <a href="#ipersonaggi" class="text-ink hover:text-ocean px-3 py-2 text-sm font-medium transition-colors">I personaggi</a>
-                    <a href="#tematiche" class="text-ink hover:text-ocean px-3 py-2 text-sm font-medium transition-colors">Tematiche</a>
-                    <a href="#oracolo" class="text-ink hover:text-ocean px-3 py-2 text-sm font-medium transition-colors font-bold">L'oracolo ✨</a>
-                    <a href="#officina" class="text-ink hover:text-ocean px-3 py-2 text-sm font-medium transition-colors font-bold text-crimson">Officina ✨</a>
+                <div class="hidden md:flex space-x-2 lg:space-x-4">
+                    <a href="#introduzione" class="text-ink hover:text-ocean px-2 py-2 text-sm font-medium transition-colors">Introduzione</a>
+                    <a href="#labalena" class="text-ink hover:text-ocean px-2 py-2 text-sm font-medium transition-colors">La balena</a>
+                    <a href="#ipersonaggi" class="text-ink hover:text-ocean px-2 py-2 text-sm font-medium transition-colors">Personaggi</a>
+                    <a href="#eventi" class="text-ink hover:text-ocean px-2 py-2 text-sm font-medium transition-colors">Eventi</a>
+                    <a href="#simboli" class="text-ink hover:text-ocean px-2 py-2 text-sm font-medium transition-colors">Simboli</a>
+                    <a href="#tematiche" class="text-ink hover:text-ocean px-2 py-2 text-sm font-medium transition-colors">Tematiche</a>
+                    <a href="#oracolo" class="text-ink hover:text-ocean px-2 py-2 text-sm font-medium transition-colors font-bold">L'oracolo ✨</a>
+                    <a href="#officina" class="text-ink hover:text-ocean px-2 py-2 text-sm font-medium transition-colors font-bold text-crimson">Officina ✨</a>
                 </div>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <header class="pt-32 pb-20 px-4 text-center bg-gradient-to-b from-bone to-parchment border-b border-bone">
-        <div class="max-w-3xl mx-auto">
-            <h1 class="text-5xl md:text-6xl font-bold text-ocean mb-6 leading-tight">Oltre la superficie del mare</h1>
-            <p class="text-xl text-ink mb-8 italic">Un'esplorazione interattiva dell'allegoria e del simbolismo nel capolavoro di Herman Melville.</p>
-            <div class="text-6xl text-ocean opacity-50 mb-4">&#128011;</div>
-            <a href="#introduzione" class="inline-block border-2 border-ocean text-ocean hover:bg-ocean hover:text-white font-bold py-3 px-8 rounded transition-all duration-300">Inizia l'Esplorazione</a>
+    <header class="pt-32 pb-0 px-0 text-center bg-gradient-to-b from-bone to-parchment relative overflow-hidden">
+        <div class="max-w-3xl mx-auto px-4 relative z-10">
+            <p class="quote-antique text-crimson text-lg tracking-widest uppercase mb-3">Herman Melville &middot; 1851</p>
+            <h1 class="text-5xl md:text-7xl font-black text-ocean mb-6 leading-tight">Oltre la superficie<br>del mare</h1>
+            <p class="text-xl text-ink mb-10 italic max-w-2xl mx-auto">Che cosa si nasconde dietro la balena bianca? Un viaggio interattivo tra le allegorie, i personaggi e i simboli di <em>Moby Dick</em>.</p>
+
+            <!-- Whale SVG illustration -->
+            <div class="whale-float mx-auto mb-8 w-64 md:w-80 text-ocean opacity-80" aria-hidden="true">
+                <svg viewBox="0 0 240 120" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <!-- spout -->
+                    <path d="M30 22 C 28 14, 32 8, 38 6 C 34 12, 35 16, 36 20 Z" opacity="0.45"/>
+                    <path d="M40 20 C 41 12, 47 8, 53 9 C 47 13, 45 17, 44 22 Z" opacity="0.45"/>
+                    <!-- body -->
+                    <path d="M30 30
+                             C 16 32, 8 44, 8 58
+                             C 8 72, 16 82, 34 86
+                             C 70 93, 120 92, 162 74
+                             C 170 70, 182 66, 192 64
+                             C 198 70, 208 80, 222 86
+                             C 216 76, 213 68, 214 60
+                             C 220 54, 228 44, 232 32
+                             C 220 40, 208 46, 198 48
+                             C 192 42, 184 40, 176 44
+                             C 160 32, 130 24, 96 24
+                             C 70 24, 46 27, 30 30 Z"/>
+                    <!-- fin -->
+                    <path d="M92 88 C 96 98, 92 108, 82 112 C 86 104, 86 96, 84 90 Z"/>
+                    <!-- eye (parchment colored) -->
+                    <circle cx="42" cy="60" r="3.5" fill="#f4f1ea"/>
+                </svg>
+            </div>
+
+            <a href="#introduzione" class="inline-block border-2 border-ocean text-ocean hover:bg-ocean hover:text-white font-bold py-3 px-8 rounded transition-all duration-300 mb-16">Inizia l'esplorazione</a>
+        </div>
+
+        <!-- Animated waves -->
+        <div class="relative h-16 overflow-hidden" aria-hidden="true">
+            <svg class="wave-drift absolute bottom-0 left-0 h-full text-ocean opacity-20" style="width: 200%;" viewBox="0 0 360 40" preserveAspectRatio="none" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 20 C 22.5 35, 45 5, 67.5 20 C 90 35, 112.5 5, 135 20 C 157.5 35, 180 5, 202.5 20 C 225 35, 247.5 5, 270 20 C 292.5 35, 315 5, 337.5 20 L 360 20 L 360 40 L 0 40 Z"/>
+            </svg>
+            <svg class="absolute bottom-0 left-0 w-full h-2/3 text-ocean opacity-30" viewBox="0 0 360 30" preserveAspectRatio="none" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 15 C 30 28, 60 4, 90 15 C 120 26, 150 4, 180 15 C 210 26, 240 4, 270 15 C 300 26, 330 4, 360 15 L 360 30 L 0 30 Z"/>
+            </svg>
         </div>
     </header>
 
@@ -106,19 +209,19 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
                 <div>
                     <h2 class="text-3xl font-bold text-ocean mb-4 border-b-2 border-crimson inline-block pb-2">Un oceano di significati</h2>
-                    <p class="mb-4 text-lg leading-relaxed">
-                        "Moby Dick" non è semplicemente la storia di una caccia alla balena. È un'epopea filosofica, un labirinto di metafore e un'indagine profonda sull'animo umano, su Dio e sulla natura dell'universo.
+                    <p class="mb-4 text-lg leading-relaxed drop-cap">
+                        Moby Dick non è semplicemente la storia di una caccia alla balena. È un'epopea filosofica, un labirinto di metafore, un'indagine vertiginosa sull'animo umano, su Dio e sul silenzio dell'universo. Quando uscì nel 1851 fu un fiasco commerciale: il mondo impiegò settant'anni ad accorgersi di avere tra le mani uno dei più grandi romanzi mai scritti.
                     </p>
                     <p class="text-lg leading-relaxed">
-                        Melville utilizza il viaggio della baleniera <strong>Pequod</strong> come veicolo per esplorare la condizione umana. Ogni elemento – dalla nave stessa, ai membri dell'equipaggio, fino al colore della balena – è carico di molteplici strati di significato. Questa applicazione scompone queste allegorie per renderle navigabili.
+                        Melville usa il viaggio della baleniera <strong>Pequod</strong> come veicolo per esplorare la condizione umana. Ogni elemento — la nave, l'equipaggio, gli oggetti di bordo, perfino il colore della balena — porta con sé più strati di significato. Questo sito li scompone uno a uno, per renderli navigabili.
                     </p>
                 </div>
                 <div class="bg-bone p-8 rounded shadow-inner border border-stone-300 relative">
                     <div class="absolute top-4 left-4 text-4xl text-ocean opacity-20">&#10077;</div>
-                    <p class="text-xl font-serif italic text-ink relative z-10 text-center mt-4">
-                        "Non c'è follia delle bestie della terra che non sia superata all'infinito dalla follia degli uomini."
+                    <p class="quote-antique text-2xl italic text-ink relative z-10 text-center mt-4">
+                        «Non c'è follia delle bestie della terra che non sia superata all'infinito dalla follia degli uomini.»
                     </p>
-                    <p class="text-right mt-4 font-bold text-ocean">- Herman Melville</p>
+                    <p class="text-right mt-4 font-bold text-ocean">— Herman Melville, <em>Moby Dick</em></p>
                 </div>
             </div>
         </section>
