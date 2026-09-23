@@ -1,0 +1,37 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Built CSS is up to date
+        run: |
+          npm run build
+          git diff --exit-code -- assets/css/site.css || {
+            echo "::error::assets/css/site.css is stale. Run 'npm run build' and commit the result."
+            exit 1
+          }
+      - name: Page data is valid JSON
+        run: |
+          node -e '
+            const fs = require("fs");
+            for (const f of ["index.html", "it/index.html"]) {
+              const m = fs.readFileSync(f, "utf8").match(/id="page-data">([\s\S]*?)<\/script>/);
+              if (!m) throw new Error(f + ": page-data block missing");
+              JSON.parse(m[1]);
+              console.log(f + ": ok");
+            }'
