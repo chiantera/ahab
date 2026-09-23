@@ -1,233 +1,119 @@
 <!DOCTYPE html>
-<html lang="it" class="scroll-smooth">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Moby Dick: analisi allegorica e simbolica</title>
-    <meta name="description" content="Che cosa si nasconde dietro la balena bianca? Un viaggio interattivo tra le allegorie, i personaggi, gli eventi e i simboli di Moby Dick di Herman Melville.">
+    <title>Moby-Dick: Beyond the Surface of the Sea</title>
+    <meta name="description" content="What lies beneath the white whale? An interactive journey through the allegories, characters, voyages, and symbols of Herman Melville's Moby-Dick.">
     <meta name="theme-color" content="#1a365d">
-    <meta property="og:title" content="Moby Dick: oltre la superficie del mare">
-    <meta property="og:description" content="Un'esplorazione interattiva dell'allegoria e del simbolismo nel capolavoro di Herman Melville: la balena, i personaggi, gli eventi, gli oggetti che parlano.">
+    <link rel="canonical" href="https://chiantera.github.io/ahab/">
+    <link rel="alternate" hreflang="en" href="https://chiantera.github.io/ahab/">
+    <link rel="alternate" hreflang="it" href="https://chiantera.github.io/ahab/it/">
+    <link rel="alternate" hreflang="x-default" href="https://chiantera.github.io/ahab/">
+    <meta property="og:title" content="Moby-Dick: Beyond the Surface of the Sea">
+    <meta property="og:description" content="An interactive exploration of allegory and symbolism in Melville's masterpiece: the whale, the crew, the nine gams, the doubloon, and the objects that speak.">
     <meta property="og:type" content="website">
-    <meta property="og:locale" content="it_IT">
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%90%8B%3C/text%3E%3C/svg%3E">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <meta property="og:url" content="https://chiantera.github.io/ahab/">
+    <meta property="og:image" content="https://chiantera.github.io/ahab/assets/img/og-image.png">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:locale:alternate" content="it_IT">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'parchment': '#f4f1ea',
-                        'ink': '#2c3e50',
-                        'ocean': '#1a365d',
-                        'crimson': '#8b0000',
-                        'bone': '#e3dac9'
-                    },
-                    fontFamily: {
-                        'serif': ['"Playfair Display"', 'serif'],
-                        'body': ['"Lora"', 'serif'],
-                        'antique': ['"IM Fell English"', 'serif'],
-                    }
-                }
-            }
+    <link rel="stylesheet" href="assets/css/site.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/chart.js@4.5.1/dist/chart.umd.min.js"></script>
+    <script defer src="assets/js/app.js"></script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Moby-Dick: Beyond the Surface of the Sea",
+        "inLanguage": "en",
+        "url": "https://chiantera.github.io/ahab/",
+        "about": {
+            "@type": "Book",
+            "name": "Moby-Dick; or, The Whale",
+            "author": { "@type": "Person", "name": "Herman Melville" },
+            "datePublished": "1851"
         }
+    }
     </script>
-    <style>
-        body { font-family: 'Lora', serif; background-color: #f4f1ea; color: #2c3e50; }
-        h1, h2, h3, h4, .nav-logo { font-family: 'Playfair Display', serif; }
-        
-        /* Required Chart Container Styling */
-        .chart-container {
-            position: relative;
-            width: 100%;
-            max-width: 650px;
-            margin-left: auto;
-            margin-right: auto;
-            height: 350px;
-            max-height: 400px;
-        }
-        @media (min-width: 768px) {
-            .chart-container { height: 400px; }
-        }
-
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #f4f1ea; }
-        ::-webkit-scrollbar-thumb { background: #1a365d; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #2c3e50; }
-
-        .tab-btn.active {
-            background-color: #1a365d;
-            color: #f4f1ea;
-            border-color: #1a365d;
-        }
-
-        /* Antique quote typography */
-        .quote-antique { font-family: 'IM Fell English', serif; }
-
-        /* Drop cap for opening paragraphs */
-        .drop-cap::first-letter {
-            font-family: 'Playfair Display', serif;
-            font-weight: 900;
-            font-size: 3.4em;
-            float: left;
-            line-height: 0.85;
-            padding-right: 0.12em;
-            color: #8b0000;
-        }
-
-        /* Timeline */
-        .timeline-line {
-            position: absolute;
-            left: 1.25rem;
-            top: 0;
-            bottom: 0;
-            width: 2px;
-            background: linear-gradient(to bottom, #e3dac9, #1a365d 15%, #1a365d 85%, #8b0000);
-        }
-        @media (min-width: 768px) {
-            .timeline-line { left: 50%; transform: translateX(-1px); }
-        }
-        .timeline-dot {
-            position: absolute;
-            left: 1.25rem;
-            transform: translateX(-50%);
-            width: 1.1rem;
-            height: 1.1rem;
-            border-radius: 9999px;
-            background-color: #f4f1ea;
-            border: 3px solid #1a365d;
-            z-index: 10;
-            top: 1.75rem;
-        }
-        @media (min-width: 768px) {
-            .timeline-dot { left: 50%; }
-        }
-
-        /* Character card hover lift */
-        .char-card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
-        .char-card:hover { transform: translateY(-6px); box-shadow: 0 12px 24px -8px rgba(26, 54, 93, 0.25); }
-
-        /* Symbol card */
-        .symbol-card { transition: transform 0.3s ease, border-color 0.3s ease; }
-        .symbol-card:hover { transform: scale(1.02); border-color: #8b0000; }
-
-        /* Gentle floating animation for the hero whale */
-        @keyframes float-whale {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-12px) rotate(-1.5deg); }
-        }
-        .whale-float { animation: float-whale 7s ease-in-out infinite; }
-
-        @keyframes wave-drift {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-90px); }
-        }
-        .wave-drift { animation: wave-drift 9s linear infinite; }
-
-        /* Scroll reveal */
-        .reveal {
-            opacity: 0;
-            transform: translateY(28px);
-            transition: opacity 0.7s ease, transform 0.7s ease;
-        }
-        .reveal.revealed { opacity: 1; transform: none; }
-        @media (prefers-reduced-motion: reduce) {
-            .reveal { opacity: 1; transform: none; transition: none; }
-            .whale-float, .wave-drift { animation: none; }
-        }
-    </style>
 </head>
-<body class="antialiased selection:bg-ocean selection:text-white pb-20">
+<body class="antialiased selection:bg-ocean selection:text-white">
 
-    <!-- Chosen Palette: Warm Neutrals (Parchment, Bone) with Deep Ocean Blue and Crimson accents -->
-    <!-- Application Structure Plan: A single-page scrolling presentation. It uses a top sticky navigation for easy access. The structure moves from a general introduction to an interactive exploration of the main symbol (the Whale), then uses quantitative visualization (Radar Chart) to compare character archetypes, followed by a breakdown of thematic frequencies (Doughnut Chart). This flow is chosen to engage the user from high-level concepts down to specific analytical comparisons, keeping the dense literary subject matter digestible and visually stimulating. -->
-    <!-- Visualization & Content Choices: 
-         1. Interactive Tabs (The Whale): Goal is to show multiple interpretations of one symbol. Tabs allow users to switch context without cluttering the screen.
-         2. Radar Chart (Characters): Goal is to compare complex character archetypes across multiple psychological/thematic axes. Radar is perfect for multi-variable profiling.
-         3. Doughnut Chart (Themes): Goal is to show the relative dominance of key themes in the narrative structure. Doughnut provides a clear proportional view. 
-         Library: Chart.js for all charts. HTML/Tailwind/JS for tabs. -->
+    <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[70] focus:bg-ocean focus:text-white focus:px-4 focus:py-2 focus:rounded">Skip to content</a>
+    <div id="progress-bar" aria-hidden="true"></div>
 
     <!-- Navigation -->
-    <nav class="fixed w-full z-50 bg-parchment/90 backdrop-blur-sm border-b border-bone shadow-sm">
+    <nav class="fixed w-full z-50 bg-parchment/90 backdrop-blur-sm border-b border-bone shadow-sm" aria-label="Main">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16 items-center">
-                <div class="flex-shrink-0 flex items-center">
-                    <a href="#" class="nav-logo text-2xl font-bold text-ocean">Moby Dick <span class="text-crimson text-xl">&#9875;</span></a>
+                <a href="#top" class="nav-logo text-2xl font-bold text-ocean">Moby-Dick <span class="text-crimson text-xl" aria-hidden="true">&#9875;</span></a>
+                <div class="hidden lg:flex items-center space-x-1 xl:space-x-2">
+                    <a href="#introduction" class="nav-link">Introduction</a>
+                    <a href="#context" class="nav-link">Context</a>
+                    <a href="#whale" class="nav-link">The Whale</a>
+                    <a href="#crew" class="nav-link">The Crew</a>
+                    <a href="#voyage" class="nav-link">The Voyage</a>
+                    <a href="#symbols" class="nav-link">Symbols</a>
+                    <a href="#themes" class="nav-link">Themes</a>
+                    <a href="#quotes" class="nav-link">Quotes</a>
+                    <a href="#oracle" class="nav-link font-bold">Oracle ✨</a>
+                    <a href="it/" hreflang="it" lang="it" class="ml-2 text-xs font-bold border border-ocean text-ocean rounded px-2 py-1 hover:bg-ocean hover:text-white transition-colors" title="Leggi in italiano">IT</a>
                 </div>
-                <div class="hidden md:flex space-x-2 lg:space-x-4">
-                    <a href="#introduzione" class="text-ink hover:text-ocean px-2 py-2 text-sm font-medium transition-colors">Introduzione</a>
-                    <a href="#labalena" class="text-ink hover:text-ocean px-2 py-2 text-sm font-medium transition-colors">La balena</a>
-                    <a href="#ipersonaggi" class="text-ink hover:text-ocean px-2 py-2 text-sm font-medium transition-colors">Personaggi</a>
-                    <a href="#eventi" class="text-ink hover:text-ocean px-2 py-2 text-sm font-medium transition-colors">Eventi</a>
-                    <a href="#simboli" class="text-ink hover:text-ocean px-2 py-2 text-sm font-medium transition-colors">Simboli</a>
-                    <a href="#tematiche" class="text-ink hover:text-ocean px-2 py-2 text-sm font-medium transition-colors">Tematiche</a>
-                    <a href="#oracolo" class="text-ink hover:text-ocean px-2 py-2 text-sm font-medium transition-colors font-bold">L'oracolo ✨</a>
-                    <a href="#officina" class="text-ink hover:text-ocean px-2 py-2 text-sm font-medium transition-colors font-bold text-crimson">Officina ✨</a>
+                <div class="flex items-center gap-2 lg:hidden">
+                    <a href="it/" hreflang="it" lang="it" class="text-xs font-bold border border-ocean text-ocean rounded px-2 py-1" title="Leggi in italiano">IT</a>
+                    <button id="mobile-menu-btn" class="p-2 text-ocean" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
                 </div>
-                <button id="mobile-menu-btn" class="md:hidden p-2 text-ocean" aria-label="Apri il menu" aria-expanded="false" aria-controls="mobile-menu">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
-                    </svg>
-                </button>
             </div>
         </div>
-        <div id="mobile-menu" class="hidden md:hidden bg-parchment border-t border-bone px-4 pb-4">
-            <a href="#introduzione" class="block py-2 text-ink hover:text-ocean font-medium">Introduzione</a>
-            <a href="#labalena" class="block py-2 text-ink hover:text-ocean font-medium">La balena</a>
-            <a href="#ipersonaggi" class="block py-2 text-ink hover:text-ocean font-medium">Personaggi</a>
-            <a href="#eventi" class="block py-2 text-ink hover:text-ocean font-medium">Eventi</a>
-            <a href="#simboli" class="block py-2 text-ink hover:text-ocean font-medium">Simboli</a>
-            <a href="#tematiche" class="block py-2 text-ink hover:text-ocean font-medium">Tematiche</a>
-            <a href="#oracolo" class="block py-2 text-ink hover:text-ocean font-bold">L'oracolo ✨</a>
-            <a href="#officina" class="block py-2 text-crimson hover:text-ocean font-bold">Officina ✨</a>
+        <div id="mobile-menu" class="hidden lg:hidden bg-parchment border-t border-bone px-4 pb-4 grid grid-cols-2 gap-x-4">
+            <a href="#introduction" class="block py-2 text-ink hover:text-ocean font-medium">Introduction</a>
+            <a href="#context" class="block py-2 text-ink hover:text-ocean font-medium">Context</a>
+            <a href="#whale" class="block py-2 text-ink hover:text-ocean font-medium">The Whale</a>
+            <a href="#crew" class="block py-2 text-ink hover:text-ocean font-medium">The Crew</a>
+            <a href="#voyage" class="block py-2 text-ink hover:text-ocean font-medium">The Voyage</a>
+            <a href="#gams" class="block py-2 text-ink hover:text-ocean font-medium">The Nine Gams</a>
+            <a href="#doubloon" class="block py-2 text-ink hover:text-ocean font-medium">The Doubloon</a>
+            <a href="#symbols" class="block py-2 text-ink hover:text-ocean font-medium">Symbols</a>
+            <a href="#book" class="block py-2 text-ink hover:text-ocean font-medium">A Book of Books</a>
+            <a href="#themes" class="block py-2 text-ink hover:text-ocean font-medium">Themes</a>
+            <a href="#quotes" class="block py-2 text-ink hover:text-ocean font-medium">Quotes</a>
+            <a href="#reading" class="block py-2 text-ink hover:text-ocean font-medium">Further Reading</a>
+            <a href="#oracle" class="block py-2 text-ink hover:text-ocean font-bold">Oracle ✨</a>
+            <a href="#workshop" class="block py-2 text-crimson hover:text-ocean font-bold">Workshop ✨</a>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <header class="pt-32 pb-0 px-0 text-center bg-gradient-to-b from-bone to-parchment relative overflow-hidden">
+    <!-- Hero -->
+    <header id="top" class="pt-32 pb-0 text-center bg-gradient-to-b from-bone to-parchment relative overflow-hidden">
         <div class="max-w-3xl mx-auto px-4 relative z-10">
             <p class="quote-antique text-crimson text-lg tracking-widest uppercase mb-3">Herman Melville &middot; 1851</p>
-            <h1 class="text-5xl md:text-7xl font-black text-ocean mb-6 leading-tight">Oltre la superficie<br>del mare</h1>
-            <p class="text-xl text-ink mb-10 italic max-w-2xl mx-auto">Che cosa si nasconde dietro la balena bianca? Un viaggio interattivo tra le allegorie, i personaggi e i simboli di <em>Moby Dick</em>.</p>
+            <h1 class="text-5xl md:text-7xl font-black text-ocean mb-6 leading-tight">Beyond the surface<br>of the sea</h1>
+            <p class="text-xl text-ink mb-10 italic max-w-2xl mx-auto">What lies beneath the white whale? An interactive voyage through the allegories, the crew, and the symbols of <em>Moby-Dick</em>.</p>
 
-            <!-- Whale SVG illustration -->
             <div class="whale-float mx-auto mb-8 w-64 md:w-80 text-ocean opacity-80" aria-hidden="true">
                 <svg viewBox="0 0 240 120" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                    <!-- spout -->
                     <path d="M30 22 C 28 14, 32 8, 38 6 C 34 12, 35 16, 36 20 Z" opacity="0.45"/>
                     <path d="M40 20 C 41 12, 47 8, 53 9 C 47 13, 45 17, 44 22 Z" opacity="0.45"/>
-                    <!-- body -->
-                    <path d="M30 30
-                             C 16 32, 8 44, 8 58
-                             C 8 72, 16 82, 34 86
-                             C 70 93, 120 92, 162 74
-                             C 170 70, 182 66, 192 64
-                             C 198 70, 208 80, 222 86
-                             C 216 76, 213 68, 214 60
-                             C 220 54, 228 44, 232 32
-                             C 220 40, 208 46, 198 48
-                             C 192 42, 184 40, 176 44
-                             C 160 32, 130 24, 96 24
-                             C 70 24, 46 27, 30 30 Z"/>
-                    <!-- fin -->
+                    <path d="M30 30 C 16 32, 8 44, 8 58 C 8 72, 16 82, 34 86 C 70 93, 120 92, 162 74 C 170 70, 182 66, 192 64 C 198 70, 208 80, 222 86 C 216 76, 213 68, 214 60 C 220 54, 228 44, 232 32 C 220 40, 208 46, 198 48 C 192 42, 184 40, 176 44 C 160 32, 130 24, 96 24 C 70 24, 46 27, 30 30 Z"/>
                     <path d="M92 88 C 96 98, 92 108, 82 112 C 86 104, 86 96, 84 90 Z"/>
-                    <!-- eye (parchment colored) -->
                     <circle cx="42" cy="60" r="3.5" fill="#f4f1ea"/>
                 </svg>
             </div>
 
-            <a href="#introduzione" class="inline-block border-2 border-ocean text-ocean hover:bg-ocean hover:text-white font-bold py-3 px-8 rounded transition-all duration-300 mb-16">Inizia l'esplorazione</a>
+            <a href="#introduction" class="inline-block border-2 border-ocean text-ocean hover:bg-ocean hover:text-white font-bold py-3 px-8 rounded transition-all duration-300 mb-16">Begin the voyage</a>
         </div>
 
-        <!-- Animated waves -->
         <div class="relative h-16 overflow-hidden" aria-hidden="true">
-            <svg class="wave-drift absolute bottom-0 left-0 h-full text-ocean opacity-20" style="width: 200%;" viewBox="0 0 360 40" preserveAspectRatio="none" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                <path d="M0 20 C 22.5 35, 45 5, 67.5 20 C 90 35, 112.5 5, 135 20 C 157.5 35, 180 5, 202.5 20 C 225 35, 247.5 5, 270 20 C 292.5 35, 315 5, 337.5 20 L 360 20 L 360 40 L 0 40 Z"/>
+            <svg class="wave-drift absolute bottom-0 left-0 h-full text-ocean opacity-20" style="width: 200%;" viewBox="0 0 720 40" preserveAspectRatio="none" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 20 C 22.5 35, 45 5, 67.5 20 C 90 35, 112.5 5, 135 20 C 157.5 35, 180 5, 202.5 20 C 225 35, 247.5 5, 270 20 C 292.5 35, 315 5, 337.5 20 C 360 35, 382.5 5, 405 20 C 427.5 35, 450 5, 472.5 20 C 495 35, 517.5 5, 540 20 C 562.5 35, 585 5, 607.5 20 C 630 35, 652.5 5, 675 20 C 697.5 35, 710 12, 720 20 L 720 40 L 0 40 Z"/>
             </svg>
             <svg class="absolute bottom-0 left-0 w-full h-2/3 text-ocean opacity-30" viewBox="0 0 360 30" preserveAspectRatio="none" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                 <path d="M0 15 C 30 28, 60 4, 90 15 C 120 26, 150 4, 180 15 C 210 26, 240 4, 270 15 C 300 26, 330 4, 360 15 L 360 30 L 0 30 Z"/>
@@ -235,448 +121,884 @@
         </div>
     </header>
 
-    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-24 py-16">
+    <main id="main" class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 space-y-24 md:space-y-32 py-16">
 
-        <!-- Introduzione -->
-        <section id="introduzione" class="scroll-mt-24">
+        <!-- Introduction -->
+        <section id="introduction" class="scroll-mt-24">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
                 <div>
-                    <h2 class="text-3xl font-bold text-ocean mb-4 border-b-2 border-crimson inline-block pb-2">Un oceano di significati</h2>
+                    <h2 class="section-title section-title-underline">An ocean of meanings</h2>
                     <p class="mb-4 text-lg leading-relaxed drop-cap">
-                        Moby Dick non è semplicemente la storia di una caccia alla balena. È un'epopea filosofica, un labirinto di metafore, un'indagine vertiginosa sull'animo umano, su Dio e sul silenzio dell'universo. Quando uscì nel 1851 fu un fiasco commerciale: il mondo impiegò settant'anni ad accorgersi di avere tra le mani uno dei più grandi romanzi mai scritti.
+                        <em>Moby-Dick</em> is not simply the story of a whale hunt. It is a philosophical epic, a labyrinth of metaphors, a vertiginous inquiry into the human soul, into God, and into the silence of the universe. When it appeared in 1851 it was a commercial failure: the world took seventy years to realise it was holding one of the greatest novels ever written.
                     </p>
                     <p class="text-lg leading-relaxed">
-                        Melville usa il viaggio della baleniera <strong>Pequod</strong> come veicolo per esplorare la condizione umana. Ogni elemento — la nave, l'equipaggio, gli oggetti di bordo, perfino il colore della balena — porta con sé più strati di significato. Questo sito li scompone uno a uno, per renderli navigabili.
+                        Melville uses the voyage of the whaleship <strong>Pequod</strong> as a vessel for exploring the human condition. Every element &mdash; the ship, the crew, the tools on deck, even the colour of the whale &mdash; carries several layers of meaning. This site takes them apart one by one, so that they can be navigated.
                     </p>
                 </div>
-                <div class="bg-bone p-8 rounded shadow-inner border border-stone-300 relative">
-                    <div class="absolute top-4 left-4 text-4xl text-ocean opacity-20">&#10077;</div>
-                    <p class="quote-antique text-2xl italic text-ink relative z-10 text-center mt-4">
-                        «Non c'è follia delle bestie della terra che non sia superata all'infinito dalla follia degli uomini.»
-                    </p>
-                    <p class="text-right mt-4 font-bold text-ocean">— Herman Melville, <em>Moby Dick</em></p>
-                </div>
+                <figure class="bg-bone p-8 rounded shadow-inner border border-stone-300 relative">
+                    <div class="absolute top-4 left-4 text-4xl text-ocean opacity-20" aria-hidden="true">&#10077;</div>
+                    <blockquote class="quote-antique text-2xl italic text-ink relative z-10 text-center mt-4">
+                        &ldquo;It is not down in any map; true places never are.&rdquo;
+                    </blockquote>
+                    <figcaption class="text-right mt-4 font-bold text-ocean">&mdash; Herman Melville, <em>Moby-Dick</em>, ch. 12</figcaption>
+                </figure>
             </div>
+
+            <dl class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+                <div class="card">
+                    <dt class="eyebrow mb-2">Published</dt>
+                    <dd class="font-serif text-4xl font-black text-ocean">1851</dd>
+                    <dd class="text-sm mt-1 opacity-80">London, then New York</dd>
+                </div>
+                <div class="card">
+                    <dt class="eyebrow mb-2">Chapters</dt>
+                    <dd class="font-serif text-4xl font-black text-ocean">135</dd>
+                    <dd class="text-sm mt-1 opacity-80">plus an epilogue</dd>
+                </div>
+                <div class="card">
+                    <dt class="eyebrow mb-2">Ships met</dt>
+                    <dd class="font-serif text-4xl font-black text-ocean">9</dd>
+                    <dd class="text-sm mt-1 opacity-80">nine gams, nine omens</dd>
+                </div>
+                <div class="card">
+                    <dt class="eyebrow mb-2">Survivors</dt>
+                    <dd class="font-serif text-4xl font-black text-crimson">1</dd>
+                    <dd class="text-sm mt-1 opacity-80">&ldquo;to tell thee&rdquo;</dd>
+                </div>
+            </dl>
         </section>
 
-        <!-- La Balena (Interactive Explorer) -->
-        <section id="labalena" class="scroll-mt-24 bg-white p-8 rounded-xl shadow-sm border border-bone">
+        <!-- Context -->
+        <section id="context" class="scroll-mt-24">
+            <div class="text-center mb-12 max-w-3xl mx-auto">
+                <h2 class="section-title">Before the Pequod</h2>
+                <p class="text-lg">The novel did not come out of nowhere. A real shipwreck, a legendary albino whale, eighteen months before the mast, and a friendship with Nathaniel Hawthorne all went into the try-pots.</p>
+            </div>
+
+            <ol class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                <li class="card">
+                    <p class="eyebrow mb-1">1819</p>
+                    <h3 class="text-lg font-bold text-ocean mb-1">A New Yorker is born</h3>
+                    <p class="text-sm leading-relaxed">Herman Melville is born in New York City on 1 August, into a merchant family that will soon fall into debt. Poverty will send him to sea.</p>
+                </li>
+                <li class="card">
+                    <p class="eyebrow mb-1">1820</p>
+                    <h3 class="text-lg font-bold text-ocean mb-1">The Essex is rammed</h3>
+                    <p class="text-sm leading-relaxed">In the Pacific, a sperm whale deliberately charges and sinks the Nantucket whaleship <em>Essex</em>. The survivors drift for months. First mate Owen Chase's account becomes Melville's blueprint &mdash; he read it at sea and later annotated his own copy.</p>
+                </li>
+                <li class="card">
+                    <p class="eyebrow mb-1">1839</p>
+                    <h3 class="text-lg font-bold text-ocean mb-1">&ldquo;Mocha Dick&rdquo;</h3>
+                    <p class="text-sm leading-relaxed">Jeremiah N. Reynolds publishes &ldquo;Mocha Dick: or the White Whale of the Pacific&rdquo; in <em>The Knickerbocker</em>: the tale of a scarred, whitish bull whale that had survived dozens of attacks.</p>
+                </li>
+                <li class="card">
+                    <p class="eyebrow mb-1">1841&ndash;42</p>
+                    <h3 class="text-lg font-bold text-ocean mb-1">Aboard the Acushnet</h3>
+                    <p class="text-sm leading-relaxed">Melville sails from Fairhaven, Massachusetts, on the whaler <em>Acushnet</em>. Eighteen months later he deserts in the Marquesas &mdash; raw material for <em>Typee</em> and, eventually, for Ishmael. &ldquo;A whale-ship was my Yale College and my Harvard.&rdquo;</p>
+                </li>
+                <li class="card">
+                    <p class="eyebrow mb-1">1850</p>
+                    <h3 class="text-lg font-bold text-ocean mb-1">Meeting Hawthorne</h3>
+                    <p class="text-sm leading-relaxed">On a Berkshire picnic Melville meets Nathaniel Hawthorne. The friendship &mdash; and his reading of Shakespeare &mdash; transforms a whaling adventure into a metaphysical tragedy, finished at Arrowhead, his farm in Pittsfield.</p>
+                </li>
+                <li class="card">
+                    <p class="eyebrow mb-1">1851</p>
+                    <h3 class="text-lg font-bold text-ocean mb-1">Two editions, one failure</h3>
+                    <p class="text-sm leading-relaxed">Published as <em>The Whale</em> in London (October) and <em>Moby-Dick; or, The Whale</em> in New York (November), dedicated to Hawthorne. The London edition omitted the Epilogue &mdash; so reviewers complained that the narrator could not have survived to tell the tale.</p>
+                </li>
+                <li class="card">
+                    <p class="eyebrow mb-1">1891</p>
+                    <h3 class="text-lg font-bold text-ocean mb-1">Forgotten</h3>
+                    <p class="text-sm leading-relaxed">Melville dies in New York on 28 September, having spent two decades as a customs inspector. His obituaries barely remember the whale; <em>Billy Budd</em> lies unpublished in a drawer.</p>
+                </li>
+                <li class="card">
+                    <p class="eyebrow mb-1">1919&ndash;1920s</p>
+                    <h3 class="text-lg font-bold text-ocean mb-1">The Melville Revival</h3>
+                    <p class="text-sm leading-relaxed">Around the centenary of his birth, critics rediscover him: Raymond Weaver's biography (1921) and D. H. Lawrence's <em>Studies in Classic American Literature</em> (1923) turn a forgotten sea-yarn into a cornerstone of the canon.</p>
+                </li>
+                <li class="card">
+                    <p class="eyebrow mb-1">1932</p>
+                    <h3 class="text-lg font-bold text-ocean mb-1">Pavese's translation</h3>
+                    <p class="text-sm leading-relaxed">A young Cesare Pavese publishes the first Italian translation. For a generation of Italian writers under Fascism, American literature &mdash; and Melville above all &mdash; becomes a window onto freedom.</p>
+                </li>
+            </ol>
+        </section>
+
+        <!-- The Whale (Interactive tabs) -->
+        <section id="whale" class="scroll-mt-24 bg-white p-6 md:p-10 rounded-xl shadow-sm border border-bone">
             <div class="mb-8 text-center max-w-3xl mx-auto">
-                <h2 class="text-3xl font-bold text-ocean mb-4">L'enigma bianco: Moby Dick</h2>
+                <h2 class="section-title">The white enigma</h2>
                 <p class="text-lg">
-                    La balena bianca è il simbolo centrale e più sfuggente del romanzo. Non rappresenta una singola entità, ma funge da schermo vuoto su cui i personaggi (e i lettori) proiettano le proprie paure, credenze e ossessioni. <strong>Clicca sui concetti sottostanti per esplorare le diverse interpretazioni allegoriche.</strong>
+                    The white whale is the novel's central and most elusive symbol. It does not stand for one thing: it is a blank screen onto which characters (and readers) project their fears, beliefs, and obsessions. <strong>Choose an interpretation below.</strong>
                 </p>
             </div>
 
-            <div class="flex flex-col md:flex-row gap-8">
-                <!-- Navigation Tabs -->
-                <div class="md:w-1/3 flex flex-col space-y-3" id="symbol-tabs">
-                    <button class="tab-btn active text-left px-6 py-4 rounded border border-ocean font-bold text-lg transition-all" data-target="natura">
-                        Forza della Natura &#127754;
-                    </button>
-                    <button class="tab-btn text-left px-6 py-4 rounded border border-ocean font-bold text-lg transition-all" data-target="dio">
-                        Divinità Incomprensibile &#9889;
-                    </button>
-                    <button class="tab-btn text-left px-6 py-4 rounded border border-ocean font-bold text-lg transition-all" data-target="vuoto">
-                        Il Vuoto e l'Ignoto &#9898;
-                    </button>
-                    <button class="tab-btn text-left px-6 py-4 rounded border border-ocean font-bold text-lg transition-all" data-target="male">
-                        Il Male Assoluto (Visione di Ahab) &#128293;
-                    </button>
+            <div class="flex flex-col md:flex-row gap-8" data-tabs>
+                <div class="md:w-1/3 flex flex-wrap md:flex-col gap-2 md:gap-3" role="tablist" aria-label="Interpretations of the whale" aria-orientation="vertical">
+                    <button class="tab-btn" role="tab" id="tab-nature" aria-controls="panel-nature" aria-selected="true">Indifferent Nature &#127754;</button>
+                    <button class="tab-btn" role="tab" id="tab-god" aria-controls="panel-god" aria-selected="false" tabindex="-1">Inscrutable God &#9889;</button>
+                    <button class="tab-btn" role="tab" id="tab-void" aria-controls="panel-void" aria-selected="false" tabindex="-1">Whiteness &amp; the Void &#9898;</button>
+                    <button class="tab-btn" role="tab" id="tab-evil" aria-controls="panel-evil" aria-selected="false" tabindex="-1">Absolute Evil (Ahab's view) &#128293;</button>
+                    <button class="tab-btn" role="tab" id="tab-text" aria-controls="panel-text" aria-selected="false" tabindex="-1">The Unreadable Text &#128220;</button>
+                    <button class="tab-btn" role="tab" id="tab-oil" aria-controls="panel-oil" aria-selected="false" tabindex="-1">Commodity &amp; Capital &#128367;</button>
                 </div>
 
-                <!-- Content Area -->
-                <div class="md:w-2/3 bg-parchment p-8 rounded border-l-4 border-crimson min-h-[300px] flex flex-col justify-center" id="symbol-content">
-                    <h3 class="text-2xl font-bold text-ocean mb-3" id="sym-title">La Forza Indifferente della Natura</h3>
-                    <p class="text-lg leading-relaxed" id="sym-text">
-                        Nella sua forma più basilare, Moby Dick rappresenta la forza bruta, implacabile e del tutto indifferente della natura. Non agisce per malizia, ma per istinto di sopravvivenza. Sfidare la balena significa sfidare l'ordine naturale stesso, un'impresa destinata al fallimento catastrofico di fronte a una potenza insormontabile.
-                    </p>
+                <div class="md:w-2/3 bg-parchment p-6 md:p-8 rounded border-l-4 border-crimson min-h-[320px] flex flex-col justify-center">
+                    <div role="tabpanel" id="panel-nature" aria-labelledby="tab-nature" tabindex="0">
+                        <h3 class="text-2xl font-bold text-ocean mb-3">The indifferent force of nature</h3>
+                        <p class="text-lg leading-relaxed">At its most basic, Moby Dick is the brute, relentless, utterly indifferent force of nature. He acts not from malice but from the instinct to survive. To challenge the whale is to challenge the natural order itself &mdash; a venture bound for catastrophe before a power that cannot be overcome.</p>
+                        <blockquote class="quote-antique mt-5 text-lg italic border-l-2 border-bone pl-4">&ldquo;Consider the subtleness of the sea; how its most dreaded creatures glide under water, unapparent for the most part, and treacherously hidden beneath the loveliest tints of azure.&rdquo; <span class="not-italic text-sm font-body text-ocean">&mdash; ch. 58</span></blockquote>
+                    </div>
+                    <div role="tabpanel" id="panel-god" aria-labelledby="tab-god" tabindex="0" hidden>
+                        <h3 class="text-2xl font-bold text-ocean mb-3">The inscrutable deity</h3>
+                        <p class="text-lg leading-relaxed">Calvinism and the idea of predestination run through the novel. Moby Dick can be read as the incarnation of an omnipotent, unknowable God &mdash; the Leviathan of the Book of Job, who cannot be drawn out with a hook. Ahab, like Prometheus, sets out to punish this God for the suffering inflicted on humankind, refusing to submit to divine fate.</p>
+                        <blockquote class="quote-antique mt-5 text-lg italic border-l-2 border-bone pl-4">&ldquo;Canst thou draw out leviathan with an hook?&rdquo; <span class="not-italic text-sm font-body text-ocean">&mdash; Job 41:1, echoed throughout the novel</span></blockquote>
+                    </div>
+                    <div role="tabpanel" id="panel-void" aria-labelledby="tab-void" tabindex="0" hidden>
+                        <h3 class="text-2xl font-bold text-ocean mb-3">&ldquo;Whiteness&rdquo; and the void</h3>
+                        <p class="text-lg leading-relaxed">In the famous chapter &ldquo;The Whiteness of the Whale&rdquo;, Ishmael reflects on white not as a symbol of purity but as a terrifying emptiness. White is the absence of colour and, at once, the sum of all colours. It stands for the terror of a meaningless universe &mdash; an atheistic abyss that humanity desperately tries to fill with sense.</p>
+                        <blockquote class="quote-antique mt-5 text-lg italic border-l-2 border-bone pl-4">&ldquo;&hellip;a dumb blankness, full of meaning, in a wide landscape of snows &mdash; a colorless, all-color of atheism from which we shrink.&rdquo; <span class="not-italic text-sm font-body text-ocean">&mdash; ch. 42</span></blockquote>
+                    </div>
+                    <div role="tabpanel" id="panel-evil" aria-labelledby="tab-evil" tabindex="0" hidden>
+                        <h3 class="text-2xl font-bold text-ocean mb-3">Absolute evil (Ahab's vision)</h3>
+                        <p class="text-lg leading-relaxed">To Ahab the whale is not an animal but the tangible mask of a cosmic demon. He projects onto Moby Dick all the pain, injustice, and evil in the world. His tragedy is believing that by destroying the physical creature he can destroy the metaphysical principle of evil itself.</p>
+                        <blockquote class="quote-antique mt-5 text-lg italic border-l-2 border-bone pl-4">&ldquo;&hellip;all evil, to crazy Ahab, were visibly personified, and made practically assailable in Moby Dick.&rdquo; <span class="not-italic text-sm font-body text-ocean">&mdash; ch. 41</span></blockquote>
+                    </div>
+                    <div role="tabpanel" id="panel-text" aria-labelledby="tab-text" tabindex="0" hidden>
+                        <h3 class="text-2xl font-bold text-ocean mb-3">The unreadable text</h3>
+                        <p class="text-lg leading-relaxed">Ishmael measures, classifies, dissects, and catalogues the whale for dozens of chapters &mdash; and fails. The whale's brow is a page no one can read; its skin is covered in marks like hieroglyphics. The whale becomes the image of the book itself, and of every text: something that resists final interpretation.</p>
+                        <blockquote class="quote-antique mt-5 text-lg italic border-l-2 border-bone pl-4">&ldquo;I but put that brow before you. Read it if you can.&rdquo; <span class="not-italic text-sm font-body text-ocean">&mdash; ch. 79</span></blockquote>
+                    </div>
+                    <div role="tabpanel" id="panel-oil" aria-labelledby="tab-oil" tabindex="0" hidden>
+                        <h3 class="text-2xl font-bold text-ocean mb-3">Commodity and capital</h3>
+                        <p class="text-lg leading-relaxed">Before petroleum, whale oil lit the lamps and greased the machines of the industrial world. Read materially, the whale is a resource, and the Pequod a floating factory run for distant shareholders in Nantucket. Ahab's private crusade hijacks a commercial enterprise &mdash; and the crew, paid in &ldquo;lays&rdquo;, follow him anyway.</p>
+                        <blockquote class="quote-antique mt-5 text-lg italic border-l-2 border-bone pl-4">&ldquo;&hellip;almost all the tapers, lamps, and candles that burn round the globe, burn, as before so many shrines, to our glory!&rdquo; <span class="not-italic text-sm font-body text-ocean">&mdash; ch. 24</span></blockquote>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- I Personaggi (Radar Chart) -->
-        <section id="ipersonaggi" class="scroll-mt-24">
+        <!-- The Crew -->
+        <section id="crew" class="scroll-mt-24">
             <div class="text-center mb-12 max-w-3xl mx-auto">
-                <h2 class="text-3xl font-bold text-ocean mb-4">La micro-società del Pequod</h2>
+                <h2 class="section-title">The Pequod's micro-society</h2>
                 <p class="text-lg">
-                    Il Pequod è una "nave-mondo", un microcosmo dell'umanità. I suoi occupanti rappresentano diverse filosofie, classi sociali e approcci alla vita. Il grafico sottostante confronta i tre archetipi principali attraverso assi psicologici e filosofici, evidenziando il contrasto tra l'ossessione distruttiva e la ragione.
+                    The Pequod is a &ldquo;ship-world&rdquo;, a microcosm of humanity. Its occupants embody different philosophies, classes, and ways of meeting life. The chart compares the principal archetypes along psychological and philosophical axes &mdash; tap a name in the legend to add or hide a character.
                 </p>
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                <!-- Chart Container -->
-                <div class="bg-white p-6 rounded-xl shadow-sm border border-bone w-full">
+                <figure class="card w-full">
                     <div class="chart-container">
-                        <canvas id="characterRadarChart"></canvas>
+                        <canvas id="characterRadarChart" role="img" aria-label="Radar chart comparing Ahab, Ishmael, Starbuck and Queequeg on obsession, reason, spirituality, will to dominate nature, and adaptability. Ahab scores highest on obsession and domination; Ishmael on adaptability and tolerance; Starbuck on reason."></canvas>
                     </div>
-                </div>
+                    <figcaption class="text-xs text-center opacity-70 mt-3">Interpretive profile, not a measurement: scores (0&ndash;10) summarise a common critical reading.</figcaption>
+                </figure>
 
-                <!-- Character Descriptions -->
                 <div class="space-y-6">
                     <div class="border-l-4 border-crimson pl-4">
-                        <h3 class="text-xl font-bold text-crimson">Capitano Ahab</h3>
-                        <p class="text-sm md:text-base mt-2">La personificazione dell'<em>hybris</em> (tracotanza). Ahab rappresenta l'intelletto umano corrotto dalla monomania e dal desiderio di vendetta contro forze superiori. Egli eleva il suo trauma personale a una crociata cosmica, sfidando Dio e la Natura.</p>
+                        <h3 class="text-xl font-bold text-crimson">Captain Ahab</h3>
+                        <p class="mt-2">The personification of <em>hubris</em>. Named for the idolatrous biblical king, Ahab is human intellect corrupted by monomania and a thirst for revenge against higher forces. He raises his personal trauma into a cosmic crusade, defying God and Nature &mdash; &ldquo;a grand, ungodly, god-like man&rdquo;, as Captain Peleg calls him.</p>
                     </div>
                     <div class="border-l-4 border-ocean pl-4">
-                        <h3 class="text-xl font-bold text-ocean">Ismaele</h3>
-                        <p class="text-sm md:text-base mt-2">Il narratore, l'osservatore e il filosofo. Ismaele rappresenta l'umanità aperta, curiosa e tollerante. A differenza di Ahab, cerca di comprendere l'universo senza la presunzione di dominarlo. La sua fluidità mentale è ciò che, allegoricamente, gli permette di sopravvivere.</p>
+                        <h3 class="text-xl font-bold text-ocean">Ishmael</h3>
+                        <p class="mt-2">Narrator, observer, philosopher. Ishmael is open, curious, tolerant humanity. Unlike Ahab, he tries to understand the universe without presuming to master it. His mental fluidity is what, allegorically, allows him to survive.</p>
                     </div>
                     <div class="border-l-4 border-stone-500 pl-4">
                         <h3 class="text-xl font-bold text-stone-600">Starbuck</h3>
-                        <p class="text-sm md:text-base mt-2">Il primo ufficiale rappresenta la ragione pragmatica, la religione ortodossa e la moralità convenzionale. Tuttavia, la tragedia del romanzo risiede anche nel fallimento della "ragione normale" (Starbuck) di fronte al fascino carismatico del fanatismo estremo (Ahab).</p>
+                        <p class="mt-2">The first mate stands for pragmatic reason, orthodox faith, and conventional morality. Yet part of the novel's tragedy lies in the failure of &ldquo;ordinary reason&rdquo; (Starbuck) before the charismatic pull of extreme fanaticism (Ahab): he considers shooting his captain, and lowers the musket.</p>
                     </div>
                 </div>
             </div>
 
-            <!-- Equipaggio: personaggi secondari -->
             <div class="mt-20">
                 <div class="text-center mb-10 max-w-3xl mx-auto">
-                    <h3 class="text-2xl md:text-3xl font-bold text-ocean mb-3">Le altre anime a bordo</h3>
-                    <p class="text-lg">Attorno ai tre protagonisti, Melville dispone una galleria di figure che sono altrettante chiavi di lettura. Nessuno, sul Pequod, è soltanto un marinaio.</p>
+                    <h3 class="text-2xl md:text-3xl font-bold text-ocean mb-3">The other souls aboard</h3>
+                    <p class="text-lg">Around the three protagonists Melville sets a gallery of figures, each of them a key to the book. No one on the Pequod is only a sailor.</p>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <div class="char-card bg-white p-6 rounded-xl border border-bone shadow-sm">
+                    <article class="char-card card">
                         <div class="flex items-center justify-between mb-3">
                             <h4 class="text-xl font-bold text-ocean">Queequeg</h4>
                             <span class="text-2xl" aria-hidden="true">&#128481;</span>
                         </div>
-                        <p class="text-xs uppercase tracking-widest text-crimson font-bold mb-3">La fratellanza universale</p>
-                        <p class="text-sm md:text-base leading-relaxed">Ramponiere "cannibale" dell'isola di Kokovoko, coperto di tatuaggi e devoto al suo idolo Yojo. Il "selvaggio" si rivela l'uomo più nobile del romanzo: Melville rovescia la dicotomia tra civiltà e barbarie. La sua bara, trasformata in salvagente, è la metafora più potente del libro: la morte accettata con serenità diventa, letteralmente, ciò che tiene a galla la vita.</p>
-                    </div>
+                        <p class="eyebrow mb-3">Universal brotherhood</p>
+                        <p class="leading-relaxed">The tattooed &ldquo;cannibal&rdquo; harpooneer from the island of Kokovoko, devoted to his little idol Yojo. The &ldquo;savage&rdquo; turns out to be the noblest man in the book: Melville overturns the opposition between civilisation and barbarism. &ldquo;Better sleep with a sober cannibal than a drunken Christian.&rdquo;</p>
+                    </article>
 
-                    <div class="char-card bg-white p-6 rounded-xl border border-bone shadow-sm">
+                    <article class="char-card card">
                         <div class="flex items-center justify-between mb-3">
                             <h4 class="text-xl font-bold text-ocean">Pip</h4>
                             <span class="text-2xl" aria-hidden="true">&#129687;</span>
                         </div>
-                        <p class="text-xs uppercase tracking-widest text-crimson font-bold mb-3">La verità che acceca</p>
-                        <p class="text-sm md:text-base leading-relaxed">Il piccolo mozzo afroamericano, abbandonato per ore in mare aperto, vede «il piede di Dio sul pedale del telaio» e ne esce folle. La sua è la follia di chi ha guardato l'abisso senza filtri: una saggezza insostenibile che il mondo chiama pazzia. Ahab, che nell'abisso si specchia ogni giorno, è l'unico a riconoscerlo come un proprio simile.</p>
-                    </div>
+                        <p class="eyebrow mb-3">The truth that blinds</p>
+                        <p class="leading-relaxed">The little Black cabin boy, abandoned for hours in the open sea, sees &ldquo;God's foot upon the treadle of the loom&rdquo; and comes back mad. His is the madness of one who has looked into the abyss unfiltered: an unbearable wisdom the world calls lunacy. Ahab, who stares into the same abyss every day, is the only one who recognises him as kin.</p>
+                    </article>
 
-                    <div class="char-card bg-white p-6 rounded-xl border border-bone shadow-sm">
+                    <article class="char-card card">
                         <div class="flex items-center justify-between mb-3">
                             <h4 class="text-xl font-bold text-ocean">Fedallah</h4>
                             <span class="text-2xl" aria-hidden="true">&#128293;</span>
                         </div>
-                        <p class="text-xs uppercase tracking-widest text-crimson font-bold mb-3">L'ombra demoniaca</p>
-                        <p class="text-sm md:text-base leading-relaxed">Il misterioso parsi adoratore del fuoco, imbarcato di nascosto da Ahab. È la sua ombra in senso quasi junghiano: il lato fatale e luciferino del capitano. Come le streghe del <em>Macbeth</em>, pronuncia profezie ambigue che si avverano alla lettera, e muore legato alla balena — anticipando di un giorno il destino del suo padrone.</p>
-                    </div>
+                        <p class="eyebrow mb-3">The demonic shadow</p>
+                        <p class="leading-relaxed">The mysterious Parsee fire-worshipper whom Ahab smuggles aboard. He is Ahab's shadow in an almost Jungian sense: the captain's fatal, Luciferian side. Like the witches in <em>Macbeth</em> he utters ambiguous prophecies that come true to the letter &mdash; and dies lashed to the whale, a day before his master.</p>
+                    </article>
 
-                    <div class="char-card bg-white p-6 rounded-xl border border-bone shadow-sm">
+                    <article class="char-card card">
                         <div class="flex items-center justify-between mb-3">
-                            <h4 class="text-xl font-bold text-ocean">Padre Mapple</h4>
+                            <h4 class="text-xl font-bold text-ocean">Father Mapple</h4>
                             <span class="text-2xl" aria-hidden="true">&#9962;</span>
                         </div>
-                        <p class="text-xs uppercase tracking-widest text-crimson font-bold mb-3">Il monito inascoltato</p>
-                        <p class="text-sm md:text-base leading-relaxed">L'ex baleniere diventato predicatore, che a New Bedford sale su un pulpito a forma di prua con una scala di corda. Il suo sermone su Giona — l'uomo che fugge da Dio e viene inghiottito da una balena — è il prologo teologico dell'intero romanzo: obbedire a Dio significa disobbedire a se stessi. Ahab farà l'esatto contrario.</p>
-                    </div>
+                        <p class="eyebrow mb-3">The unheeded warning</p>
+                        <p class="leading-relaxed">The former whaleman turned preacher who climbs a rope ladder into a pulpit shaped like a ship's bow. His sermon on Jonah &mdash; the man who fled from God and was swallowed by a great fish &mdash; is the theological prologue of the whole novel: to obey God, we must disobey ourselves. Ahab will do the exact opposite.</p>
+                    </article>
 
-                    <div class="char-card bg-white p-6 rounded-xl border border-bone shadow-sm">
+                    <article class="char-card card">
                         <div class="flex items-center justify-between mb-3">
-                            <h4 class="text-xl font-bold text-ocean">Stubb e Flask</h4>
+                            <h4 class="text-xl font-bold text-ocean">Stubb &amp; Flask</h4>
                             <span class="text-2xl" aria-hidden="true">&#128684;</span>
                         </div>
-                        <p class="text-xs uppercase tracking-widest text-crimson font-bold mb-3">L'indifferenza e la mediocrità</p>
-                        <p class="text-sm md:text-base leading-relaxed">Il secondo e il terzo ufficiale completano lo spettro delle risposte umane all'assurdo. Stubb ride di tutto, fuma la pipa e affronta la morte come una barzelletta: è il fatalismo cinico che si salva dall'angoscia rinunciando a pensare. Flask, ottuso e aggressivo, caccia le balene senza chiedersi mai nulla: la violenza ridotta a mestiere.</p>
-                    </div>
+                        <p class="eyebrow mb-3">Indifference and mediocrity</p>
+                        <p class="leading-relaxed">The second and third mates complete the spectrum of human responses to the absurd. Stubb laughs at everything, smokes his pipe and treats death as a joke: a cynical fatalism that escapes anguish by refusing to think. Flask, dull and pugnacious, kills whales without ever asking why: violence reduced to a trade.</p>
+                    </article>
 
-                    <div class="char-card bg-white p-6 rounded-xl border border-bone shadow-sm">
+                    <article class="char-card card">
                         <div class="flex items-center justify-between mb-3">
-                            <h4 class="text-xl font-bold text-ocean">Tashtego, Daggoo ed Elia</h4>
+                            <h4 class="text-xl font-bold text-ocean">Tashtego, Daggoo &amp; Elijah</h4>
                             <span class="text-2xl" aria-hidden="true">&#127757;</span>
                         </div>
-                        <p class="text-xs uppercase tracking-widest text-crimson font-bold mb-3">Il mondo intero a bordo</p>
-                        <p class="text-sm md:text-base leading-relaxed">Con il nativo americano Tashtego e il gigantesco africano Daggoo, i tre ramponieri pagani fanno del Pequod un'arca dell'umanità intera, guidata però da un solo folle. A terra resta Elia, lo straccione-profeta del molo che mormora oscuri avvertimenti sui destini della nave: come il suo omonimo biblico con il re Achab, parla — e nessuno lo ascolta.</p>
-                    </div>
+                        <p class="eyebrow mb-3">The whole world aboard</p>
+                        <p class="leading-relaxed">With the Gay Head Wampanoag Tashtego and the towering African Daggoo, the three pagan harpooneers make the Pequod an ark of all humanity &mdash; steered by a single madman. On shore stays Elijah, the ragged prophet of the wharf who mutters dark warnings about the ship's fate: like his biblical namesake before King Ahab, he speaks, and no one listens.</p>
+                    </article>
                 </div>
             </div>
         </section>
 
-        <!-- Gli Eventi (Timeline) -->
-        <section id="eventi" class="scroll-mt-24">
+        <!-- The Voyage (Timeline) -->
+        <section id="voyage" class="scroll-mt-24">
             <div class="text-center mb-14 max-w-3xl mx-auto">
-                <h2 class="text-3xl font-bold text-ocean mb-4 border-b-2 border-crimson inline-block pb-2">La rotta verso l'abisso</h2>
+                <h2 class="section-title section-title-underline">The course toward the abyss</h2>
                 <p class="text-lg">
-                    La trama di <em>Moby Dick</em> è scandita da una serie di momenti che sono insieme eventi narrativi e soglie simboliche. Ogni tappa del viaggio avvicina il Pequod al vortice finale — e ogni avvertimento viene puntualmente ignorato.
+                    The plot is punctuated by moments that are at once narrative events and symbolic thresholds. Each stage of the voyage brings the Pequod closer to the final vortex &mdash; and every warning is dutifully ignored.
                 </p>
             </div>
 
             <div class="relative max-w-4xl mx-auto">
                 <div class="timeline-line" aria-hidden="true"></div>
-                <div class="space-y-12">
-
-                    <div class="relative md:grid md:grid-cols-2 md:gap-12">
-                        <div class="timeline-dot"></div>
+                <ol class="space-y-12">
+                    <li class="relative md:grid md:grid-cols-2 md:gap-12">
+                        <div class="timeline-dot" aria-hidden="true"></div>
                         <div class="pl-12 md:pl-0 md:pr-12 md:text-right">
-                            <div class="bg-white p-6 rounded-xl border border-bone shadow-sm">
-                                <p class="text-xs uppercase tracking-widest text-crimson font-bold mb-1">Capitolo 9 &middot; New Bedford</p>
-                                <h3 class="text-xl font-bold text-ocean mb-2">Il sermone di Padre Mapple</h3>
-                                <p class="text-sm md:text-base leading-relaxed">Prima ancora di salpare, il romanzo offre la sua chiave teologica: la storia di Giona, l'uomo che fuggì da Dio e fu inghiottito da una balena. Il viaggio comincia con un monito che nessuno, a bordo, vorrà ricordare.</p>
+                            <div class="card">
+                                <p class="eyebrow mb-1">Chapter 9 &middot; New Bedford</p>
+                                <h3 class="text-xl font-bold text-ocean mb-2">Father Mapple's sermon</h3>
+                                <p class="leading-relaxed">Before the ship has even sailed, the novel hands us its theological key: the story of Jonah, who fled from God and was swallowed by a whale. The voyage begins with a warning no one aboard will want to remember.</p>
                             </div>
                         </div>
-                        <div></div>
-                    </div>
-
-                    <div class="relative md:grid md:grid-cols-2 md:gap-12">
-                        <div class="timeline-dot"></div>
-                        <div class="md:col-start-2 pl-12 md:pl-12">
-                            <div class="bg-white p-6 rounded-xl border border-bone shadow-sm">
-                                <p class="text-xs uppercase tracking-widest text-crimson font-bold mb-1">Capitolo 36 &middot; Il cassero</p>
-                                <h3 class="text-xl font-bold text-ocean mb-2">Il doblone inchiodato all'albero</h3>
-                                <p class="text-sm md:text-base leading-relaxed">Ahab raduna l'equipaggio, inchioda una moneta d'oro all'albero maestro e la promette a chi avvisterà la balena bianca. Con un rito quasi blasfemo — il grog bevuto negli incavi dei ramponi — la caccia commerciale si trasforma in crociata metafisica: «Morte a Moby Dick!». È il patto faustiano del romanzo.</p>
+                    </li>
+                    <li class="relative md:grid md:grid-cols-2 md:gap-12">
+                        <div class="timeline-dot" aria-hidden="true"></div>
+                        <div class="md:col-start-2 pl-12">
+                            <div class="card">
+                                <p class="eyebrow mb-1">Chapter 36 &middot; The Quarter-Deck</p>
+                                <h3 class="text-xl font-bold text-ocean mb-2">The doubloon nailed to the mast</h3>
+                                <p class="leading-relaxed">Ahab gathers the crew, nails a gold coin to the mainmast and promises it to whoever first raises the white whale. With an almost blasphemous rite &mdash; grog drunk from the inverted sockets of the harpoons &mdash; a commercial hunt becomes a metaphysical crusade: &ldquo;Death to Moby Dick!&rdquo; It is the novel's Faustian pact.</p>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="relative md:grid md:grid-cols-2 md:gap-12">
-                        <div class="timeline-dot"></div>
+                    </li>
+                    <li class="relative md:grid md:grid-cols-2 md:gap-12">
+                        <div class="timeline-dot" aria-hidden="true"></div>
                         <div class="pl-12 md:pl-0 md:pr-12 md:text-right">
-                            <div class="bg-white p-6 rounded-xl border border-bone shadow-sm">
-                                <p class="text-xs uppercase tracking-widest text-crimson font-bold mb-1">Capitolo 42 &middot; Il saggio nel romanzo</p>
-                                <h3 class="text-xl font-bold text-ocean mb-2">La bianchezza della balena</h3>
-                                <p class="text-sm md:text-base leading-relaxed">Ismaele sospende la narrazione per chiedersi perché, di tutto, lo atterrisca proprio il <em>bianco</em>. Colore della purezza ma anche del nulla, somma di tutti i colori e loro assenza: la pagina più vertiginosa del libro, dove il terrore non ha più zanne né artigli, ma la forma di un universo senza significato.</p>
+                            <div class="card">
+                                <p class="eyebrow mb-1">Chapter 42 &middot; An essay inside the novel</p>
+                                <h3 class="text-xl font-bold text-ocean mb-2">The whiteness of the whale</h3>
+                                <p class="leading-relaxed">Ishmael halts the story to ask why, of all things, it is <em>whiteness</em> that appals him. Colour of purity and of nothingness, sum of all colours and their absence: the book's most vertiginous pages, where terror no longer has fangs or claws but the shape of a universe without meaning.</p>
                             </div>
                         </div>
-                        <div></div>
-                    </div>
-
-                    <div class="relative md:grid md:grid-cols-2 md:gap-12">
-                        <div class="timeline-dot"></div>
-                        <div class="md:col-start-2 pl-12 md:pl-12">
-                            <div class="bg-white p-6 rounded-xl border border-bone shadow-sm">
-                                <p class="text-xs uppercase tracking-widest text-crimson font-bold mb-1">Capitolo 93 &middot; Oceano Pacifico</p>
-                                <h3 class="text-xl font-bold text-ocean mb-2">Pip abbandonato in mare</h3>
-                                <p class="text-sm md:text-base leading-relaxed">Saltato dalla lancia per paura, il mozzo viene lasciato solo per ore nell'immensità dell'oceano. Quando lo recuperano, la sua ragione è rimasta laggiù: Pip ha visto il fondo delle cose, «il piede di Dio sul pedale del telaio». La conoscenza assoluta, suggerisce Melville, non è compatibile con la vita.</p>
+                    </li>
+                    <li class="relative md:grid md:grid-cols-2 md:gap-12">
+                        <div class="timeline-dot" aria-hidden="true"></div>
+                        <div class="md:col-start-2 pl-12">
+                            <div class="card">
+                                <p class="eyebrow mb-1">Chapter 93 &middot; The Castaway</p>
+                                <h3 class="text-xl font-bold text-ocean mb-2">Pip abandoned at sea</h3>
+                                <p class="leading-relaxed">Having leapt from the whaleboat in fright, the cabin boy is left alone for hours in the immensity of the ocean. When they pick him up, his reason has stayed down there: Pip has seen the bottom of things, &ldquo;God's foot upon the treadle of the loom&rdquo;. Absolute knowledge, Melville suggests, is not compatible with life.</p>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="relative md:grid md:grid-cols-2 md:gap-12">
-                        <div class="timeline-dot"></div>
+                    </li>
+                    <li class="relative md:grid md:grid-cols-2 md:gap-12">
+                        <div class="timeline-dot" aria-hidden="true"></div>
                         <div class="pl-12 md:pl-0 md:pr-12 md:text-right">
-                            <div class="bg-white p-6 rounded-xl border border-bone shadow-sm">
-                                <p class="text-xs uppercase tracking-widest text-crimson font-bold mb-1">Capitolo 119 &middot; Il tifone</p>
-                                <h3 class="text-xl font-bold text-ocean mb-2">I fuochi di Sant'Elmo</h3>
-                                <p class="text-sm md:text-base leading-relaxed">Durante la tempesta, fiamme bianche si accendono in cima agli alberi del Pequod. L'equipaggio vi legge un segno divino e vorrebbe tornare indietro; Ahab afferra i parafulmini e sfida il fuoco: «Ti adoro come un figlio adora il padre che lo brucia». L'uomo prometeico al suo apice — e al suo punto di non ritorno.</p>
+                            <div class="card">
+                                <p class="eyebrow mb-1">Chapter 119 &middot; The Candles</p>
+                                <h3 class="text-xl font-bold text-ocean mb-2">St. Elmo's fire</h3>
+                                <p class="leading-relaxed">During the typhoon, pale flames flare at the tips of the Pequod's masts. The crew reads a divine sign and wants to turn back; Ahab grips the lightning-rod links and defies the fire: &ldquo;I now know thee, thou clear spirit, and I now know that thy right worship is defiance.&rdquo; Promethean man at his apex &mdash; and at his point of no return.</p>
                             </div>
                         </div>
-                        <div></div>
-                    </div>
-
-                    <div class="relative md:grid md:grid-cols-2 md:gap-12">
-                        <div class="timeline-dot"></div>
-                        <div class="md:col-start-2 pl-12 md:pl-12">
-                            <div class="bg-white p-6 rounded-xl border border-bone shadow-sm">
-                                <p class="text-xs uppercase tracking-widest text-crimson font-bold mb-1">Capitolo 128 &middot; L'ultima occasione</p>
-                                <h3 class="text-xl font-bold text-ocean mb-2">L'incontro con la Rachele</h3>
-                                <p class="text-sm md:text-base leading-relaxed">Il capitano Gardiner implora Ahab di aiutarlo a cercare la lancia dispersa su cui c'è suo figlio. Ahab rifiuta: la vendetta non concede deviazioni. È l'ultimo bivio morale del romanzo, la porta della redenzione chiusa con le proprie mani. Sarà proprio la Rachele, alla fine, a raccogliere l'unico superstite.</p>
+                    </li>
+                    <li class="relative md:grid md:grid-cols-2 md:gap-12">
+                        <div class="timeline-dot" aria-hidden="true"></div>
+                        <div class="md:col-start-2 pl-12">
+                            <div class="card">
+                                <p class="eyebrow mb-1">Chapter 128 &middot; The last chance</p>
+                                <h3 class="text-xl font-bold text-ocean mb-2">Meeting the Rachel</h3>
+                                <p class="leading-relaxed">Captain Gardiner begs Ahab to help search for a lost whaleboat carrying his young son. Ahab refuses: revenge allows no detours. It is the novel's last moral crossroads, the door to redemption shut by his own hand. And it is the Rachel, in the end, that will pick up the only survivor.</p>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="relative md:grid md:grid-cols-2 md:gap-12">
-                        <div class="timeline-dot" style="border-color: #8b0000;"></div>
+                    </li>
+                    <li class="relative md:grid md:grid-cols-2 md:gap-12">
+                        <div class="timeline-dot" aria-hidden="true"></div>
                         <div class="pl-12 md:pl-0 md:pr-12 md:text-right">
+                            <div class="card">
+                                <p class="eyebrow mb-1">Chapter 132 &middot; The Symphony</p>
+                                <h3 class="text-xl font-bold text-ocean mb-2">A human eye</h3>
+                                <p class="leading-relaxed">On a mild, lovely day, Ahab drops a single tear into the sea and speaks to Starbuck of his wife and child, of forty years at sea. &ldquo;Let me look into a human eye; it is better than to gaze into sea or sky.&rdquo; For a moment he could turn for home. Then: &ldquo;Is Ahab, Ahab? Is it I, God, or who, that lifts this arm?&rdquo;</p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="relative md:grid md:grid-cols-2 md:gap-12">
+                        <div class="timeline-dot is-final" aria-hidden="true"></div>
+                        <div class="md:col-start-2 pl-12">
                             <div class="bg-gradient-to-b from-stone-900 to-ink text-parchment p-6 rounded-xl border-2 border-crimson shadow-md">
-                                <p class="text-xs uppercase tracking-widest text-bone font-bold mb-1 opacity-80">Capitoli 133–135 &middot; La fine</p>
-                                <h3 class="text-xl font-bold text-white mb-2">La caccia di tre giorni</h3>
-                                <p class="text-sm md:text-base leading-relaxed opacity-90">Tre giorni di caccia come una liturgia rovesciata: al terzo giorno non c'è resurrezione, ma il vortice. Moby Dick sfonda il Pequod, e Ahab — strangolato dalla sua stessa sagola, avvinto per sempre alla balena — scompare negli abissi insieme all'intero equipaggio. «E il grande sudario del mare tornò a stendersi placido come cinquemila anni fa.»</p>
+                                <p class="text-xs uppercase tracking-widest text-bone font-bold mb-1 opacity-80">Chapters 133&ndash;135 &middot; The Chase</p>
+                                <h3 class="text-xl font-bold text-white mb-2">Three days of hunting</h3>
+                                <p class="leading-relaxed opacity-90">Three days of pursuit, like an inverted liturgy: on the third day there is no resurrection, only the vortex. Moby Dick stoves in the Pequod, and Ahab &mdash; caught by the neck in the flying line of his own harpoon, bound forever to the whale &mdash; vanishes into the deep with the entire crew. &ldquo;&hellip;and the great shroud of the sea rolled on as it rolled five thousand years ago.&rdquo;</p>
                             </div>
                         </div>
-                        <div></div>
-                    </div>
-
-                    <div class="relative md:grid md:grid-cols-2 md:gap-12">
-                        <div class="timeline-dot"></div>
-                        <div class="md:col-start-2 pl-12 md:pl-12">
-                            <div class="bg-white p-6 rounded-xl border border-bone shadow-sm">
-                                <p class="text-xs uppercase tracking-widest text-crimson font-bold mb-1">Epilogo</p>
-                                <h3 class="text-xl font-bold text-ocean mb-2">La bara che salva</h3>
-                                <p class="text-sm md:text-base leading-relaxed">Solo Ismaele sopravvive, aggrappato alla bara-salvagente di Queequeg, finché la Rachele, «che incrociando ancora in cerca dei suoi figli dispersi, trovò soltanto un altro orfano», lo trae in salvo. Il cerchio simbolico si chiude: la morte accolta con serenità diventa zattera, e chi non ha voluto dominare l'oceano è l'unico che l'oceano restituisce.</p>
+                    </li>
+                    <li class="relative md:grid md:grid-cols-2 md:gap-12">
+                        <div class="timeline-dot" aria-hidden="true"></div>
+                        <div class="pl-12 md:pl-0 md:pr-12 md:text-right">
+                            <div class="card">
+                                <p class="eyebrow mb-1">Epilogue</p>
+                                <h3 class="text-xl font-bold text-ocean mb-2">The coffin that saves</h3>
+                                <p class="leading-relaxed">Only Ishmael survives, clinging to Queequeg's coffin-lifebuoy, until &ldquo;the devious-cruising Rachel, that in her retracing search after her missing children, only found another orphan.&rdquo; The symbolic circle closes: death accepted with serenity becomes a raft, and the one who never tried to master the ocean is the only one the ocean gives back.</p>
                             </div>
                         </div>
-                    </div>
+                    </li>
+                </ol>
+            </div>
+        </section>
 
+        <!-- The Nine Gams -->
+        <section id="gams" class="scroll-mt-24 bg-white p-6 md:p-10 rounded-xl shadow-sm border border-bone">
+            <div class="text-center mb-12 max-w-3xl mx-auto">
+                <h2 class="section-title">The nine gams</h2>
+                <p class="text-lg">A <em>gam</em> is a social meeting of two whaleships at sea. The Pequod has nine, and Ahab greets almost every ship with the same question: <span class="quote-antique text-xl">&ldquo;Have ye seen the White Whale?&rdquo;</span> Read in sequence, the answers form a crescendo of warnings &mdash; each ship a possible Ahab, each a road not taken. Cards in red are ships that have met Moby Dick.</p>
+            </div>
+
+            <ol class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                <li class="gam-card card bg-parchment">
+                    <p class="eyebrow mb-1">I &middot; Ch. 52</p>
+                    <h3 class="text-xl font-bold text-ocean">The Goney (Albatross)</h3>
+                    <p class="text-sm italic mb-2 opacity-80">A ghostly, bleached ship, long from home</p>
+                    <p class="text-sm leading-relaxed">As her captain raises his trumpet to answer, it falls from his hand into the sea. The first omen: the question cannot even be heard. The ship is itself a pale spectre of what a four-year voyage does to a vessel.</p>
+                </li>
+                <li class="gam-card is-omen card bg-parchment">
+                    <p class="eyebrow mb-1">II &middot; Ch. 54</p>
+                    <h3 class="text-xl font-bold text-ocean">The Town-Ho</h3>
+                    <p class="text-sm italic mb-2 opacity-80">A story of mutiny and judgment</p>
+                    <p class="text-sm leading-relaxed">Her crew brings a secret tale: the tyrannical mate Radney, who had abused the sailor Steelkilt, was snatched from his boat and killed by Moby Dick. The whale appears as an instrument of justice &mdash; or of a fate that plays no favourites.</p>
+                </li>
+                <li class="gam-card is-omen card bg-parchment">
+                    <p class="eyebrow mb-1">III &middot; Ch. 71</p>
+                    <h3 class="text-xl font-bold text-ocean">The Jeroboam</h3>
+                    <p class="text-sm italic mb-2 opacity-80">A ship ruled by a prophet</p>
+                    <p class="text-sm leading-relaxed">Plague rages aboard, and a mad Shaker called Gabriel holds the crew in awe, proclaiming the white whale the Shaker God incarnate. Her mate Macey was killed by Moby Dick. A letter for the dead man, handed across on a pole, is flung back at the Pequod.</p>
+                </li>
+                <li class="gam-card card bg-parchment">
+                    <p class="eyebrow mb-1">IV &middot; Ch. 81</p>
+                    <h3 class="text-xl font-bold text-ocean">The Jungfrau (Virgin)</h3>
+                    <p class="text-sm italic mb-2 opacity-80">A German ship begging for oil</p>
+                    <p class="text-sm leading-relaxed">Captain Derick De Deer comes over asking for lamp-oil: his ship has taken none. Comic relief &mdash; but also the image of an empty enterprise, and of a hunt (for a hopelessly fast finback) that can never be won.</p>
+                </li>
+                <li class="gam-card card bg-parchment">
+                    <p class="eyebrow mb-1">V &middot; Ch. 91</p>
+                    <h3 class="text-xl font-bold text-ocean">The Rose-Bud</h3>
+                    <p class="text-sm italic mb-2 opacity-80">A French ship and two rotting whales</p>
+                    <p class="text-sm leading-relaxed">The <em>Bouton-de-Rose</em> reeks of two dead, blasted whales. Stubb tricks her captain into abandoning one &mdash; and digs precious ambergris from its bowels. Perfume from putrefaction: the novel's grim joke about value.</p>
+                </li>
+                <li class="gam-card is-omen card bg-parchment">
+                    <p class="eyebrow mb-1">VI &middot; Ch. 100</p>
+                    <h3 class="text-xl font-bold text-ocean">The Samuel Enderby</h3>
+                    <p class="text-sm italic mb-2 opacity-80">An English ship, and a mirror</p>
+                    <p class="text-sm leading-relaxed">Captain Boomer lost an arm to Moby Dick &mdash; and laughs about it. He has no wish to meet the whale again: &ldquo;he's best let alone.&rdquo; Leg meets arm: the same wound, two opposite responses. Ahab leaves so violently he splinters his ivory leg.</p>
+                </li>
+                <li class="gam-card card bg-parchment">
+                    <p class="eyebrow mb-1">VII &middot; Ch. 115</p>
+                    <h3 class="text-xl font-bold text-ocean">The Bachelor</h3>
+                    <p class="text-sm italic mb-2 opacity-80">A full ship, homeward bound</p>
+                    <p class="text-sm leading-relaxed">Her hold brimming with oil, her crew dancing on deck, the Bachelor is the happy ending Ahab could still choose. Her captain has heard of the white whale &mdash; but &ldquo;I don't believe in him at all.&rdquo; Ahab turns away from joy.</p>
+                </li>
+                <li class="gam-card is-omen card bg-parchment">
+                    <p class="eyebrow mb-1">VIII &middot; Ch. 128</p>
+                    <h3 class="text-xl font-bold text-ocean">The Rachel</h3>
+                    <p class="text-sm italic mb-2 opacity-80">A father searching for his son</p>
+                    <p class="text-sm leading-relaxed">She met Moby Dick only yesterday, and lost a boat with the captain's twelve-year-old son. Gardiner begs for help; Ahab refuses. Named for the biblical mother weeping for her children, the Rachel will be the one to rescue Ishmael.</p>
+                </li>
+                <li class="gam-card is-omen card bg-parchment">
+                    <p class="eyebrow mb-1">IX &middot; Ch. 131</p>
+                    <h3 class="text-xl font-bold text-ocean">The Delight</h3>
+                    <p class="text-sm italic mb-2 opacity-80">A funeral at sea</p>
+                    <p class="text-sm leading-relaxed">Grimly misnamed, the Delight has just lost five men to the whale, and is burying one as the Pequod passes. The last ship before the chase: the future, already enacted. The Pequod sails on, and the burial splashes against her hull like a baptism.</p>
+                </li>
+            </ol>
+        </section>
+
+        <!-- The Doubloon -->
+        <section id="doubloon" class="scroll-mt-24">
+            <div class="text-center mb-12 max-w-3xl mx-auto">
+                <h2 class="section-title section-title-underline">One coin, eight readings</h2>
+                <p class="text-lg">In chapter 99, the crew file past the Ecuadorian gold doubloon nailed to the mainmast, and each reads something different in its three peaks, its tower, its rooster, and its zodiac. It is Melville's lesson in interpretation &mdash; and a mirror held up to the reader. <strong>Choose who looks at the coin.</strong></p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-10 items-center" data-doubloon>
+                <div class="md:col-span-2 flex flex-col items-center gap-6">
+                    <div class="doubloon flex items-center justify-center" aria-hidden="true" style="perspective: 800px;">
+                        <svg viewBox="0 0 100 100" class="w-2/3 h-2/3 text-[#7a5a0a] opacity-80" fill="currentColor">
+                            <path d="M10 70 L28 38 L38 54 L50 28 L62 54 L72 38 L90 70 Z" opacity=".9"/>
+                            <rect x="24" y="22" width="5" height="16"/><path d="M22 22 h9 v-3 h-2 v-2 h-1 v2 h-1 v-2 h-1 v2 h-1 v-2 h-1 v2 h-2 z"/>
+                            <circle cx="72" cy="22" r="6" opacity=".9"/>
+                            <path d="M47 18 c2-4 6-4 7 0 c-2 0-3 1-3 3 h-3 c0-2-1-3-1-3 z" opacity=".9"/>
+                            <path d="M8 78 Q50 92 92 78" stroke="currentColor" stroke-width="2" fill="none"/>
+                        </svg>
+                    </div>
+                    <div class="flex flex-wrap justify-center gap-2" role="group" aria-label="Who reads the doubloon">
+                        <button class="coin-btn" data-reader="ahab" aria-pressed="true">Ahab</button>
+                        <button class="coin-btn" data-reader="starbuck" aria-pressed="false">Starbuck</button>
+                        <button class="coin-btn" data-reader="stubb" aria-pressed="false">Stubb</button>
+                        <button class="coin-btn" data-reader="flask" aria-pressed="false">Flask</button>
+                        <button class="coin-btn" data-reader="manxman" aria-pressed="false">The Manxman</button>
+                        <button class="coin-btn" data-reader="queequeg" aria-pressed="false">Queequeg</button>
+                        <button class="coin-btn" data-reader="fedallah" aria-pressed="false">Fedallah</button>
+                        <button class="coin-btn" data-reader="pip" aria-pressed="false">Pip</button>
+                    </div>
+                </div>
+
+                <div class="md:col-span-3 card min-h-[260px] flex flex-col justify-center" aria-live="polite">
+                    <div data-reading="ahab">
+                        <p class="eyebrow mb-2">Ahab sees&hellip; himself</p>
+                        <p class="text-lg leading-relaxed">In the three mountain-tops, the tower, the crowing cock, Ahab reads only Ahab: pride, defiance, courage. The coin is a magician's glass that shows every man his own face &mdash; but Ahab is the only one who seems to know it, and still cannot look away.</p>
+                        <blockquote class="quote-antique mt-4 italic text-lg border-l-2 border-bone pl-4">&ldquo;&hellip;this round gold is but the image of the rounder globe, which, like a magician's glass, to each and every man in turn but mirrors back his own mysterious self.&rdquo;</blockquote>
+                    </div>
+                    <div data-reading="starbuck" hidden>
+                        <p class="eyebrow mb-2">Starbuck sees&hellip; the Trinity</p>
+                        <p class="text-lg leading-relaxed">For the pious mate, the three peaks are the Trinity and the dark valley between them the vale of death, lit from above by the sun of righteousness. But he dares not look too long: his faith needs to glance, not to stare.</p>
+                        <blockquote class="quote-antique mt-4 italic text-lg border-l-2 border-bone pl-4">&ldquo;So in this vale of Death, God girds us round; and over all our gloom, the sun of Righteousness still shines a beacon and a hope.&rdquo;</blockquote>
+                    </div>
+                    <div data-reading="stubb" hidden>
+                        <p class="eyebrow mb-2">Stubb sees&hellip; a comic almanac</p>
+                        <p class="text-lg leading-relaxed">With a book in hand, Stubb reads the zodiac as the whole life of man, from Aries to Pisces &mdash; birth, love, trouble, and death &mdash; and decides the only reasonable response is to laugh. Then he stays to eavesdrop on the others.</p>
+                        <blockquote class="quote-antique mt-4 italic text-lg border-l-2 border-bone pl-4">&ldquo;There's another rendering now; but still one text. All sorts of men in one kind of world, you see.&rdquo;</blockquote>
+                    </div>
+                    <div data-reading="flask" hidden>
+                        <p class="eyebrow mb-2">Flask sees&hellip; cigars</p>
+                        <p class="text-lg leading-relaxed">No symbols for Flask: just a round thing made of gold worth sixteen dollars. At two cents a cigar, that makes nine hundred and sixty cigars. The literalist's reading is also a reading &mdash; and not the least revealing.</p>
+                        <blockquote class="quote-antique mt-4 italic text-lg border-l-2 border-bone pl-4">&ldquo;I see nothing here, but a round thing made of gold&hellip;&rdquo;</blockquote>
+                    </div>
+                    <div data-reading="manxman" hidden>
+                        <p class="eyebrow mb-2">The Manxman sees&hellip; a prophecy</p>
+                        <p class="text-lg leading-relaxed">The old sailor from the Isle of Man reads a calendar of doom: the white whale will be raised when the sun stands in one of the signs &mdash; in a month and a day. Superstition, or the only accurate forecast on board?</p>
+                        <blockquote class="quote-antique mt-4 italic text-lg border-l-2 border-bone pl-4">&ldquo;If the White Whale be raised, it will be in a month and a day, when the sun stands in some one of these signs.&rdquo;</blockquote>
+                    </div>
+                    <div data-reading="queequeg" hidden>
+                        <p class="eyebrow mb-2">Queequeg sees&hellip; his own body</p>
+                        <p class="text-lg leading-relaxed">Queequeg compares the signs on the coin with the tattoos on his thigh, as if checking a map. For him the cosmos is written on the skin &mdash; a theme that returns when he carves those same marks into his coffin.</p>
+                        <blockquote class="quote-antique mt-4 italic text-lg border-l-2 border-bone pl-4">&ldquo;&hellip;looking at his thigh bone; thinks the sun is in the thigh, or in the calf, or in the bowels, I suppose&hellip;&rdquo; <span class="not-italic text-sm font-body text-ocean">&mdash; Stubb, watching</span></blockquote>
+                    </div>
+                    <div data-reading="fedallah" hidden>
+                        <p class="eyebrow mb-2">Fedallah sees&hellip; the fire</p>
+                        <p class="text-lg leading-relaxed">The Parsee says nothing. He looks at the coin and makes a sign, and bows &mdash; to the sun stamped upon it. For the fire-worshipper the coin is an altar; for the reader, one more silence that means too much.</p>
+                        <blockquote class="quote-antique mt-4 italic text-lg border-l-2 border-bone pl-4">&ldquo;There's a sun on the coin &mdash; fire worshipper, depend upon it.&rdquo; <span class="not-italic text-sm font-body text-ocean">&mdash; Stubb, watching</span></blockquote>
+                    </div>
+                    <div data-reading="pip" hidden>
+                        <p class="eyebrow mb-2">Pip sees&hellip; that everyone is seeing</p>
+                        <p class="text-lg leading-relaxed">Last comes mad Pip, who reads nothing into the coin and instead conjugates a verb. His grammar lesson is the sharpest criticism of all: the doubloon means only the act of looking. Then he names it the ship's navel, and predicts the end.</p>
+                        <blockquote class="quote-antique mt-4 italic text-lg border-l-2 border-bone pl-4">&ldquo;I look, you look, he looks; we look, ye look, they look.&rdquo;</blockquote>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- Simboli e Oggetti -->
-        <section id="simboli" class="scroll-mt-24 bg-white p-8 md:p-12 rounded-xl shadow-sm border border-bone">
+        <!-- Symbols & Objects -->
+        <section id="symbols" class="scroll-mt-24 bg-white p-6 md:p-12 rounded-xl shadow-sm border border-bone">
             <div class="text-center mb-12 max-w-3xl mx-auto">
-                <h2 class="text-3xl font-bold text-ocean mb-4">Il bagaglio del Pequod: oggetti che parlano</h2>
-                <p class="text-lg">
-                    In <em>Moby Dick</em> nessun oggetto è soltanto un oggetto. Melville carica gli strumenti quotidiani della baleneria di un peso metafisico: ecco i sei più eloquenti.
-                </p>
+                <h2 class="section-title">The Pequod's cargo: objects that speak</h2>
+                <p class="text-lg">In <em>Moby-Dick</em> no object is only an object. Melville loads the everyday tools of whaling with metaphysical weight. Here are eight of the most eloquent.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <article class="symbol-card bg-parchment p-6 rounded-xl border-2 border-bone">
+                    <div class="text-3xl mb-3" aria-hidden="true">&#9973;</div>
+                    <h3 class="text-xl font-bold text-ocean mb-2">The Pequod</h3>
+                    <p class="text-sm md:text-base leading-relaxed">The ship bears the name of the Pequot, a Native nation of what is now Connecticut, nearly annihilated by colonists in 1637: extinction is written into her name from the start. Trimmed with the teeth and bones of sperm whales, she is a ship-world and a floating factory &mdash; humanity embarked on exploiting nature, unaware it is already the trophy.</p>
+                </article>
+
+                <article class="symbol-card bg-parchment p-6 rounded-xl border-2 border-bone">
+                    <div class="text-3xl mb-3" aria-hidden="true">&#129460;</div>
+                    <h3 class="text-xl font-bold text-ocean mb-2">The ivory leg</h3>
+                    <p class="text-sm md:text-base leading-relaxed">Ahab walks on a prosthesis carved from a sperm whale's jaw: he literally carries a piece of his enemy. Trauma has become body, and the body has become obsession. With every step on deck, the thud of ivory reminds the crew &mdash; and Ahab himself &mdash; that half of him already belongs to the whale.</p>
+                </article>
+
+                <article class="symbol-card bg-parchment p-6 rounded-xl border-2 border-bone">
+                    <div class="text-3xl mb-3" aria-hidden="true">&#9904;</div>
+                    <h3 class="text-xl font-bold text-ocean mb-2">Queequeg's coffin</h3>
+                    <p class="text-sm md:text-base leading-relaxed">Believing himself dying, Queequeg has a coffin built and carves on it the tattoos of his body &mdash; then recovers, and the coffin is caulked into the ship's life-buoy. The most dialectical object in the book: death prepared with serenity turns into an instrument of salvation. On that wood, at the end, floats the only survivor.</p>
+                </article>
+
+                <article class="symbol-card bg-parchment p-6 rounded-xl border-2 border-bone">
+                    <div class="text-3xl mb-3" aria-hidden="true">&#129526;</div>
+                    <h3 class="text-xl font-bold text-ocean mb-2">The whale-line</h3>
+                    <p class="text-sm md:text-base leading-relaxed">In chapter 60 Ishmael describes the rope that, during the chase, runs coiled around every man in the boat: &ldquo;All men live enveloped in whale-lines. All are born with halters round their necks.&rdquo; The line binding hunter to prey is the thread of fate &mdash; and it is his own line that finally drags Ahab under.</p>
+                </article>
+
+                <article class="symbol-card bg-parchment p-6 rounded-xl border-2 border-bone">
+                    <div class="text-3xl mb-3" aria-hidden="true">&#129697;</div>
+                    <h3 class="text-xl font-bold text-ocean mb-2">The loom of fate</h3>
+                    <p class="text-sm md:text-base leading-relaxed">Weaving a mat with Queequeg, Ishmael sees in the loom a model of existence: the fixed warp is necessity, his own hand passing the shuttle is free will, and Queequeg's sword striking the threads, now hard, now soft, is chance. &ldquo;Chance, free will, and necessity &mdash; nowise incompatible &mdash; all interweavingly working together.&rdquo;</p>
+                </article>
+
+                <article class="symbol-card bg-parchment p-6 rounded-xl border-2 border-bone">
+                    <div class="text-3xl mb-3" aria-hidden="true">&#128293;</div>
+                    <h3 class="text-xl font-bold text-ocean mb-2">The try-works</h3>
+                    <p class="text-sm md:text-base leading-relaxed">At night the brick furnaces on deck boil blubber into oil, and the Pequod glows like a ship of hell. Mesmerised at the helm, Ishmael nearly capsizes her. His lesson: &ldquo;Look not too long in the face of the fire, O man!&rdquo; &mdash; and &ldquo;There is a wisdom that is woe; but there is a woe that is madness.&rdquo;</p>
+                </article>
+
+                <article class="symbol-card bg-parchment p-6 rounded-xl border-2 border-bone">
+                    <div class="text-3xl mb-3" aria-hidden="true">&#129517;</div>
+                    <h3 class="text-xl font-bold text-ocean mb-2">Quadrant &amp; compass</h3>
+                    <p class="text-sm md:text-base leading-relaxed">Ahab smashes his quadrant &mdash; &ldquo;Science! Curse thee, thou vain toy&rdquo; &mdash; choosing to steer by dead reckoning and will alone. When lightning reverses the compasses, he forges a new needle and declares himself &ldquo;lord of the level loadstone&rdquo;. Instruments of knowledge bent to serve an obsession.</p>
+                </article>
+
+                <article class="symbol-card bg-parchment p-6 rounded-xl border-2 border-bone">
+                    <div class="text-3xl mb-3" aria-hidden="true">&#128481;</div>
+                    <h3 class="text-xl font-bold text-ocean mb-2">The baptised harpoon</h3>
+                    <p class="text-sm md:text-base leading-relaxed">Ahab has the blacksmith forge a harpoon from horseshoe-nail stubs and his own razors, and tempers it not in water but in the blood of the three pagan harpooneers: &ldquo;Ego non baptizo te in nomine patris, sed in nomine diaboli!&rdquo; An anti-sacrament &mdash; the weapon consecrated to the devil.</p>
+                </article>
+            </div>
+        </section>
+
+        <!-- A Book of Many Books -->
+        <section id="book" class="scroll-mt-24">
+            <div class="text-center mb-12 max-w-3xl mx-auto">
+                <h2 class="section-title section-title-underline">A book of many books</h2>
+                <p class="text-lg">Part of <em>Moby-Dick</em>'s strangeness is its form. Melville switches genres the way a ship changes tack: the novel is also an encyclopedia, a stage play, a sermon, and a philosophical essay. &ldquo;This whole book is but a draught &mdash; nay, but the draught of a draught.&rdquo;</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div class="symbol-card bg-parchment p-6 rounded-xl border-2 border-bone">
-                    <div class="text-3xl mb-3" aria-hidden="true">&#9973;</div>
-                    <h3 class="text-xl font-bold text-ocean mb-2">Il Pequod</h3>
-                    <p class="text-sm md:text-base leading-relaxed">La nave porta il nome di una tribù del Connecticut sterminata dai coloni: il destino di annientamento è iscritto nel suo nome fin dalla prima pagina. Decorata con denti e ossa di capodoglio, è una nave-mondo e insieme una fabbrica galleggiante — l'umanità intera imbarcata nel progetto di sfruttare la natura, senza accorgersi di esserne già il trofeo.</p>
-                </div>
-
-                <div class="symbol-card bg-parchment p-6 rounded-xl border-2 border-bone">
-                    <div class="text-3xl mb-3" aria-hidden="true">&#129689;</div>
-                    <h3 class="text-xl font-bold text-ocean mb-2">Il doblone d'oro</h3>
-                    <p class="text-sm md:text-base leading-relaxed">La moneta equadoriana inchiodata all'albero maestro è lo specchio del romanzo: nel capitolo 99, ogni personaggio la osserva e vi legge qualcosa di diverso — Ahab vi vede se stesso, Starbuck la Trinità, Stubb uno zodiaco da ridere, Flask solo il prezzo di novecentosessanta sigari. Come la balena, il doblone non significa: riflette chi lo guarda.</p>
-                </div>
-
-                <div class="symbol-card bg-parchment p-6 rounded-xl border-2 border-bone">
-                    <div class="text-3xl mb-3" aria-hidden="true">&#129460;</div>
-                    <h3 class="text-xl font-bold text-ocean mb-2">La gamba d'avorio</h3>
-                    <p class="text-sm md:text-base leading-relaxed">Ahab cammina su una protesi ricavata dalla mascella di un capodoglio: porta letteralmente addosso un pezzo del suo nemico. Il trauma si è fatto corpo, e il corpo si è fatto ossessione. A ogni passo sul ponte, il tonfo dell'avorio ricorda all'equipaggio — e a lui stesso — che metà di Ahab appartiene già alla balena.</p>
-                </div>
-
-                <div class="symbol-card bg-parchment p-6 rounded-xl border-2 border-bone">
-                    <div class="text-3xl mb-3" aria-hidden="true">&#9904;</div>
-                    <h3 class="text-xl font-bold text-ocean mb-2">La bara di Queequeg</h3>
-                    <p class="text-sm md:text-base leading-relaxed">Sentendosi morire, Queequeg si fa costruire una bara e vi incide i tatuaggi del proprio corpo — poi guarisce, e la bara viene calafatata come salvagente di bordo. È l'oggetto più dialettico del libro: la morte preparata con serenità che si rovescia in strumento di salvezza. Su quel legno, alla fine, galleggia l'unico superstite.</p>
-                </div>
-
-                <div class="symbol-card bg-parchment p-6 rounded-xl border-2 border-bone">
-                    <div class="text-3xl mb-3" aria-hidden="true">&#129526;</div>
-                    <h3 class="text-xl font-bold text-ocean mb-2">La sagola del rampone</h3>
-                    <p class="text-sm md:text-base leading-relaxed">Nel capitolo 60 Ismaele descrive la fune che, durante la caccia, corre avvolta attorno a ogni uomo della lancia: «tutti gli uomini vivono avvolti nelle sagole. Tutti sono nati col capestro al collo». Il filo che lega il cacciatore alla preda è il filo del destino — e sarà proprio la sua sagola, alla fine, a trascinare Ahab negli abissi.</p>
-                </div>
-
-                <div class="symbol-card bg-parchment p-6 rounded-xl border-2 border-bone">
-                    <div class="text-3xl mb-3" aria-hidden="true">&#129697;</div>
-                    <h3 class="text-xl font-bold text-ocean mb-2">Il telaio del fato</h3>
-                    <p class="text-sm md:text-base leading-relaxed">Intrecciando una stuoia con Queequeg, Ismaele vede nel telaio il modello dell'esistenza: l'ordito fisso è la necessità, la sua mano che passa la navetta è il libero arbitrio, e la spada di Queequeg che batte i fili, ora forte ora piano, è il caso. Le tre forze tessono insieme — e nessuna, da sola, decide il disegno.</p>
-                </div>
+                <article class="card">
+                    <p class="eyebrow mb-1">Front matter</p>
+                    <h3 class="text-xl font-bold text-ocean mb-2">The library</h3>
+                    <p class="leading-relaxed">Before &ldquo;Call me Ishmael&rdquo; come &ldquo;Etymology&rdquo;, supplied by a late consumptive usher, and &ldquo;Extracts&rdquo;, gathered by a sub-sub-librarian: pages of quotations about whales from the Bible to whaling logs. The book opens as an archive.</p>
+                </article>
+                <article class="card">
+                    <p class="eyebrow mb-1">Chapter 9</p>
+                    <h3 class="text-xl font-bold text-ocean mb-2">The sermon</h3>
+                    <p class="leading-relaxed">Father Mapple's homily on Jonah is a complete piece of American pulpit oratory, hymn included. It gives the book its moral frame before the ship ever leaves port.</p>
+                </article>
+                <article class="card">
+                    <p class="eyebrow mb-1">Chapter 32 and after</p>
+                    <h3 class="text-xl font-bold text-ocean mb-2">The encyclopedia</h3>
+                    <p class="leading-relaxed">&ldquo;Cetology&rdquo; classifies whales like books &mdash; Folios, Octavos, Duodecimos. Dozens of chapters follow on the head, the tail, the spout, the skeleton, pictures of whales. Science as an attempt to master the unmasterable.</p>
+                </article>
+                <article class="card">
+                    <p class="eyebrow mb-1">Chapters 36&ndash;40</p>
+                    <h3 class="text-xl font-bold text-ocean mb-2">The stage play</h3>
+                    <p class="leading-relaxed">Suddenly there are stage directions, soliloquies, and a chorus of sailors from every nation singing on the forecastle at midnight. Ahab speaks like Lear; the book becomes Shakespearean tragedy.</p>
+                </article>
+                <article class="card">
+                    <p class="eyebrow mb-1">Chapter 42</p>
+                    <h3 class="text-xl font-bold text-ocean mb-2">The essay</h3>
+                    <p class="leading-relaxed">&ldquo;The Whiteness of the Whale&rdquo; abandons plot entirely for a meditation on colour, terror, and meaning &mdash; a philosophical essay in the tradition of Montaigne and Burke's sublime.</p>
+                </article>
+                <article class="card">
+                    <p class="eyebrow mb-1">Chapter 54</p>
+                    <h3 class="text-xl font-bold text-ocean mb-2">The yarn</h3>
+                    <p class="leading-relaxed">&ldquo;The Town-Ho's Story&rdquo; is told, Ishmael says, as he once recounted it to Spanish friends at the Golden Inn in Lima &mdash; a tale inside the tale, complete with interruptions from sceptical listeners.</p>
+                </article>
             </div>
         </section>
 
-        <!-- Tematiche (Doughnut Chart) -->
-        <section id="tematiche" class="scroll-mt-24 mb-20 bg-ocean text-parchment p-8 md:p-12 rounded-xl">
+        <!-- Themes (Doughnut) -->
+        <section id="themes" class="scroll-mt-24 bg-ocean text-parchment p-6 md:p-12 rounded-xl">
             <div class="text-center mb-12 max-w-3xl mx-auto">
-                <h2 class="text-3xl font-bold text-white mb-4 border-b-2 border-bone inline-block pb-2">Struttura tematica dell'opera</h2>
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4 border-b-2 border-bone inline-block pb-2">The thematic structure</h2>
                 <p class="text-lg opacity-90">
-                    L'opera è un tessuto intricato di dicotomie. Questa visualizzazione concettuale rappresenta il "peso" narrativo e filosofico delle forze in contrasto all'interno del romanzo. Naviga sui segmenti del grafico per scoprire i dettagli di ogni tema.
+                    The novel is an intricate weave of oppositions. This conceptual chart represents the narrative and philosophical &ldquo;weight&rdquo; of the forces at play &mdash; an interpretive estimate, not a word count. Choose a theme, or hover over the chart.
                 </p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-                <!-- Chart Container -->
-                <div class="chart-container bg-white/5 rounded-full p-4">
-                    <canvas id="themeDoughnutChart"></canvas>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center" data-themes>
+                <div class="chart-container">
+                    <canvas id="themeDoughnutChart" role="img" aria-label="Doughnut chart of six themes and their interpretive weight: fate versus free will, the limits of knowledge, obsession and madness, isolation and brotherhood, industry versus nature, race and democracy."></canvas>
                 </div>
-                
-                <div class="space-y-4" id="theme-description">
-                    <div class="bg-white/10 p-6 rounded backdrop-blur-sm border border-white/20">
-                        <h3 class="text-2xl font-bold mb-2 text-white">&#10024; Interagisci col Grafico</h3>
-                        <p class="opacity-90">Passa il cursore (o tocca) le sezioni del grafico a ciambella per esplorare le grandi dicotomie filosofiche che guidano la narrazione di Moby Dick.</p>
+
+                <div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-6" role="group" aria-label="Themes">
+                        <button class="theme-btn" data-theme-index="0" aria-pressed="false">Fate vs. free will</button>
+                        <button class="theme-btn" data-theme-index="1" aria-pressed="false">Limits of knowledge</button>
+                        <button class="theme-btn" data-theme-index="2" aria-pressed="false">Obsession &amp; madness</button>
+                        <button class="theme-btn" data-theme-index="3" aria-pressed="false">Isolation &amp; brotherhood</button>
+                        <button class="theme-btn" data-theme-index="4" aria-pressed="false">Industry vs. nature</button>
+                        <button class="theme-btn" data-theme-index="5" aria-pressed="false">Race &amp; democracy</button>
+                    </div>
+                    <div class="bg-white/10 p-6 rounded backdrop-blur-sm border border-white/20 min-h-[180px]" aria-live="polite">
+                        <div data-theme-panel="intro">
+                            <h3 class="text-2xl font-bold mb-2 text-white">&#10024; Explore the chart</h3>
+                            <p class="opacity-90">Select a theme above, or hover over (or tap) a segment of the doughnut, to explore the great philosophical oppositions that drive the story.</p>
+                        </div>
+                        <div data-theme-panel="0" hidden>
+                            <h3 class="text-2xl font-bold mb-3 text-bone">Fate vs. free will</h3>
+                            <p class="text-lg leading-relaxed">How far does anyone control their own life? Ahab believes he acts freely, yet calls himself &ldquo;the Fates' lieutenant&rdquo;; Ishmael suggests all of humanity is caught on a &ldquo;loom&rdquo; where chance, necessity, and free will weave together.</p>
+                        </div>
+                        <div data-theme-panel="1" hidden>
+                            <h3 class="text-2xl font-bold mb-3 text-bone">The limits of knowledge</h3>
+                            <p class="text-lg leading-relaxed">The book is full of failed attempts to classify and understand the whale &mdash; through science, art, myth. The final lesson is that some truths are unfathomable, and that there are mysteries the human intellect cannot penetrate.</p>
+                        </div>
+                        <div data-theme-panel="2" hidden>
+                            <h3 class="text-2xl font-bold mb-3 text-bone">Obsession &amp; madness</h3>
+                            <p class="text-lg leading-relaxed">Ahab's &ldquo;monomania&rdquo; is lucid: &ldquo;All my means are sane, my motive and my object mad.&rdquo; Against it stands Pip's madness, which is vision rather than will. The novel asks where insight ends and insanity begins.</p>
+                        </div>
+                        <div data-theme-panel="3" hidden>
+                            <h3 class="text-2xl font-bold mb-3 text-bone">Isolation &amp; brotherhood</h3>
+                            <p class="text-lg leading-relaxed">The hunt cuts the Pequod off from civilisation, and Ahab chooses total solitude, severing every human bond. Against him, Ishmael's friendship with Queequeg and the &ldquo;squeeze of the hand&rdquo; in chapter 94 propose a fellowship of equals.</p>
+                        </div>
+                        <div data-theme-panel="4" hidden>
+                            <h3 class="text-2xl font-bold mb-3 text-bone">Industry vs. nature</h3>
+                            <p class="text-lg leading-relaxed">The Pequod is a floating factory. The book documents the dawn of the ruthless exploitation of nature by industrial capital &mdash; and even asks, in chapter 105, whether the whale might one day be hunted to extinction.</p>
+                        </div>
+                        <div data-theme-panel="5" hidden>
+                            <h3 class="text-2xl font-bold mb-3 text-bone">Race &amp; democracy</h3>
+                            <p class="text-lg leading-relaxed">A crew of &ldquo;isolatoes&rdquo; from every nation, pagan harpooneers doing the killing while white officers give orders, a captain who bends them all to one will: readers from C. L. R. James onward have seen in the Pequod an allegory of America &mdash; and of the dangers of charismatic tyranny.</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- L'Oracolo del Pequod (Gemini API Integration) -->
-        <section id="oracolo" class="scroll-mt-24 mb-10">
-            <div class="bg-gradient-to-br from-parchment to-white p-8 md:p-12 rounded-xl shadow-lg border-2 border-ocean relative overflow-hidden">
-                <div class="absolute -right-10 -top-10 text-9xl opacity-5 text-ocean">&#9875;</div>
-                
+        <!-- Quotes -->
+        <section id="quotes" class="scroll-mt-24">
+            <div class="text-center mb-12 max-w-3xl mx-auto">
+                <h2 class="section-title section-title-underline">Words from the deep</h2>
+                <p class="text-lg">A dozen lines worth carrying ashore. Tap a card to copy the quotation.</p>
+            </div>
+
+            <div class="columns-1 md:columns-2 lg:columns-3 gap-6 [&>*]:mb-6">
+                <figure class="card break-inside-avoid">
+                    <blockquote class="quote-antique text-xl italic">&ldquo;Call me Ishmael.&rdquo;</blockquote>
+                    <figcaption class="mt-3 text-sm text-ocean font-bold">Ishmael &middot; ch. 1</figcaption>
+                </figure>
+                <figure class="card break-inside-avoid">
+                    <blockquote class="quote-antique text-xl italic">&ldquo;&hellip;whenever it is a damp, drizzly November in my soul&hellip; then, I account it high time to get to sea as soon as I can.&rdquo;</blockquote>
+                    <figcaption class="mt-3 text-sm text-ocean font-bold">Ishmael &middot; ch. 1</figcaption>
+                </figure>
+                <figure class="card break-inside-avoid">
+                    <blockquote class="quote-antique text-xl italic">&ldquo;Better sleep with a sober cannibal than a drunken Christian.&rdquo;</blockquote>
+                    <figcaption class="mt-3 text-sm text-ocean font-bold">Ishmael &middot; ch. 3</figcaption>
+                </figure>
+                <figure class="card break-inside-avoid">
+                    <blockquote class="quote-antique text-xl italic">&ldquo;If we obey God, we must disobey ourselves; and it is in this disobeying ourselves, wherein the hardness of obeying God consists.&rdquo;</blockquote>
+                    <figcaption class="mt-3 text-sm text-ocean font-bold">Father Mapple &middot; ch. 9</figcaption>
+                </figure>
+                <figure class="card break-inside-avoid border-crimson">
+                    <blockquote class="quote-antique text-xl italic">&ldquo;All visible objects, man, are but as pasteboard masks&hellip; If man will strike, strike through the mask!&rdquo;</blockquote>
+                    <figcaption class="mt-3 text-sm text-crimson font-bold">Ahab &middot; ch. 36</figcaption>
+                </figure>
+                <figure class="card break-inside-avoid border-crimson">
+                    <blockquote class="quote-antique text-xl italic">&ldquo;Talk not to me of blasphemy, man; I'd strike the sun if it insulted me.&rdquo;</blockquote>
+                    <figcaption class="mt-3 text-sm text-crimson font-bold">Ahab &middot; ch. 36</figcaption>
+                </figure>
+                <figure class="card break-inside-avoid">
+                    <blockquote class="quote-antique text-xl italic">&ldquo;I know not all that may be coming, but be it what it will, I'll go to it laughing.&rdquo;</blockquote>
+                    <figcaption class="mt-3 text-sm text-ocean font-bold">Stubb &middot; ch. 39</figcaption>
+                </figure>
+                <figure class="card break-inside-avoid border-crimson">
+                    <blockquote class="quote-antique text-xl italic">&ldquo;All my means are sane, my motive and my object mad.&rdquo;</blockquote>
+                    <figcaption class="mt-3 text-sm text-crimson font-bold">Ahab &middot; ch. 41</figcaption>
+                </figure>
+                <figure class="card break-inside-avoid">
+                    <blockquote class="quote-antique text-xl italic">&ldquo;For as this appalling ocean surrounds the verdant land, so in the soul of man there lies one insular Tahiti, full of peace and joy&hellip; Push not off from that isle, thou canst never return!&rdquo;</blockquote>
+                    <figcaption class="mt-3 text-sm text-ocean font-bold">Ishmael &middot; ch. 58</figcaption>
+                </figure>
+                <figure class="card break-inside-avoid">
+                    <blockquote class="quote-antique text-xl italic">&ldquo;There is a wisdom that is woe; but there is a woe that is madness.&rdquo;</blockquote>
+                    <figcaption class="mt-3 text-sm text-ocean font-bold">Ishmael &middot; ch. 96</figcaption>
+                </figure>
+                <figure class="card break-inside-avoid border-crimson">
+                    <blockquote class="quote-antique text-xl italic">&ldquo;Towards thee I roll, thou all-destroying but unconquering whale; to the last I grapple with thee; from hell's heart I stab at thee; for hate's sake I spit my last breath at thee.&rdquo;</blockquote>
+                    <figcaption class="mt-3 text-sm text-crimson font-bold">Ahab &middot; ch. 135</figcaption>
+                </figure>
+                <figure class="card break-inside-avoid">
+                    <blockquote class="quote-antique text-xl italic">&ldquo;And I only am escaped alone to tell thee.&rdquo;</blockquote>
+                    <figcaption class="mt-3 text-sm text-ocean font-bold">Epilogue &middot; after Job 1:15</figcaption>
+                </figure>
+                <figure class="card break-inside-avoid bg-bone">
+                    <blockquote class="quote-antique text-xl italic">&ldquo;I have written a wicked book, and feel spotless as the lamb.&rdquo;</blockquote>
+                    <figcaption class="mt-3 text-sm text-ocean font-bold">Melville to Hawthorne &middot; November 1851</figcaption>
+                </figure>
+            </div>
+        </section>
+
+        <!-- The Oracle (AI) -->
+        <section id="oracle" class="scroll-mt-24">
+            <div class="bg-gradient-to-br from-parchment to-white p-6 md:p-12 rounded-xl shadow-lg border-2 border-ocean relative overflow-hidden">
+                <div class="absolute -right-10 -top-10 text-9xl opacity-5 text-ocean" aria-hidden="true">&#9875;</div>
+
                 <div class="max-w-3xl mx-auto relative z-10">
-                    <h2 class="text-3xl font-bold text-ocean mb-2">L'oracolo del Pequod ✨</h2>
+                    <div class="flex flex-wrap items-start justify-between gap-4 mb-2">
+                        <h2 class="text-3xl font-bold text-ocean">The Pequod's oracle ✨</h2>
+                        <button type="button" class="ai-settings-btn text-sm border border-ocean text-ocean rounded px-3 py-1 hover:bg-ocean hover:text-white transition-colors" data-ai-status>&#9881; AI settings</button>
+                    </div>
                     <p class="text-lg text-ink mb-6">
-                        Hai un dubbio su un capitolo oscuro? Vuoi analizzare una citazione specifica? Interroga il nostro esperto letterario virtuale basato sull'Intelligenza Artificiale.
+                        Puzzled by a dark chapter? Want to unpack a particular line? Ask a virtual literary scholar. The oracle uses your own AI key (Claude or DeepSeek), stored only in this browser &mdash; without one, it will point you to the relevant part of this guide.
                     </p>
 
-                    <!-- Pre-set Questions -->
                     <div class="flex flex-wrap gap-2 mb-6">
-                        <span class="text-sm font-bold text-stone-500 uppercase mt-2 mr-2">Spunti:</span>
-                        <button class="preset-btn text-xs bg-bone hover:bg-ocean hover:text-white border border-stone-300 rounded-full px-3 py-1 transition-colors" data-prompt="Qual è il significato simbolico della gamba di balena di Ahab?">Gamba d'osso</button>
-                        <button class="preset-btn text-xs bg-bone hover:bg-ocean hover:text-white border border-stone-300 rounded-full px-3 py-1 transition-colors" data-prompt="Perché il romanzo inizia con la frase 'Chiamatemi Ismaele'?">Chiamatemi Ismaele</button>
-                        <button class="preset-btn text-xs bg-bone hover:bg-ocean hover:text-white border border-stone-300 rounded-full px-3 py-1 transition-colors" data-prompt="Analizza allegoricamente il personaggio di Pip, il mozzo.">Il mozzo Pip</button>
+                        <span class="text-sm font-bold text-stone-500 uppercase mt-1 mr-2">Try:</span>
+                        <button class="preset-btn pill-btn" data-prompt="What is the symbolic meaning of Ahab's ivory leg?">The ivory leg</button>
+                        <button class="preset-btn pill-btn" data-prompt="Why does the novel begin with the words 'Call me Ishmael'?">&ldquo;Call me Ishmael&rdquo;</button>
+                        <button class="preset-btn pill-btn" data-prompt="Give an allegorical reading of Pip, the cabin boy.">Pip, the cabin boy</button>
+                        <button class="preset-btn pill-btn" data-prompt="Why is the chapter on cetology in the middle of an adventure story?">Why cetology?</button>
                     </div>
 
-                    <!-- Input Area -->
-                    <div class="flex flex-col space-y-4">
-                        <textarea id="ai-input" rows="3" class="w-full p-4 rounded border border-stone-300 focus:ring-2 focus:ring-ocean focus:outline-none resize-none bg-white/80 backdrop-blur-sm shadow-inner" placeholder="Es: 'Cosa rappresenta il raggio di Sant'Elmo sugli alberi della nave?'"></textarea>
-                        
+                    <form id="oracle-form" class="flex flex-col space-y-4">
+                        <label for="ai-input" class="sr-only">Your question about Moby-Dick</label>
+                        <textarea id="ai-input" rows="3" maxlength="1500" class="w-full p-4 rounded border border-stone-300 focus:ring-2 focus:ring-ocean focus:outline-none resize-none bg-white/80 shadow-inner" placeholder="e.g. 'What do the St. Elmo's fires on the masts represent?'"></textarea>
                         <div class="flex justify-end">
-                            <button id="ai-submit" class="bg-ocean hover:bg-ink text-white font-bold py-3 px-6 rounded transition-colors shadow-md flex items-center">
-                                <span>Analizza con l'Intelligenza Artificiale ✨</span>
-                                <svg id="ai-loading" class="animate-spin -mr-1 ml-3 h-5 w-5 text-white hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                                </svg>
+                            <button type="submit" id="ai-submit" class="bg-ocean hover:bg-ink text-white font-bold py-3 px-6 rounded transition-colors shadow-md flex items-center disabled:opacity-75 disabled:cursor-not-allowed">
+                                <span>Consult the oracle ✨</span>
+                                <svg class="spinner hidden text-white" data-spinner xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" aria-hidden="true"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path></svg>
                             </button>
                         </div>
-                    </div>
+                    </form>
 
-                    <!-- Response Area -->
-                    <div id="ai-response-container" class="mt-8 hidden">
+                    <div id="ai-response-container" class="mt-8" hidden>
                         <div class="border-t-2 border-bone pt-6">
-                            <h4 class="font-serif text-xl font-bold text-crimson mb-4 flex items-center">
-                                <span class="mr-2">&#9997;</span> L'analisi dello studioso:
-                            </h4>
-                            <div id="ai-response-content" class="text-lg leading-relaxed space-y-4 bg-white p-6 rounded border border-stone-200 shadow-sm">
-                                <!-- AI response will be injected here -->
-                            </div>
+                            <h3 class="font-serif text-xl font-bold text-crimson mb-4 flex items-center"><span class="mr-2" aria-hidden="true">&#9997;</span> The scholar's analysis:</h3>
+                            <div id="ai-response-content" class="ai-output text-lg leading-relaxed bg-white p-6 rounded border border-stone-200 shadow-sm" aria-live="polite"></div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Officina Creativa (More Gemini API Features) -->
-        <section id="officina" class="scroll-mt-24 mb-10">
+        <!-- Literary Workshop -->
+        <section id="workshop" class="scroll-mt-24">
             <div class="text-center mb-12 max-w-3xl mx-auto">
-                <h2 class="text-3xl font-bold text-ocean mb-4 border-b-2 border-crimson inline-block pb-2">Officina letteraria ✨</h2>
-                <p class="text-lg">
-                    Sperimenta in prima persona lo stile narrativo di Melville. Lascia che l'Intelligenza Artificiale trasformi i tuoi pensieri quotidiani nel linguaggio epico dei protagonisti del Pequod.
-                </p>
+                <h2 class="section-title section-title-underline">The literary workshop ✨</h2>
+                <p class="text-lg">Try Melville's voice for yourself. Turn your everyday thoughts into the epic language of the Pequod's crew. With an AI key the prose is freshly written; without one, the ship's old log-keeper improvises from Melvillean stock.</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                
-                <!-- Il Diario di Ismaele -->
-                <div class="bg-[#fdfbf7] p-8 rounded-xl shadow-md border-2 border-bone relative">
-                    <div class="absolute top-4 right-4 text-3xl opacity-20">&#128214;</div>
-                    <h3 class="text-2xl font-bold text-ocean mb-2 font-serif">Il diario di Ismaele ✨</h3>
-                    <p class="text-sm text-ink mb-4 h-16">Scrivi un evento banale della tua giornata. L'IA nei panni di Ismaele lo trasformerà in una lunga e complessa divagazione filosofica marinaresca.</p>
-                    
-                    <input type="text" id="ishmael-input" class="w-full p-3 mb-4 rounded border border-stone-300 focus:ring-2 focus:ring-ocean focus:outline-none bg-white" placeholder="Es: 'Oggi ho perso le chiavi di casa.'">
-                    
-                    <button id="ishmael-submit" class="w-full bg-stone-700 hover:bg-ink text-white font-bold py-2 px-4 rounded transition-colors shadow flex items-center justify-center mb-6">
-                        <span>Scrivi sul Diario di Bordo</span>
-                        <svg id="ishmael-loading" class="animate-spin -mr-1 ml-3 h-5 w-5 text-white hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+                <form class="workshop-form bg-[#fdfbf7] p-6 md:p-8 rounded-xl shadow-md border-2 border-bone relative" data-voice="ishmael">
+                    <div class="absolute top-4 right-4 text-3xl opacity-20" aria-hidden="true">&#128214;</div>
+                    <h3 class="text-2xl font-bold text-ocean mb-2">Ishmael's journal ✨</h3>
+                    <p class="text-sm text-ink mb-4 md:min-h-[4rem]">Describe a mundane moment from your day. Ishmael will turn it into a long, winding, seafaring philosophical digression.</p>
+                    <label for="ishmael-input" class="sr-only">A mundane event from your day</label>
+                    <input type="text" id="ishmael-input" maxlength="300" class="w-full p-3 mb-4 rounded border border-stone-300 focus:ring-2 focus:ring-ocean focus:outline-none bg-white" placeholder="e.g. 'I lost my house keys today.'">
+                    <button type="submit" class="w-full bg-stone-700 hover:bg-ink text-white font-bold py-2 px-4 rounded transition-colors shadow flex items-center justify-center mb-6 disabled:opacity-75">
+                        <span>Write in the ship's log</span>
+                        <svg class="spinner hidden text-white" data-spinner xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" aria-hidden="true"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path></svg>
                     </button>
-
-                    <div id="ishmael-output" class="hidden">
-                        <div class="border-t border-stone-300 pt-4 font-serif italic text-ink leading-relaxed" id="ishmael-response-text"></div>
+                    <div data-output hidden>
+                        <div class="ai-output border-t border-stone-300 pt-4 font-serif italic text-ink leading-relaxed" data-output-text aria-live="polite"></div>
                     </div>
-                </div>
+                </form>
 
-                <!-- Il Monologo di Ahab -->
-                <div class="bg-gradient-to-b from-stone-900 to-ink p-8 rounded-xl shadow-md border-2 border-crimson relative text-parchment">
-                    <div class="absolute top-4 right-4 text-3xl opacity-20">&#9876;</div>
-                    <h3 class="text-2xl font-bold text-crimson mb-2 font-serif">Parla come Ahab ✨</h3>
-                    <p class="text-sm text-bone mb-4 opacity-80 h-16">Inserisci una piccola frustrazione quotidiana. L'IA la trasformerà in un furioso monologo vendicativo e teatrale del Capitano Ahab.</p>
-                    
-                    <input type="text" id="ahab-input" class="w-full p-3 mb-4 rounded border border-stone-600 focus:ring-2 focus:ring-crimson focus:outline-none bg-stone-800 text-white placeholder-stone-400" placeholder="Es: 'Il wifi ha smesso di funzionare.'">
-                    
-                    <button id="ahab-submit" class="w-full bg-crimson hover:bg-red-800 text-white font-bold py-2 px-4 rounded transition-colors shadow flex items-center justify-center mb-6 border border-red-900">
-                        <span>Lancia la Fiocina</span>
-                        <svg id="ahab-loading" class="animate-spin -mr-1 ml-3 h-5 w-5 text-white hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+                <form class="workshop-form bg-gradient-to-b from-stone-900 to-ink p-6 md:p-8 rounded-xl shadow-md border-2 border-crimson relative text-parchment" data-voice="ahab">
+                    <div class="absolute top-4 right-4 text-3xl opacity-20" aria-hidden="true">&#9876;</div>
+                    <h3 class="text-2xl font-bold text-[#e05252] mb-2">Speak like Ahab ✨</h3>
+                    <p class="text-sm text-bone mb-4 opacity-80 md:min-h-[4rem]">Enter a small everyday frustration. Ahab will turn it into a furious, theatrical monologue of vengeance.</p>
+                    <label for="ahab-input" class="sr-only">A small everyday frustration</label>
+                    <input type="text" id="ahab-input" maxlength="300" class="w-full p-3 mb-4 rounded border border-stone-600 focus:ring-2 focus:ring-crimson focus:outline-none bg-stone-800 text-white placeholder-stone-400" placeholder="e.g. 'The wifi stopped working.'">
+                    <button type="submit" class="w-full bg-crimson hover:bg-red-800 text-white font-bold py-2 px-4 rounded transition-colors shadow flex items-center justify-center mb-6 border border-red-900 disabled:opacity-75">
+                        <span>Hurl the harpoon</span>
+                        <svg class="spinner hidden text-white" data-spinner xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" aria-hidden="true"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"></path></svg>
                     </button>
-
-                    <div id="ahab-output" class="hidden">
-                        <div class="border-t border-stone-700 pt-4 font-serif text-white leading-relaxed text-lg" id="ahab-response-text"></div>
+                    <div data-output hidden>
+                        <div class="ai-output border-t border-stone-700 pt-4 font-serif text-white leading-relaxed text-lg" data-output-text aria-live="polite"></div>
                     </div>
-                </div>
+                </form>
+            </div>
+        </section>
 
+        <!-- Further reading -->
+        <section id="reading" class="scroll-mt-24">
+            <div class="text-center mb-12 max-w-3xl mx-auto">
+                <h2 class="section-title">Further reading</h2>
+                <p class="text-lg">The best guide to <em>Moby-Dick</em> is <em>Moby-Dick</em>. After that, a few books that changed how it is read.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <a href="https://www.gutenberg.org/ebooks/2701" class="card block hover:border-ocean transition-colors md:row-span-2 bg-ocean text-parchment" rel="noopener">
+                    <p class="text-xs uppercase tracking-widest font-bold text-bone mb-2">Read it free</p>
+                    <h3 class="text-2xl font-bold text-white mb-2">Moby-Dick; or, The Whale</h3>
+                    <p class="opacity-90 mb-4">The full text is in the public domain. Project Gutenberg offers it online and as an e-book.</p>
+                    <span class="font-bold underline">gutenberg.org &rarr;</span>
+                </a>
+                <div class="card">
+                    <h3 class="font-bold text-ocean">D. H. Lawrence &mdash; <em>Studies in Classic American Literature</em> (1923)</h3>
+                    <p class="text-sm mt-1">Wild, brilliant, and early: Moby Dick as &ldquo;the deepest blood-being of the white race&rdquo;.</p>
+                </div>
+                <div class="card">
+                    <h3 class="font-bold text-ocean">Charles Olson &mdash; <em>Call Me Ishmael</em> (1947)</h3>
+                    <p class="text-sm mt-1">A poet on Melville, Shakespeare, and American space.</p>
+                </div>
+                <div class="card">
+                    <h3 class="font-bold text-ocean">C. L. R. James &mdash; <em>Mariners, Renegades and Castaways</em> (1953)</h3>
+                    <p class="text-sm mt-1">Written on Ellis Island: Ahab as the totalitarian leader, the crew as the modern working class.</p>
+                </div>
+                <div class="card">
+                    <h3 class="font-bold text-ocean">Nathaniel Philbrick &mdash; <em>In the Heart of the Sea</em> (2000)</h3>
+                    <p class="text-sm mt-1">The true story of the Essex, the disaster behind the novel.</p>
+                </div>
+                <div class="card">
+                    <h3 class="font-bold text-ocean">Andrew Delbanco &mdash; <em>Melville: His World and Work</em> (2005)</h3>
+                    <p class="text-sm mt-1">A lucid biography that places the book in its turbulent America.</p>
+                </div>
             </div>
         </section>
 
     </main>
 
-    <footer class="bg-ink text-bone pt-0 pb-10 text-center relative">
+    <!-- AI settings dialog -->
+    <dialog id="ai-settings" class="rounded-xl p-0 w-[min(32rem,calc(100vw-2rem))] bg-parchment text-ink shadow-2xl border-2 border-ocean">
+        <form method="dialog" id="ai-settings-form" class="p-6 space-y-4">
+            <h2 class="text-2xl font-bold text-ocean">AI settings</h2>
+            <p class="text-sm">The oracle and the workshop can use a large language model. Bring your own key: it is sent only to the provider you choose, directly from your browser, and is never stored on any server of this site.</p>
+            <div>
+                <label for="ai-provider" class="block text-sm font-bold mb-1">Provider</label>
+                <select id="ai-provider" class="w-full p-2 rounded border border-stone-300 bg-white">
+                    <option value="anthropic">Anthropic (Claude)</option>
+                    <option value="deepseek">DeepSeek</option>
+                </select>
+            </div>
+            <div>
+                <label for="ai-model" class="block text-sm font-bold mb-1">Model</label>
+                <input id="ai-model" type="text" class="w-full p-2 rounded border border-stone-300 bg-white font-mono text-sm" autocomplete="off" spellcheck="false">
+            </div>
+            <div>
+                <label for="ai-key" class="block text-sm font-bold mb-1">API key</label>
+                <input id="ai-key" type="password" class="w-full p-2 rounded border border-stone-300 bg-white font-mono text-sm" autocomplete="off" spellcheck="false" placeholder="sk-…">
+            </div>
+            <label class="flex items-center gap-2 text-sm">
+                <input id="ai-remember" type="checkbox" class="accent-ocean">
+                Remember on this device (otherwise it's forgotten when you close the tab)
+            </label>
+            <p class="text-xs opacity-75">Anyone with access to this browser profile could read a remembered key. Use a key with a spending limit.</p>
+            <div class="flex flex-wrap justify-between gap-3 pt-2">
+                <button type="button" id="ai-forget" class="text-sm text-crimson underline">Forget key</button>
+                <div class="flex gap-3">
+                    <button value="cancel" formnovalidate class="px-4 py-2 rounded border border-stone-400">Cancel</button>
+                    <button value="save" id="ai-save" class="px-4 py-2 rounded bg-ocean text-white font-bold">Save</button>
+                </div>
+            </div>
+        </form>
+    </dialog>
+
+    <button id="to-top" class="fixed bottom-5 right-5 z-40 bg-ocean text-parchment border-2 border-parchment w-11 h-11 rounded-full shadow-lg opacity-0 pointer-events-none transition-opacity" aria-label="Back to top">&uarr;</button>
+
+    <footer class="bg-ink text-bone pt-0 pb-10 text-center relative mt-24">
         <div class="h-12 overflow-hidden bg-parchment" aria-hidden="true">
             <svg class="w-full h-full text-ink" viewBox="0 0 360 30" preserveAspectRatio="none" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                 <path d="M0 18 C 30 30, 60 6, 90 18 C 120 30, 150 6, 180 18 C 210 30, 240 6, 270 18 C 300 30, 330 6, 360 18 L 360 30 L 0 30 Z"/>
@@ -688,378 +1010,86 @@
                     <path d="M30 30 C 16 32, 8 44, 8 58 C 8 72, 16 82, 34 86 C 70 93, 120 92, 162 74 C 170 70, 182 66, 192 64 C 198 70, 208 80, 222 86 C 216 76, 213 68, 214 60 C 220 54, 228 44, 232 32 C 220 40, 208 46, 198 48 C 192 42, 184 40, 176 44 C 160 32, 130 24, 96 24 C 70 24, 46 27, 30 30 Z"/>
                 </svg>
             </div>
-            <p class="mb-2 quote-antique text-2xl italic">«Chiamatemi Ismaele.»</p>
-            <p class="text-sm opacity-70 mb-6">L'incipit più famoso della letteratura americana: non un nome, ma una scelta. Ismaele, il figlio ripudiato di Abramo, l'esule volontario.</p>
-            <div class="flex items-center justify-center gap-4 text-xs uppercase tracking-widest opacity-60">
-                <span>Herman Melville &middot; Moby Dick, or The Whale &middot; 1851</span>
-            </div>
-            <p class="text-xs opacity-50 mt-4">Analisi allegorica interattiva &mdash; progettata per l'esplorazione letteraria. Nessun capodoglio è stato ferito nella realizzazione di questo sito.</p>
+            <p class="mb-2 quote-antique text-2xl italic">&ldquo;Call me Ishmael.&rdquo;</p>
+            <p class="text-sm opacity-70 mb-6 max-w-xl mx-auto">The most famous opening in American literature: not a name, but a choice. Ishmael, the outcast son of Abraham, the voluntary exile.</p>
+            <p class="text-xs uppercase tracking-widest opacity-60">Herman Melville &middot; Moby-Dick; or, The Whale &middot; 1851</p>
+            <p class="text-xs opacity-50 mt-4">An interactive allegorical analysis &mdash; made for literary exploration. No sperm whales were harmed in the making of this site.</p>
+            <p class="text-xs mt-4"><a href="it/" hreflang="it" lang="it" class="underline opacity-80 hover:opacity-100">Leggi in italiano</a> &middot; <a href="https://github.com/chiantera/ahab" class="underline opacity-80 hover:opacity-100">Source on GitHub</a></p>
         </div>
     </footer>
 
-    <!-- JavaScript Logic -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-
-            // --- 0a. Mobile Menu ---
-            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-            const mobileMenu = document.getElementById('mobile-menu');
-            mobileMenuBtn.addEventListener('click', () => {
-                const isOpen = !mobileMenu.classList.toggle('hidden');
-                mobileMenuBtn.setAttribute('aria-expanded', isOpen);
-            });
-            mobileMenu.querySelectorAll('a').forEach(link => {
-                link.addEventListener('click', () => {
-                    mobileMenu.classList.add('hidden');
-                    mobileMenuBtn.setAttribute('aria-expanded', 'false');
-                });
-            });
-
-            // --- 0b. Scroll Reveal ---
-            if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-                const revealTargets = document.querySelectorAll('main > section, .char-card, .symbol-card');
-                const observer = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            entry.target.classList.add('revealed');
-                            observer.unobserve(entry.target);
-                        }
-                    });
-                }, { threshold: 0.08 });
-                revealTargets.forEach(el => {
-                    el.classList.add('reveal');
-                    observer.observe(el);
-                });
+    <script type="application/json" id="page-data">
+    {
+        "radar": {
+            "labels": ["Obsession / Madness", "Reason / Pragmatism", "Spirituality / Tolerance", "Will to dominate nature", "Adaptability"],
+            "datasets": [
+                { "label": "Captain Ahab", "data": [10, 2, 1, 10, 1], "color": "139, 0, 0" },
+                { "label": "Ishmael", "data": [3, 7, 9, 2, 10], "color": "26, 54, 93" },
+                { "label": "Starbuck", "data": [1, 9, 6, 5, 4], "color": "120, 113, 108" },
+                { "label": "Queequeg", "data": [2, 6, 10, 3, 9], "color": "180, 130, 20", "hidden": true }
+            ]
+        },
+        "themes": {
+            "labels": ["Fate vs. free will", "Limits of knowledge", "Obsession & madness", "Isolation & brotherhood", "Industry vs. nature", "Race & democracy"],
+            "weights": [22, 20, 18, 16, 12, 12]
+        },
+        "ai": {
+            "oracleSystem": "You are an academic scholar and literary critic specialising in Herman Melville's Moby-Dick. Answer in English. Give a deep, allegorical, and symbolic analysis of the user's request. Be clear and incisive, in at most three or four well-structured paragraphs. Quote the novel only when you are sure of the wording, and cite the chapter. If the question has nothing to do with Moby-Dick or Melville, gently steer back to the novel.",
+            "ishmaelSystem": "You are Ishmael, the narrator of Moby-Dick. The user will give you a mundane event from their day. Write a ship's-log journal entry (at most 150 words). Begin by describing the event plainly, then lose yourself at once in a deep, intricate, almost absurd philosophical or metaphysical reflection on the human condition, the cosmos, or fate, in your characteristic digressive style, rich in metaphors of the ocean, ships, and whaling. Write in English.",
+            "ahabSystem": "You are Captain Ahab from Moby-Dick. The user will give you a small, insignificant everyday frustration. Rewrite it as a dark, theatrical, mad, obsessive, vengeful monologue. Use nineteenth-century nautical language, dramatic exclamations, and references to dark forces, inexorable fate, or damnation. Be brief but intensely dramatic (at most 100 words). Write in English.",
+            "ishmaelWrap": "Mundane event: \"{x}\"",
+            "ahabWrap": "Everyday frustration: \"{x}\"",
+            "strings": {
+                "thinkingOracle": "Consulting the Pequod's ancient logbooks…",
+                "thinkingIshmael": "Dipping the quill in the inkwell…",
+                "thinkingAhab": "Glaring at the horizon with hatred…",
+                "error": "The fog is too thick to see clearly right now: the oracle is unreachable ({e}). Check your key in the AI settings, or try again later.",
+                "refusal": "The oracle falls silent and will not answer that. Try rephrasing your question.",
+                "empty": "No answer came back from the deep.",
+                "noKeyOracle": "The oracle needs an AI key to speak (see ⚙ AI settings). Meanwhile, the log suggests these parts of the guide:",
+                "noKeyNoMatch": "The oracle needs an AI key to speak (see ⚙ AI settings). Meanwhile, why not start with the white whale itself?",
+                "offlineNote": "Composed by the ship's log-keeper without AI. Add a key in ⚙ AI settings for freshly written prose.",
+                "statusOn": "⚙ AI: {p}",
+                "statusOff": "⚙ AI settings"
             }
-
-            // --- 1. Interactive Tabs Logic (La Balena) ---
-            const symbolData = {
-                natura: {
-                    title: "La Forza Indifferente della Natura \uD83C\uDF0A",
-                    text: "Nella sua forma più basilare, Moby Dick rappresenta la forza bruta, implacabile e del tutto indifferente della natura. Non agisce per malizia, ma per istinto di sopravvivenza. Sfidare la balena significa sfidare l'ordine naturale stesso, un'impresa destinata al fallimento catastrofico di fronte a una potenza insormontabile."
-                },
-                dio: {
-                    title: "La Divinità Incomprensibile \u26A1",
-                    text: "Il calvinismo e l'idea di predestinazione permeano il romanzo. Moby Dick può essere vista come l'incarnazione di un Dio onnipotente e imperscrutabile. Ahab, simile a Prometeo, cerca di punire questo Dio per le sofferenze inflitte all'umanità, rifiutando la sottomissione al fato divino."
-                },
-                vuoto: {
-                    title: "La 'Bianchezza' e il Vuoto \u26AA",
-                    text: "Nel celebre capitolo 'La Bianchezza della Balena', Ismaele riflette sul colore bianco non come simbolo di purezza, ma come un vuoto terrificante. Il bianco è l'assenza di colore e, simultaneamente, la somma di tutti i colori. Rappresenta il terrore dell'assenza di significato nell'universo, un abisso ateo che l'uomo cerca disperatamente di riempire di senso."
-                },
-                male: {
-                    title: "Il Male Assoluto (La Visione di Ahab) \uD83D\uDD25",
-                    text: "Per Ahab, la balena non è un animale, ma la maschera tangibile di un demone cosmico. Egli proietta su Moby Dick tutto il dolore, l'ingiustizia e il male del mondo. La sua tragedia è credere che distruggendo la creatura fisica, possa distruggere il principio metafisico del male."
-                }
-            };
-
-            const tabBtns = document.querySelectorAll('.tab-btn');
-            const symTitle = document.getElementById('sym-title');
-            const symText = document.getElementById('sym-text');
-
-            tabBtns.forEach(btn => {
-                btn.addEventListener('click', function() {
-                    // Remove active class from all
-                    tabBtns.forEach(b => {
-                        b.classList.remove('active', 'bg-ocean', 'text-white');
-                        b.classList.add('text-ink');
-                    });
-                    
-                    // Add active class to clicked
-                    this.classList.add('active');
-                    this.classList.remove('text-ink');
-                    
-                    // Update content
-                    const target = this.getAttribute('data-target');
-                    
-                    // Add simple fade animation
-                    symTitle.style.opacity = 0;
-                    symText.style.opacity = 0;
-                    
-                    setTimeout(() => {
-                        symTitle.textContent = symbolData[target].title;
-                        symText.textContent = symbolData[target].text;
-                        symTitle.style.opacity = 1;
-                        symText.style.opacity = 1;
-                    }, 200);
-                });
-            });
-
-            // Smooth transition setup for text
-            symTitle.style.transition = 'opacity 0.2s ease';
-            symText.style.transition = 'opacity 0.2s ease';
-
-
-            // --- 2. Character Radar Chart ---
-            const ctxRadar = document.getElementById('characterRadarChart').getContext('2d');
-            
-            // Shared Chart.js options for responsiveness
-            const commonOptions = {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        position: 'bottom',
-                        labels: { font: { family: "'Lora', serif", size: 14 } }
-                    }
-                }
-            };
-
-            new Chart(ctxRadar, {
-                type: 'radar',
-                data: {
-                    labels: ['Ossessione/Follia', 'Ragione/Pragmatismo', 'Spiritualità/Tolleranza', 'Dominio sulla Natura', 'Adattabilità'],
-                    datasets: [
-                        {
-                            label: 'Capitano Ahab',
-                            data: [10, 2, 1, 9, 1],
-                            backgroundColor: 'rgba(139, 0, 0, 0.2)', // Crimson
-                            borderColor: 'rgba(139, 0, 0, 1)',
-                            pointBackgroundColor: 'rgba(139, 0, 0, 1)',
-                            borderWidth: 2
-                        },
-                        {
-                            label: 'Ismaele',
-                            data: [3, 7, 9, 2, 10],
-                            backgroundColor: 'rgba(26, 54, 93, 0.2)', // Ocean
-                            borderColor: 'rgba(26, 54, 93, 1)',
-                            pointBackgroundColor: 'rgba(26, 54, 93, 1)',
-                            borderWidth: 2
-                        },
-                        {
-                            label: 'Starbuck',
-                            data: [1, 9, 6, 5, 4],
-                            backgroundColor: 'rgba(120, 113, 108, 0.2)', // Stone
-                            borderColor: 'rgba(120, 113, 108, 1)',
-                            pointBackgroundColor: 'rgba(120, 113, 108, 1)',
-                            borderWidth: 2
-                        }
-                    ]
-                },
-                options: {
-                    ...commonOptions,
-                    scales: {
-                        r: {
-                            angleLines: { color: 'rgba(0, 0, 0, 0.1)' },
-                            grid: { color: 'rgba(0, 0, 0, 0.1)' },
-                            pointLabels: {
-                                font: { family: "'Lora', serif", size: 12 },
-                                color: '#2c3e50'
-                            },
-                            ticks: { display: false, min: 0, max: 10 }
-                        }
-                    }
-                }
-            });
-
-            // --- 3. Thematic Doughnut Chart ---
-            const ctxDoughnut = document.getElementById('themeDoughnutChart').getContext('2d');
-            
-            const themeDetails = {
-                0: { title: "Destino vs Libero Arbitrio", text: "Fino a che punto l'uomo controlla la propria vita? Ahab crede di agire liberamente, ma Ismaele suggerisce che l'intera umanità è intrappolata in un 'telaio del fato', intrecciando caso, necessità e libero arbitrio." },
-                1: { title: "L'Isolamento e l'Alienazione", text: "La caccia isola il Pequod dalla civiltà. L'oceano vasto e solitario riflette l'isolamento esistenziale dell'individuo. Ahab sceglie l'isolamento assoluto, recidendo ogni legame umano." },
-                2: { title: "I Limiti della Conoscenza Umana", text: "Il romanzo è pieno di tentativi falliti di classificare e comprendere la balena (scienza, arte, mito). La lezione finale è che ci sono verità insondabili e misteri che l'intelletto umano non può penetrare." },
-                3: { title: "Sfruttamento Industriale vs Natura", text: "Il Pequod è una fabbrica galleggiante. Il libro documenta l'alba dello sfruttamento spietato della natura da parte dell'industria capitalistica, prefigurando la crisi ecologica moderna." }
-            };
-
-            const themeChart = new Chart(ctxDoughnut, {
-                type: 'doughnut',
-                data: {
-                    labels: ['Destino / Libero Arbitrio', 'Isolamento', 'Limiti della Conoscenza', 'Sfruttamento / Industria'],
-                    datasets: [{
-                        data: [35, 25, 25, 15],
-                        backgroundColor: [
-                            '#e3dac9', // Bone
-                            '#8b0000', // Crimson
-                            '#2c3e50', // Ink
-                            '#475569'  // Slate
-                        ],
-                        borderColor: '#1a365d',
-                        borderWidth: 2,
-                        hoverOffset: 10
-                    }]
-                },
-                options: {
-                    ...commonOptions,
-                    cutout: '60%',
-                    plugins: {
-                        legend: {
-                            position: 'right',
-                            labels: { color: '#f4f1ea', font: { family: "'Lora', serif" } }
-                        },
-                        tooltip: {
-                            callbacks: {
-                                label: function(context) { return ' ' + context.label; }
-                            }
-                        }
-                    },
-                    onHover: (event, chartElement) => {
-                        const descriptionBox = document.getElementById('theme-description');
-                        if (chartElement.length > 0) {
-                            const index = chartElement[0].index;
-                            descriptionBox.innerHTML = `
-                                <div class="bg-white/10 p-6 rounded backdrop-blur-sm border border-white/20 transition-all duration-300">
-                                    <h3 class="text-2xl font-bold mb-3 text-[#e3dac9]">${themeDetails[index].title}</h3>
-                                    <p class="text-lg leading-relaxed">${themeDetails[index].text}</p>
-                                </div>
-                            `;
-                        }
-                    }
-                }
-            });
-
-            // --- 4. Gemini API Integration (L'Oracolo del Pequod) ---
-            const apiKey = "sk-e68246bf4bba4222a84655b676a8abd3"; // API Key is injected by the environment
-            const aiInput = document.getElementById('ai-input');
-            const aiSubmitBtn = document.getElementById('ai-submit');
-            const aiLoadingIcon = document.getElementById('ai-loading');
-            const aiResponseContainer = document.getElementById('ai-response-container');
-            const aiResponseContent = document.getElementById('ai-response-content');
-            const presetBtns = document.querySelectorAll('.preset-btn');
-
-            // Handle Preset Buttons
-            presetBtns.forEach(btn => {
-                btn.addEventListener('click', () => {
-                    aiInput.value = btn.getAttribute('data-prompt');
-                    aiInput.focus();
-                });
-            });
-
-            // Format simple markdown (bold and line breaks)
-            const formatMarkdown = (text) => {
-                let formatted = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>'); // Bold
-                formatted = formatted.replace(/\*(.*?)\*/g, '<em>$1</em>'); // Italic
-                formatted = formatted.split('\n').filter(p => p.trim() !== '').map(p => `<p>${p}</p>`).join(''); // Paragraphs
-                return formatted;
-            };
-
-            // Call DeepSeek API with Exponential Backoff and dynamic system prompts
-            async function generateContent(prompt, systemInstructionText) {
-                const endpoint = `https://api.deepseek.com/chat/completions`;
-                
-                const payload = {
-                    model: "deepseek-v4-flash",
-                    messages: [
-                        { role: "system", content: systemInstructionText },
-                        { role: "user", content: prompt }
-                    ]
-                };
-
-                const maxRetries = 5;
-                let baseDelay = 1000; // 1s, 2s, 4s, 8s, 16s
-
-                for (let attempt = 0; attempt < maxRetries; attempt++) {
-                    try {
-                        const response = await fetch(endpoint, {
-                            method: 'POST',
-                            headers: { 
-                                'Content-Type': 'application/json',
-                                'Authorization': `Bearer ${apiKey}`
-                            },
-                            body: JSON.stringify(payload)
-                        });
-
-                        if (!response.ok) {
-                            throw new Error(`HTTP Error: ${response.status}`);
-                        }
-
-                        const data = await response.json();
-                        return data.choices?.[0]?.message?.content || "Nessuna risposta generata.";
-                    } catch (error) {
-                        if (attempt === maxRetries - 1) {
-                            console.error("DeepSeek API failed after all retries:", error);
-                            return "Mi dispiace, la nebbia è troppo fitta per vedere chiaramente in questo momento. Il nostro oracolo è temporaneamente irraggiungibile. Riprova più tardi.";
-                        }
-                        await new Promise(resolve => setTimeout(resolve, baseDelay));
-                        baseDelay *= 2; // Exponential backoff
-                    }
-                }
+        },
+        "offline": {
+            "ishmael": {
+                "openers": [
+                    "Log of the Pequod, some day or other, latitude uncertain. {x} So it befell, and I set it down plainly, as a plain man should.",
+                    "Let it be recorded, for posterity and for the sub-sub-librarians, that on this day it came to pass: {x}",
+                    "Call it what you will; I call it Providence in a pea-jacket. {x} &mdash; thus ran the day."
+                ],
+                "turns": [
+                    "And yet, standing there, I could not help but consider how every man that lives is but a harpooneer who has lost his line; for what is any mishap but the whale of the everyday, sounding beneath us, and bearing off some small portion of our tackle into the fathomless?",
+                    "Now it is a curious thing, and one I have often meditated upon at the mast-head, that the smallest vexations of the land should so resemble the great calms of the Pacific: nothing moves, and yet the whole soul strains at its moorings.",
+                    "Methinks the old Chaldeans, had they but known of it, would have read it in the stars; and Queequeg, had he been by, would have consulted Yojo, and gone placidly to sleep."
+                ],
+                "closers": [
+                    "Wherefore I conclude, as all philosophers must at last, by going below for a pipe. There is a wisdom that is woe; but there is a woe that is merely Tuesday.",
+                    "So be it. Let the land keep its certainties; I shall take mine to sea, where at least the fog is honest.",
+                    "And thus, as ever, I find that the heaviest cargo a man can ship is his own astonishment."
+                ]
+            },
+            "ahab": {
+                "openers": [
+                    "Aye, aye! {x} &mdash; it was this that dismasted me!",
+                    "Hark ye yet again, the little lower layer! {x}",
+                    "Look ye, shipmates! {x} &mdash; and ye stand there gaping like codfish?"
+                ],
+                "middles": [
+                    "I see in it the pasteboard mask of some inscrutable malice, and I will strike through the mask!",
+                    "Talk not to me of trifles, man; I'd strike the sun if it insulted me.",
+                    "It tasks me; it heaps me; I see in it outrageous strength, with an inscrutable malice sinewing it."
+                ],
+                "closers": [
+                    "I'll chase it round Good Hope, and round the Horn, and round perdition's flames before I give it up!",
+                    "From hell's heart I stab at thee, and I shall not rest till it be done!",
+                    "Ahab is for ever Ahab, man. This whole act's immutably decreed."
+                ]
             }
-
-            // Handle Submit Action for L'Oracolo
-            aiSubmitBtn.addEventListener('click', async () => {
-                const prompt = aiInput.value.trim();
-                if (!prompt) return;
-
-                // UI Loading State
-                aiInput.disabled = true;
-                aiSubmitBtn.disabled = true;
-                aiSubmitBtn.classList.add('opacity-75', 'cursor-not-allowed');
-                aiLoadingIcon.classList.remove('hidden');
-                aiResponseContainer.classList.add('hidden');
-                
-                // Set preset response area to show thinking
-                aiResponseContainer.classList.remove('hidden');
-                aiResponseContent.innerHTML = '<p class="animate-pulse text-stone-500 italic">Consultando gli antichi registri del Pequod...</p>';
-
-                // Fetch AI response
-                const sysPromptOracolo = "Sei un esperto accademico e critico letterario specializzato in 'Moby Dick' di Herman Melville. Rispondi in italiano. Fornisci un'analisi profonda, allegorica e simbolica alla richiesta dell'utente. Sii chiaro, incisivo e limitati a un massimo di tre o quattro paragrafi ben strutturati.";
-                const responseText = await generateContent(prompt, sysPromptOracolo);
-
-                // UI Complete State
-                aiInput.disabled = false;
-                aiSubmitBtn.disabled = false;
-                aiSubmitBtn.classList.remove('opacity-75', 'cursor-not-allowed');
-                aiLoadingIcon.classList.add('hidden');
-                
-                // Render Response
-                aiResponseContent.innerHTML = formatMarkdown(responseText);
-            });
-
-            // --- 5. Nuove Feature AI (Officina Creativa) ---
-
-            // Diario di Ismaele
-            const ishmaelInput = document.getElementById('ishmael-input');
-            const ishmaelSubmit = document.getElementById('ishmael-submit');
-            const ishmaelLoading = document.getElementById('ishmael-loading');
-            const ishmaelOutput = document.getElementById('ishmael-output');
-            const ishmaelResponseText = document.getElementById('ishmael-response-text');
-
-            ishmaelSubmit.addEventListener('click', async () => {
-                const prompt = ishmaelInput.value.trim();
-                if (!prompt) return;
-
-                ishmaelInput.disabled = true;
-                ishmaelSubmit.disabled = true;
-                ishmaelLoading.classList.remove('hidden');
-                ishmaelOutput.classList.remove('hidden');
-                ishmaelResponseText.innerHTML = '<span class="animate-pulse">Intingendo la penna nel calamaio...</span>';
-
-                const sysPromptIshmael = "Sei Ismaele, il narratore di Moby Dick. L'utente ti fornirà un evento banale della sua giornata. Scrivi una voce di diario di bordo (max 150 parole). Inizia descrivendo l'evento oggettivamente, ma poi perditi immediatamente in una profonda, complessa e quasi assurda riflessione filosofica/metafisica sulla condizione umana, il cosmo o il destino, usando il tuo classico stile divagante e ricche metafore legate all'oceano, alle navi o alla baleneria.";
-                const responseText = await generateContent(`Evento banale: "${prompt}"`, sysPromptIshmael);
-
-                ishmaelInput.disabled = false;
-                ishmaelSubmit.disabled = false;
-                ishmaelLoading.classList.add('hidden');
-                ishmaelResponseText.innerHTML = formatMarkdown(responseText);
-            });
-
-            // Monologo di Ahab
-            const ahabInput = document.getElementById('ahab-input');
-            const ahabSubmit = document.getElementById('ahab-submit');
-            const ahabLoading = document.getElementById('ahab-loading');
-            const ahabOutput = document.getElementById('ahab-output');
-            const ahabResponseText = document.getElementById('ahab-response-text');
-
-            ahabSubmit.addEventListener('click', async () => {
-                const prompt = ahabInput.value.trim();
-                if (!prompt) return;
-
-                ahabInput.disabled = true;
-                ahabSubmit.disabled = true;
-                ahabLoading.classList.remove('hidden');
-                ahabOutput.classList.remove('hidden');
-                ahabResponseText.innerHTML = '<span class="animate-pulse">Fissando l\'orizzonte con odio...</span>';
-
-                const sysPromptAhab = "Sei il Capitano Ahab di Moby Dick. L'utente ti fornirà una piccola e insignificante frustrazione quotidiana. Riscrivila trasformandola in un monologo oscuro, teatrale, folle, ossessivo e vendicativo. Usa il tuo tipico linguaggio marinaresco ottocentesco, esclamazioni drammatiche (es: 'Per il cuore di tenebra!'), e riferimenti a forze oscure, al fato inesorabile o alla dannazione. Sii breve ma incredibilmente intenso (max 100 parole).";
-                const responseText = await generateContent(`Frustrazione quotidiana: "${prompt}"`, sysPromptAhab);
-
-                ahabInput.disabled = false;
-                ahabSubmit.disabled = false;
-                ahabLoading.classList.add('hidden');
-                ahabResponseText.innerHTML = formatMarkdown(responseText);
-            });
-
-        });
+        }
+    }
     </script>
 </body>
 </html>

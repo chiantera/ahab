@@ -1,0 +1,14 @@
+{
+  "name": "ahab",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Beyond the Surface of the Sea — an interactive guide to the allegory and symbolism of Herman Melville's Moby-Dick.",
+  "scripts": {
+    "build": "tailwindcss -c tailwind.config.js -i src/input.css -o assets/css/site.css --minify",
+    "watch": "tailwindcss -c tailwind.config.js -i src/input.css -o assets/css/site.css --watch",
+    "serve": "python3 -m http.server 8000"
+  },
+  "devDependencies": {
+    "tailwindcss": "3.4.19"
+  }
+}
